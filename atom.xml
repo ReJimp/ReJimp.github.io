@@ -38,11 +38,11 @@
   </entry>
   
   <entry>
-    <title>orw总结</title>
-    <link href="https://jimp.top/orw%E6%80%BB%E7%BB%93/"/>
-    <id>https://jimp.top/orw%E6%80%BB%E7%BB%93/</id>
-    <published>2021-06-14T17:42:38.000Z</published>
-    <updated>2021-06-14T17:44:00.363Z</updated>
+    <title>VM Pwn学习</title>
+    <link href="https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-06-15T09:01:14.000Z</published>
+    <updated>2021-06-15T09:01:54.361Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
@@ -52,16 +52,73 @@
     <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
     
     
-    <category term="pwn" scheme="https://jimp.top/tags/pwn/"/>
+    <category term="PWn" scheme="https://jimp.top/tags/PWn/"/>
     
   </entry>
   
   <entry>
-    <title>dl_runtime_resolve总结</title>
-    <link href="https://jimp.top/dl-runtime-resolve%E6%80%BB%E7%BB%93/"/>
-    <id>https://jimp.top/dl-runtime-resolve%E6%80%BB%E7%BB%93/</id>
+    <title>IO_FILE学习</title>
+    <link href="https://jimp.top/IO-FILE%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://jimp.top/IO-FILE%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-06-15T09:01:02.000Z</published>
+    <updated>2021-06-15T09:02:17.985Z</updated>
+    
+    
+    <summary type="html">还没写完呀</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MUSL学习</title>
+    <link href="https://jimp.top/MUSL%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://jimp.top/MUSL%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-06-15T08:59:33.000Z</published>
+    <updated>2021-06-15T08:59:56.014Z</updated>
+    
+    
+    <summary type="html">还没写完呀</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>orw学习</title>
+    <link href="https://jimp.top/orw%E6%80%BB%E7%BB%93/"/>
+    <id>https://jimp.top/orw%E6%80%BB%E7%BB%93/</id>
+    <published>2021-06-14T17:42:38.000Z</published>
+    <updated>2021-06-15T09:02:41.792Z</updated>
+    
+    
+    <summary type="html">还没写完呀</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dl_runtime_resolve学习</title>
+    <link href="https://jimp.top/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://jimp.top/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-06-12T10:31:09.000Z</published>
-    <updated>2021-06-14T17:43:21.538Z</updated>
+    <updated>2021-06-15T08:58:58.208Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
