@@ -53,6 +53,8 @@
     <content><![CDATA[<blockquote>
 <p>准备暑假学习Windows Kernel相关的知识，考虑到家里网络环境一般，先提前搭好环境</p>
 </blockquote>
+<span id="more"></span>
+
 <h1 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1 环境搭建"></a>1 环境搭建</h1><h2 id="1-1-工具准备"><a href="#1-1-工具准备" class="headerlink" title="1.1 工具准备"></a>1.1 工具准备</h2><ul>
 <li>windows7 x86 sp1虚拟机(安装十分简易)<ul>
 <li>镜像下载链接(迅雷下载)：ed2k://|file|cn_windows_7_professional_with_sp1_x86_dvd_u_677162.iso|2653276160|08F65018BD9B5BC8D77C1C7C5615A329|/</li>
