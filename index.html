@@ -297,6 +297,147 @@
 
 
   
+    <article id="post-HEVD从0到1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/HEVD%E4%BB%8E0%E5%88%B01/">HEVD从0到1</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/HEVD%E4%BB%8E0%E5%88%B01/" class="archive-article-date">
+        <time datetime="2021-06-23T11:07:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <blockquote>
+<p>准备暑假学习Windows Kernel相关的知识，考虑到家里网络环境一般，先提前搭好环境</p>
+</blockquote>
+<h1 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1 环境搭建"></a>1 环境搭建</h1><h2 id="1-1-工具准备"><a href="#1-1-工具准备" class="headerlink" title="1.1 工具准备"></a>1.1 工具准备</h2><ul>
+<li>windows7 x86 sp1虚拟机(安装十分简易)<ul>
+<li>镜像下载链接(迅雷下载)：ed2k://|file|cn_windows_7_professional_with_sp1_x86_dvd_u_677162.iso|2653276160|08F65018BD9B5BC8D77C1C7C5615A329|/</li>
+</ul>
+</li>
+<li>windbg(官网教程详细)<ul>
+<li>官方下载链接：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-CN/windows-hardware/drivers/debugger/debugger-download-tools">https://docs.microsoft.com/zh-CN/windows-hardware/drivers/debugger/debugger-download-tools</a></li>
+</ul>
+</li>
+<li>VirtualKD-Redux<ul>
+<li>官方仓库：<a target="_blank" rel="noopener" href="https://github.com/4d61726b/VirtualKD-Redux">https://github.com/4d61726b/VirtualKD-Redux</a></li>
+</ul>
+</li>
+<li>HEVD驱动程序<ul>
+<li>官方仓库：<a target="_blank" rel="noopener" href="https://github.com/hacksysteam/HackSysExtremeVulnerableDriver">https://github.com/hacksysteam/HackSysExtremeVulnerableDriver</a></li>
+</ul>
+</li>
+<li>OSR驱动加载工具 or DriverMonitor(驱动加载工具)<ul>
+<li>笔者仓库：<a target="_blank" rel="noopener" href="https://github.com/ReJimp/lab-environment/blob/master/osrloaderv30.zip">https://github.com/ReJimp/lab-environment/blob/master/osrloaderv30.zip</a> or <a target="_blank" rel="noopener" href="https://github.com/ReJimp/lab-environment/blob/master/DriverMonitor.zip">https://github.com/ReJimp/lab-environment/blob/master/DriverMonitor.zip</a></li>
+</ul>
+</li>
+</ul>
+<p>仓库还有可选择性下载的工具：PCHunter(查看加载的驱动等等)</p>
+<h2 id="1-2-双机调试"><a href="#1-2-双机调试" class="headerlink" title="1.2 双机调试"></a>1.2 双机调试</h2><p>1、物理机上下载HEVD驱动程序，笔者物理机存放路径为<code>G:\Kernel\HEVD.3.00</code>，同时将<code>HEVD.3.00\driver\vulnerable\x86</code>(即x86目录)复制到windows7的虚拟机上</p>
+<p>2、物理机上启动VirtualKD-Redux下的vmmon32.exe(调试32位)，若调试64位，则切换为vmmon64.exe，选择好32位的windbg</p>
+<p><img src="/pic/YrW8W6V98a.gif"></p>
+<p>3、将VirtualKD-Redux下的target32复制到windows7的虚拟机上并安装，最后虚拟机会卡在启动界面</p>
+<p><img src="/pic/D1ZbRV4zKf.gif"></p>
+<p>4、在windbg配置Symbol File Path如下(必须设置HEVD驱动程序的符号表，否则后面没法进行调试，会报错，<code>G:\Kernel\HEVD.3.00\driver\vulnerable\x86</code>自行进行替换):</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G:\Kernel\HEVD.3.00\driver\vulnerable\x86;SRV*C:\symbols*http://msdl.microsoft.com/download/symbols</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/60d331f1844ef46bb2329a65.png"></p>
+<p>5、windbg命令行输入<code>g</code>，虚拟机就可以继续运行，开始安装HEVD驱动</p>
+<p>​    5.1 OSR驱动加载工具安装</p>
+<p><img src="/pic/B3mxJ2SQtX.gif"></p>
+<p>​    5.2 DriverMonitor安装</p>
+<blockquote>
+<p>由于5.1安装过一次，故先演示卸载再安装</p>
+</blockquote>
+<p><img src="/pic/i6gfG1b0sd.gif"></p>
+<p>6、在windbg的顶栏Debug选项下选择Break，使用命令<code>lm m H*</code>(列举出H字母开头的模块)，点击蓝色的HEVD，再点击蓝色的 Browse all global symbols，可以得到以下结果:</p>
+<p><img src="https://pic.imgdb.cn/item/60d34d89844ef46bb220f78a.png"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Vuln</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Kernel//" class="article-tag-list-link color2">Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/HEVD%E4%BB%8E0%E5%88%B01/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-VM-Pwn学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1065,107 +1206,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/Pwn-Writeup/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Pwnable-tw" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/Pwnable-tw/">Pwnable.tw</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/Pwnable-tw/" class="archive-article-date">
-        <time datetime="2021-05-22T01:48:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <blockquote>
-<p>记录pwnable.tw平台的题解</p>
-</blockquote>
-    
-    <a class="article-more-a" href="/Pwnable-tw/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Pwn</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CTF//" class="article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/Pwnable-tw/">展开全文 >></a>
     </p>
     
 
