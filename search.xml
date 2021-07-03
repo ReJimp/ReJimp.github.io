@@ -100,7 +100,7 @@
 <p><img src="/pic/i6gfG1b0sd.gif"></p>
 <p>6、在windbg的顶栏Debug选项下选择Break，使用命令<code>lm m H*</code>(列举出H字母开头的模块)，点击蓝色的HEVD，再点击蓝色的 Browse all global symbols，可以得到以下结果:</p>
 <p><img src="https://pic.imgdb.cn/item/60d34d89844ef46bb220f78a.png"></p>
-]]></content>
+<h1 id="2-漏洞分类"><a href="#2-漏洞分类" class="headerlink" title="2 漏洞分类"></a>2 漏洞分类</h1><h2 id="2-1-Stack-Overflow"><a href="#2-1-Stack-Overflow" class="headerlink" title="2.1 Stack Overflow"></a>2.1 Stack Overflow</h2><h2 id="2-2-Stack-Overflow-GS"><a href="#2-2-Stack-Overflow-GS" class="headerlink" title="2.2 Stack Overflow GS"></a>2.2 Stack Overflow GS</h2><h2 id="2-3-Integer-Overflow"><a href="#2-3-Integer-Overflow" class="headerlink" title="2.3 Integer Overflow"></a>2.3 Integer Overflow</h2><h2 id="2-4-Type-Confusion"><a href="#2-4-Type-Confusion" class="headerlink" title="2.4 Type Confusion"></a>2.4 Type Confusion</h2><h2 id="2-5-Use-After-Free"><a href="#2-5-Use-After-Free" class="headerlink" title="2.5 Use After Free"></a>2.5 Use After Free</h2><h2 id="2-6-Pool-Overflow"><a href="#2-6-Pool-Overflow" class="headerlink" title="2.6 Pool Overflow"></a>2.6 Pool Overflow</h2><h2 id="2-7-Arbitrary-Overwrite"><a href="#2-7-Arbitrary-Overwrite" class="headerlink" title="2.7 Arbitrary Overwrite"></a>2.7 Arbitrary Overwrite</h2><h2 id="2-8-Null-Pointer-Dereference"><a href="#2-8-Null-Pointer-Dereference" class="headerlink" title="2.8 Null Pointer Dereference"></a>2.8 Null Pointer Dereference</h2>]]></content>
       <categories>
         <category>Kernel</category>
       </categories>
