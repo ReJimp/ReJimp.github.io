@@ -225,43 +225,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <span id="more"></span>
-
-<h1 id="2021-6-6"><a href="#2021-6-6" class="headerlink" title="2021.6.6"></a>2021.6.6</h1><ul>
-<li>明天下午概率论考试，此时此刻还想去学习堆利用，pwn实在是太吸引人了</li>
-<li>前几天分别在ubuntu16、18、20上使用buildroot编译了mips编译环境和binwalk，binwalk扩展安装略显挣扎，ubuntu16上的libc存在一些问题(版本是4.0，匹配不上)，无法编译动态链接的可执行文件，还是乖乖在Ubuntu18/20上先搞搞，找了道栈溢出的题，发现虽然学了mips汇编，但还是不熟悉，这得继续加强；其次，调用叶子函数时堆栈上没有返回地址，返回地址存在$ra中；最后，我要恶补计网知识！然后再尝试复现CVE，抱紧澳神大腿</li>
-<li>两个星期以来，修电脑的几天里，肉眼学了几天堆，修完电脑发现上手调试非常手生，说明肌肉记忆才是最靠谱的；目前学到的两个漏洞点：UAF&amp;Heap overflow；一系列的利用方式也围绕这两种情况，如double free、unlink、chunk重叠等，这一切的最终目的就是为了修改fd指针，申请到我们想控制的区域，进而进行hook，总的来说就两个要点：泄露信息与修改fd指针。unsorted bin、small bin、house of orange、沙箱、IO_File等都是我未学或者未理解的点，后面需要进行大量真题练习进行学习</li>
-</ul>
-<h1 id="2021-6-7"><a href="#2021-6-7" class="headerlink" title="2021.6.7"></a>2021.6.7</h1><ul>
-<li>复习半天概率论，考完试已经六点多</li>
-<li>对mips部分指令熟悉了不少，调试一个简单的栈溢出漏洞却不能成功，遇到两个问题：<ul>
-<li>1、IDA Pro堆栈上的局部变量偏移识别错误 </li>
-<li>2、执行<code>jr $ra</code>指令时候，又进行了几个跳转，真正跳到gadget时，已经出现了段错误(crash)，一时间没想明白</li>
-</ul>
-</li>
-<li>开始狂补基础知识……</li>
-</ul>
-<h1 id="2021-6-8"><a href="#2021-6-8" class="headerlink" title="2021.6.8"></a>2021.6.8</h1><ul>
-<li>调了一道2.31版本的简单off-by-null的题目</li>
-</ul>
-<h1 id="2021-6-9"><a href="#2021-6-9" class="headerlink" title="2021.6.9"></a>2021.6.9</h1><ul>
-<li>复现两道国赛题目：pwny&amp;lonelywolf</li>
-<li>效率还是不够高:(</li>
-</ul>
-<h1 id="2021-6-10"><a href="#2021-6-10" class="headerlink" title="2021.6.10"></a>2021.6.10</h1><ul>
-<li>复习了两小节信安数学基础</li>
-<li>复现了TP-Link-sr20远程命令执行漏洞，了解如何操作qemu等(网络这块知识感觉太欠缺了)</li>
-</ul>
-<h1 id="2021-6-11"><a href="#2021-6-11" class="headerlink" title="2021.6.11"></a>2021.6.11</h1><ul>
-<li>复现两个IOT漏洞，还没完……</li>
-</ul>
-<h1 id="2021-6-12-13"><a href="#2021-6-12-13" class="headerlink" title="2021.6.12-13"></a>2021.6.12-13</h1><ul>
-<li>世界名作: 强网杯Pwn方向0解</li>
-</ul>
-<h1 id="2021-6-14-7-2"><a href="#2021-6-14-7-2" class="headerlink" title="2021.6.14-7.2"></a>2021.6.14-7.2</h1><ul>
-<li>期末复习与考试……</li>
-</ul>
-
+    <p>欢迎一起讨论学习:)</p>
+    
+    <a class="article-more-a" href="/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/#more">more >></a>
+    
     
 
     
