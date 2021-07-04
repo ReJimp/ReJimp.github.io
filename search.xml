@@ -3,10 +3,7 @@
   <entry>
     <title>学习日志</title>
     <url>/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<blockquote>
-<p>重开学习日志，为了更好的复盘，调整学习状态</p>
-</blockquote>
-<span id="more"></span>
+    <content><![CDATA[<span id="more"></span>
 
 <h1 id="2021-6-6"><a href="#2021-6-6" class="headerlink" title="2021.6.6"></a>2021.6.6</h1><ul>
 <li>明天下午概率论考试，此时此刻还想去学习堆利用，pwn实在是太吸引人了</li>
@@ -252,12 +249,13 @@
   <entry>
     <title>IOT漏洞复现合集</title>
     <url>/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[<h1 id="TP-Link-sr20远程命令执行漏洞分析"><a href="#TP-Link-sr20远程命令执行漏洞分析" class="headerlink" title="TP-Link-sr20远程命令执行漏洞分析"></a>TP-Link-sr20远程命令执行漏洞分析</h1><h2 id="调试环境"><a href="#调试环境" class="headerlink" title="调试环境"></a>调试环境</h2><ul>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="TP-Link-sr20远程命令执行漏洞分析"><a href="#TP-Link-sr20远程命令执行漏洞分析" class="headerlink" title="TP-Link-sr20远程命令执行漏洞分析"></a>TP-Link-sr20远程命令执行漏洞分析</h1><h2 id="调试环境"><a href="#调试环境" class="headerlink" title="调试环境"></a>调试环境</h2><ul>
 <li>Ubuntu18.04（安装binwalk&amp;qemu）</li>
 <li>IDA pro 7.5</li>
 </ul>
-<span id="more"></span>
-
 <h2 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>P-Link SR20 设备运行了 V1 版本的 TDDP 协议，V1 版本无需认证，只需往 SR20 设备的 UDP 1040 端口发送数据，且数据的第二字节为 <code>0x31</code> 时，SR20 设备会连接发送该请求设备的 TFTP 服务下载相应的文件并使用 LUA 解释器以 root 权限来执行，这就导致存在远程代码执行漏洞</p>
 <h2 id="固件解包"><a href="#固件解包" class="headerlink" title="固件解包"></a>固件解包</h2><p>固件下载地址：<a href="https://www.tp-link.com/us/support/download/sr20/#Firmware">Download for SR20 | TP-Link</a></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://static.tp-link.com/2018/201806/20180611/SR20\(US\)_V1_180518.zip</span><br><span class="line"></span><br><span class="line">unzip SR20\(US\)_V1_180518.zip</span><br><span class="line"></span><br><span class="line">binwalk -Me tpra_sr20v1_us-up-ver1-2-1-P522_20180518-rel77140_2018-05-21_08.42.04.bin</span><br></pre></td></tr></table></figure>
@@ -349,9 +347,7 @@
   <entry>
     <title>Pwn Writeup</title>
     <url>/Pwn-Writeup/</url>
-    <content><![CDATA[<blockquote>
-<p>五年高考三年真题</p>
-</blockquote>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
 <h1 id="CISCN2021初赛"><a href="#CISCN2021初赛" class="headerlink" title="CISCN2021初赛"></a>CISCN2021初赛</h1><h2 id="pwny"><a href="#pwny" class="headerlink" title="pwny"></a>pwny</h2><blockquote>
@@ -417,9 +413,7 @@
   <entry>
     <title>Pwnable.tw</title>
     <url>/Pwnable-tw/</url>
-    <content><![CDATA[<blockquote>
-<p>记录pwnable.tw平台的题解</p>
-</blockquote>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
 <h1 id="start"><a href="#start" class="headerlink" title="start"></a>start</h1><p><img src="https://img.imgdb.cn/item/609031b1d1a9ae528f59b8f3.png"></p>
@@ -436,12 +430,15 @@
   <entry>
     <title>操作系统真象还原 Part1</title>
     <url>/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/</url>
-    <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>笔者电脑环境：</p>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>笔者电脑环境：</p>
 <ul>
 <li>Vmware 16</li>
 <li>Ubuntu 18.04</li>
 </ul>
-<span id="more"></span>
+<!--more-->
 
 <h2 id="bochs"><a href="#bochs" class="headerlink" title="bochs"></a>bochs</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在物理机下载bochs2.6.9版本<a href="https://sourceforge.net/projects/bochs/files/bochs/2.6.9/">Bochs x86 PC emulator - Browse /bochs/2.6.9 at SourceForge.net</a>，复制到Ubuntu虚拟机，进行解压：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf bochs-2.6.9.tar.gz</span><br><span class="line"></span><br><span class="line">cd bochs-2.6.9</span><br></pre></td></tr></table></figure>
@@ -604,10 +601,13 @@
   <entry>
     <title>AFL-Fuzz学习之路</title>
     <url>/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
-    <content><![CDATA[<h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
-<span id="more"></span>
+<!--more-->
 
 <p>安装成功标志如下:</p>
 <p><img src="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png"></p>
@@ -637,10 +637,11 @@
   <entry>
     <title>Windows Kernel Pool Spraying</title>
     <url>/Windows-Kernel-Pool-Spraying/</url>
-    <content><![CDATA[<p><a href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
-<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
+<p><a href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
+<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
 <h1 id="部分池结构"><a href="#部分池结构" class="headerlink" title="部分池结构"></a>部分池结构</h1><p>这个池对于Windows内核中的每个分配来说是常见的。由于它已经被广泛使用，所以控制它比控制一个简单的堆要困难得多。它管理着所有类型的数据，从最简单的字符串到最大的结构体。即使池跟堆没有太大的不同，池也有自己的分配器和结构。Windows操作系统内核预留两个内存池，一个保留在物理内存(非分页池)，一个可以跟物理内存进行交换(分页池)。注意Windows8引入了NonPagedPoolNx，它基本上是一个开启了DEP的非分页池。内核中有许多种类型的池，但它们的主要结构是相同的。池描述符保留了池的当前状态信息，当前状态信息包含以下5点：</p>
 <ul>
 <li>(A Deferred Free list)一个延迟的释放列表(默认状态下开启)：当列表被填充的时候就会被释放的块列表</li>
@@ -756,12 +757,13 @@
   <entry>
     <title>CVE-2010-2883分析</title>
     <url>/CVE-2010-2883%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<blockquote>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<blockquote>
 <p>用到的实验文件<a href="https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe">https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe</a></p>
 </blockquote>
 <h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码</p>
-<span id="more"></span>
-
 <h1 id="调试环境"><a href="#调试环境" class="headerlink" title="调试环境"></a>调试环境</h1><ul>
 <li>操作系统——Windows XP SP3</li>
 <li>虚拟机——VMware Pro 16</li>
@@ -858,13 +860,14 @@
   <entry>
     <title>Pwn Environment</title>
     <url>/Pwn-Environment/</url>
-    <content><![CDATA[<h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
 <ul>
 <li>VMware Pro 16</li>
 <li>Ubuntu 18.04</li>
 </ul>
-<span id="more"></span>
-
 <h1 id="实用软件"><a href="#实用软件" class="headerlink" title="实用软件"></a>实用软件</h1><h2 id="安装aptitude"><a href="#安装aptitude" class="headerlink" title="安装aptitude"></a>安装aptitude</h2><p>强大的包管理器</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install aptitude</span><br></pre></td></tr></table></figure>
 
