@@ -326,7 +326,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1 环境搭建"></a>1 环境搭建</h1><p>笔者电脑环境：</p>
+    <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>笔者电脑环境：</p>
 <ul>
 <li>Vmware 16</li>
 <li>Ubuntu 18.04</li>
@@ -429,7 +429,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-安装AFL"><a href="#1-安装AFL" class="headerlink" title="1 安装AFL"></a>1 安装AFL</h1><h2 id="1-1-有源码模式"><a href="#1-1-有源码模式" class="headerlink" title="1.1 有源码模式"></a>1.1 有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
+    <h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
     
     <a class="article-more-a" href="/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/#more">more >></a>
@@ -530,7 +530,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p><a target="_blank" rel="noopener" href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
-<h1 id="1-导语"><a href="#1-导语" class="headerlink" title="1 导语"></a>1 导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
+<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
     
     <a class="article-more-a" href="/Windows-Kernel-Pool-Spraying/#more">more >></a>
     
@@ -632,7 +632,7 @@
     <blockquote>
 <p>用到的实验文件<a target="_blank" rel="noopener" href="https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe">https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe</a></p>
 </blockquote>
-<h1 id="1-漏洞描述"><a href="#1-漏洞描述" class="headerlink" title="1 漏洞描述"></a>1 漏洞描述</h1><p>CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码</p>
+<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码</p>
     
     <a class="article-more-a" href="/CVE-2010-2883%E5%88%86%E6%9E%90/#more">more >></a>
     
@@ -731,7 +731,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-基础环境"><a href="#1-基础环境" class="headerlink" title="1 基础环境"></a>1 基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
+    <h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
 <ul>
 <li>VMware Pro 16</li>
 <li>Ubuntu 18.04</li>

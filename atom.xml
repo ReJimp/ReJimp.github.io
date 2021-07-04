@@ -42,7 +42,7 @@
     <link href="https://jimp.top/HEVD%E4%BB%8E0%E5%88%B01/"/>
     <id>https://jimp.top/HEVD%E4%BB%8E0%E5%88%B01/</id>
     <published>2021-06-23T11:07:28.000Z</published>
-    <updated>2021-07-04T07:57:16.500Z</updated>
+    <updated>2021-07-04T08:01:49.148Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -175,10 +175,10 @@
     <link href="https://jimp.top/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/"/>
     <id>https://jimp.top/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/</id>
     <published>2021-06-10T17:51:09.000Z</published>
-    <updated>2021-06-14T10:33:04.481Z</updated>
+    <updated>2021-07-04T08:02:46.496Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;1-TP-Link-sr20远程命令执行漏洞分析&quot;&gt;&lt;a href=&quot;#1-TP-Link-sr20远程命令执行漏洞分析&quot; class=&quot;headerlink&quot; title=&quot;1 TP-Link-sr20远程命令执行漏洞分析&quot;&gt;&lt;/a&gt;1 TP-Link-sr20远程命令执行漏洞分析&lt;/h1&gt;&lt;h2 id=&quot;1-1-调试环境&quot;&gt;&lt;a href=&quot;#1-1-调试环境&quot; class=&quot;headerlink&quot; title=&quot;1.1 调试环境&quot;&gt;&lt;/a&gt;1.1 调试环境&lt;/h2&gt;&lt;ul&gt;
+    <summary type="html">&lt;h1 id=&quot;TP-Link-sr20远程命令执行漏洞分析&quot;&gt;&lt;a href=&quot;#TP-Link-sr20远程命令执行漏洞分析&quot; class=&quot;headerlink&quot; title=&quot;TP-Link-sr20远程命令执行漏洞分析&quot;&gt;&lt;/a&gt;TP-Link-sr20远程命令执行漏洞分析&lt;/h1&gt;&lt;h2 id=&quot;调试环境&quot;&gt;&lt;a href=&quot;#调试环境&quot; class=&quot;headerlink&quot; title=&quot;调试环境&quot;&gt;&lt;/a&gt;调试环境&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Ubuntu18.04（安装binwalk&amp;amp;qemu）&lt;/li&gt;
 &lt;li&gt;IDA pro 7.5&lt;/li&gt;
 &lt;/ul&gt;</summary>
@@ -197,7 +197,7 @@
     <link href="https://jimp.top/Pwn-Writeup/"/>
     <id>https://jimp.top/Pwn-Writeup/</id>
     <published>2021-06-09T10:50:04.000Z</published>
-    <updated>2021-06-14T10:33:11.295Z</updated>
+    <updated>2021-07-04T08:03:46.700Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -218,7 +218,7 @@
     <link href="https://jimp.top/Pwnable-tw/"/>
     <id>https://jimp.top/Pwnable-tw/</id>
     <published>2021-05-22T01:48:19.000Z</published>
-    <updated>2021-06-23T11:08:42.859Z</updated>
+    <updated>2021-07-04T08:03:50.304Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -239,10 +239,10 @@
     <link href="https://jimp.top/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/"/>
     <id>https://jimp.top/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/</id>
     <published>2021-05-18T05:44:42.000Z</published>
-    <updated>2021-06-14T10:32:48.328Z</updated>
+    <updated>2021-07-04T08:00:08.225Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;1-环境搭建&quot;&gt;&lt;a href=&quot;#1-环境搭建&quot; class=&quot;headerlink&quot; title=&quot;1 环境搭建&quot;&gt;&lt;/a&gt;1 环境搭建&lt;/h1&gt;&lt;p&gt;笔者电脑环境：&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h1&gt;&lt;p&gt;笔者电脑环境：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Vmware 16&lt;/li&gt;
 &lt;li&gt;Ubuntu 18.04&lt;/li&gt;
@@ -262,10 +262,10 @@
     <link href="https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
     <id>https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</id>
     <published>2021-05-17T19:20:24.000Z</published>
-    <updated>2021-06-14T10:32:41.380Z</updated>
+    <updated>2021-07-04T07:59:18.581Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;1-安装AFL&quot;&gt;&lt;a href=&quot;#1-安装AFL&quot; class=&quot;headerlink&quot; title=&quot;1 安装AFL&quot;&gt;&lt;/a&gt;1 安装AFL&lt;/h1&gt;&lt;h2 id=&quot;1-1-有源码模式&quot;&gt;&lt;a href=&quot;#1-1-有源码模式&quot; class=&quot;headerlink&quot; title=&quot;1.1 有源码模式&quot;&gt;&lt;/a&gt;1.1 有源码模式&lt;/h2&gt;&lt;p&gt;前往官网进行下载压缩包，解压，安装&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;安装AFL&quot;&gt;&lt;a href=&quot;#安装AFL&quot; class=&quot;headerlink&quot; title=&quot;安装AFL&quot;&gt;&lt;/a&gt;安装AFL&lt;/h1&gt;&lt;h2 id=&quot;有源码模式&quot;&gt;&lt;a href=&quot;#有源码模式&quot; class=&quot;headerlink&quot; title=&quot;有源码模式&quot;&gt;&lt;/a&gt;有源码模式&lt;/h2&gt;&lt;p&gt;前往官网进行下载压缩包，解压，安装&lt;/p&gt;
 &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tar -zxvf afl-latest.tgz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd afl-2.52b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;make&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
@@ -282,11 +282,11 @@
     <link href="https://jimp.top/Windows-Kernel-Pool-Spraying/"/>
     <id>https://jimp.top/Windows-Kernel-Pool-Spraying/</id>
     <published>2021-05-17T19:18:20.000Z</published>
-    <updated>2021-06-14T10:33:16.919Z</updated>
+    <updated>2021-07-04T08:04:19.711Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;1-导语&quot;&gt;&lt;a href=&quot;#1-导语&quot; class=&quot;headerlink&quot; title=&quot;1 导语&quot;&gt;&lt;/a&gt;1 导语&lt;/h1&gt;&lt;p&gt;当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。&lt;strong&gt;所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。&lt;/strong&gt;&lt;/p&gt;</summary>
+&lt;h1 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h1&gt;&lt;p&gt;当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。&lt;strong&gt;所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。&lt;/strong&gt;&lt;/p&gt;</summary>
     
     
     
@@ -302,13 +302,13 @@
     <link href="https://jimp.top/CVE-2010-2883%E5%88%86%E6%9E%90/"/>
     <id>https://jimp.top/CVE-2010-2883%E5%88%86%E6%9E%90/</id>
     <published>2021-05-17T19:08:26.000Z</published>
-    <updated>2021-06-14T10:32:56.690Z</updated>
+    <updated>2021-07-04T08:00:42.100Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;用到的实验文件&lt;a href=&quot;https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe&quot;&gt;https://github.com/ReJimp/lab-environment/blob/master/AdbeRdr930_zh_CN.exe&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;1-漏洞描述&quot;&gt;&lt;a href=&quot;#1-漏洞描述&quot; class=&quot;headerlink&quot; title=&quot;1 漏洞描述&quot;&gt;&lt;/a&gt;1 漏洞描述&lt;/h1&gt;&lt;p&gt;CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码&lt;/p&gt;</summary>
+&lt;h1 id=&quot;漏洞描述&quot;&gt;&lt;a href=&quot;#漏洞描述&quot; class=&quot;headerlink&quot; title=&quot;漏洞描述&quot;&gt;&lt;/a&gt;漏洞描述&lt;/h1&gt;&lt;p&gt;CVE-2010-2883是Adobe Reader和Acrobat的CoolType.dll库在解析字体文件SING表中的uniqueName项时存在的栈溢出漏洞，用户受骗打开特制的PDF文件就可能导致执行任意代码&lt;/p&gt;</summary>
     
     
     
@@ -324,10 +324,10 @@
     <link href="https://jimp.top/Pwn-Environment/"/>
     <id>https://jimp.top/Pwn-Environment/</id>
     <published>2021-05-17T19:00:00.000Z</published>
-    <updated>2021-06-14T10:33:07.932Z</updated>
+    <updated>2021-07-04T08:03:32.275Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;1-基础环境&quot;&gt;&lt;a href=&quot;#1-基础环境&quot; class=&quot;headerlink&quot; title=&quot;1 基础环境&quot;&gt;&lt;/a&gt;1 基础环境&lt;/h1&gt;&lt;p&gt;Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;基础环境&quot;&gt;&lt;a href=&quot;#基础环境&quot; class=&quot;headerlink&quot; title=&quot;基础环境&quot;&gt;&lt;/a&gt;基础环境&lt;/h1&gt;&lt;p&gt;Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;VMware Pro 16&lt;/li&gt;
 &lt;li&gt;Ubuntu 18.04&lt;/li&gt;
