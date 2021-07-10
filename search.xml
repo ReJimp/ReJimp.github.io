@@ -1,51 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>学习日志</title>
-    <url>/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</url>
+    <title>AFL-Fuzz学习之路</title>
+    <url>/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
     <content><![CDATA[<p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
-<h1 id="2021-6-6"><a href="#2021-6-6" class="headerlink" title="2021.6.6"></a>2021.6.6</h1><ul>
-<li>明天下午概率论考试，此时此刻还想去学习堆利用，pwn实在是太吸引人了</li>
-<li>前几天分别在ubuntu16、18、20上使用buildroot编译了mips编译环境和binwalk，binwalk扩展安装略显挣扎，ubuntu16上的libc存在一些问题(版本是4.0，匹配不上)，无法编译动态链接的可执行文件，还是乖乖在Ubuntu18/20上先搞搞，找了道栈溢出的题，发现虽然学了mips汇编，但还是不熟悉，这得继续加强；其次，调用叶子函数时堆栈上没有返回地址，返回地址存在$ra中；最后，我要恶补计网知识！然后再尝试复现CVE，抱紧澳神大腿</li>
-<li>两个星期以来，修电脑的几天里，肉眼学了几天堆，修完电脑发现上手调试非常手生，说明肌肉记忆才是最靠谱的；目前学到的两个漏洞点：UAF&amp;Heap overflow；一系列的利用方式也围绕这两种情况，如double free、unlink、chunk重叠等，这一切的最终目的就是为了修改fd指针，申请到我们想控制的区域，进而进行hook，总的来说就两个要点：泄露信息与修改fd指针。unsorted bin、small bin、house of orange、沙箱、IO_File等都是我未学或者未理解的点，后面需要进行大量真题练习进行学习</li>
-</ul>
-<h1 id="2021-6-7"><a href="#2021-6-7" class="headerlink" title="2021.6.7"></a>2021.6.7</h1><ul>
-<li>复习半天概率论，考完试已经六点多</li>
-<li>对mips部分指令熟悉了不少，调试一个简单的栈溢出漏洞却不能成功，遇到两个问题：<ul>
-<li>1、IDA Pro堆栈上的局部变量偏移识别错误 </li>
-<li>2、执行<code>jr $ra</code>指令时候，又进行了几个跳转，真正跳到gadget时，已经出现了段错误(crash)，一时间没想明白</li>
-</ul>
-</li>
-<li>开始狂补基础知识……</li>
-</ul>
-<h1 id="2021-6-8"><a href="#2021-6-8" class="headerlink" title="2021.6.8"></a>2021.6.8</h1><ul>
-<li>调了一道2.31版本的简单off-by-null的题目</li>
-</ul>
-<h1 id="2021-6-9"><a href="#2021-6-9" class="headerlink" title="2021.6.9"></a>2021.6.9</h1><ul>
-<li>复现两道国赛题目：pwny&amp;lonelywolf</li>
-<li>效率还是不够高:(</li>
-</ul>
-<h1 id="2021-6-10"><a href="#2021-6-10" class="headerlink" title="2021.6.10"></a>2021.6.10</h1><ul>
-<li>复习了两小节信安数学基础</li>
-<li>复现了TP-Link-sr20远程命令执行漏洞，了解如何操作qemu等(网络这块知识感觉太欠缺了)</li>
-</ul>
-<h1 id="2021-6-11"><a href="#2021-6-11" class="headerlink" title="2021.6.11"></a>2021.6.11</h1><ul>
-<li>复现两个IOT漏洞，还没完……</li>
-</ul>
-<h1 id="2021-6-12-13"><a href="#2021-6-12-13" class="headerlink" title="2021.6.12-13"></a>2021.6.12-13</h1><ul>
-<li>世界名作: 强网杯Pwn方向0解</li>
-</ul>
-<h1 id="2021-6-14-7-2"><a href="#2021-6-14-7-2" class="headerlink" title="2021.6.14-7.2"></a>2021.6.14-7.2</h1><ul>
-<li>期末复习与考试……</li>
-</ul>
+<h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<!--more-->
+
+<p>安装成功标志如下:</p>
+<p><img src="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png"></p>
+<h2 id="无源码模式"><a href="#无源码模式" class="headerlink" title="无源码模式"></a>无源码模式</h2><blockquote>
+<p>即在上面的基础上安装qemu_mode afl fuzzing，安装了n次都没有成功，差点放弃，最后还是成功了</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd afl-2.52b/qemu_mode</span><br><span class="line"></span><br><span class="line">./build_qemu_support.sh</span><br></pre></td></tr></table></figure>
+
+<p>不出意外的话这一步就开始报错，缺什么就是用apt安装什么，除了安装libtool，还得安装libtool-bin，再次执行build_qemu_support.sh脚本依然可以看到以下错误</p>
+<p><img src="https://pic.imgdb.cn/item/609f1b00d1a9ae528f003074.png"></p>
+<p>memfd_create和glibc中的同名函数冲突，需要打patch，在afl-2.52b/qemu_mode/patches/目录下新增一个memfd_create.diff，文件内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">diff -ru qemu-2.10.0-clean/util/memfd.c qemu-2.10.0/util/memfd.c</span><br><span class="line">--- qemu-2.10.0-clean/util/memfd.c      2018-11-20 18:11:00.170271506 +0100</span><br><span class="line">+++ qemu-2.10.0/util/memfd.c    2018-11-20 18:11:13.398423613 +0100</span><br><span class="line">@@ -37,7 +37,7 @@</span><br><span class="line"> #include &lt;sys/syscall.h&gt;</span><br><span class="line"> #include &lt;asm/unistd.h&gt;</span><br><span class="line"> </span><br><span class="line">-static int memfd_create(const char *name, unsigned int flags)</span><br><span class="line">+int memfd_create(const char *name, unsigned int flags)</span><br><span class="line"> &#123;</span><br><span class="line"> #ifdef __NR_memfd_create</span><br><span class="line">     return syscall(__NR_memfd_create, name, flags);</span><br></pre></td></tr></table></figure>
+
+<p>修改build_qemu_support.sh文件内容，加上自己添加的补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;[*] Applying patches...&quot;</span><br><span class="line"></span><br><span class="line">patch -p1 &lt;../patches/elfload.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/cpu-exec.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/syscall.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/memfd_create.diff || exit 1</span><br><span class="line"></span><br><span class="line">echo &quot;[+] Patching done.&quot;</span><br></pre></td></tr></table></figure>
+
+<p>再次执行build_qemu_support.sh脚本，可以看到以下成功的信息：</p>
+<p><img src="https://pic.imgdb.cn/item/609f1ccfd1a9ae528f118d7b.png"></p>
 ]]></content>
       <categories>
-        <category>记录</category>
+        <category>Fuzz</category>
       </categories>
       <tags>
-        <tag>记录</tag>
+        <tag>Fuzz</tag>
       </tags>
   </entry>
   <entry>
@@ -116,28 +104,6 @@
       </tags>
   </entry>
   <entry>
-    <title>VM Pwn学习</title>
-    <url>/VM-Pwn%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>PWn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IO_FILE学习</title>
     <url>/IO-FILE%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -157,94 +123,6 @@
       </categories>
       <tags>
         <tag>Pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MUSL学习</title>
-    <url>/MUSL%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="65e94230ec1830462e927fdc919688e5e3d822d7ac9210b9d553392d86c5a974">cd28d3e0b4493b238e1a648c2b8d0b236585a5d668bd28cbd8de194bd5d7042851c816eb3826825f0c6f4ed2de6dd98b9c59679c6fc80b94a1291fcbd67559cd9c441acc09b993470855da0bf29603f0489417b1c5832a537d7e6df9f59c54982107d7506d91ee844d98830a5f0d52fba3c08099564880910add07eb445c590f20f9f41436763cb36ac73c40e20c0cadb2d5184453fb033d5afb958f7321c7a686aedb10f928a8d34c148dcf46048ac5fbc62653b93aca8cb860210ef18895a2fc0f39499e86ca98b51dcaf433c8323c99e117da07f449270babe3b83f282c04d4fbc27e7e23b5158d6c3e36d5d90dcd87a35477e56eb7b5dac6516a804794bba1e435e77a9cd6f184dd274f1a497dd6cc64cae932b8e216d670513623083282694c0bb43ca050ec40e4d3fc0c5ef7881e656fd4402839d826bd9b773e4da4a37804419eedf8cb8e4b9abeaf514373835e226c4ae9e98fb9fdcb7372175eb32dfab4feb922cd63f804eb4882e125de0cc0a288ac6426b533f6215fa5481f536d1c0625935c9e9452288e07e2d61b075d2e1aea58e2f9d324665456734ce29cfb892390b1dea6ad50b1f4b3234820b44a8eed0ee287994e8f58e42916a76692af2daf2a3bfcb67b067d489cf99f4b9a9d062ef3e37986e407c572ae24858566d828258a7a01ed80d4a02b04b96c6225af7535fa7f2e7c334d1d56f0959667f7ffb26efb931166f4f12aad8be0237af72976954848ffd52bcdd2c2c9d7dc487afaf7ad3edd1e03b0f8ad7945a22537bc3fee53959bfbd42d2eedfc87ab129db4d778c1552a37e4f7e9ea7bc92c54c73302d02b8a497db4e90764e0735393570d232a0d41fd3041f96a811f67260ef7bc179ae7887e666c74196eba204524707a188ef4ff9da3d5f13d97dd1e5eb0388eaf58587cc62855c992b05f9b265e33720f2193a05382a9387512cd0cbb48a29882ee291420438da51bb638eb1e1712830043a8b9b55feed7b36f7e0bb46e374f51722bdbb5ee8c637e2602b6f30efdd3099d09d73db5970004242ae57c2c3c91bc992ee5d24558c193fdf146b4db35602aec42ec1690f2762e8f7177735bb6f700adcce4ddc8dccbc43edfb8c2ba4398963c6cb059cc604daee9fd266f00ca738cdcd4f40ed40a2a5f563f8c3935d3bbb7165073f300ed7e6eeb8faac5020fa0a1082d4193b0cd17e76865bb4100d08fc16fae0b8863e5dd121fb1477e25e146949b359afb393f8d15e7f7c40ee3cb4d35ef376207de8e97a07d86e50cea70d680f73540d20e625d19c8bc7dd45c19badb8f648fa5a90ee7b6f39eb9cea13d54607091452016a31791ba0034173baf4e7cc12bd8b1bcd47405a21ed4fcdcb76387160163b5c79e23c21da6aafc1bf09c5b02176ece05b8ff68af54410219a270ea30008ccae11f8d0d376eaf4a585b26e3e0c7397fa3383eda38a8f9ce51b883037514df458f3d8537a638fef7a552902b06bd4a272fb3633723adc50dd75f6f2fe35e7ec67fadc36b81d5607b0aaf9de4511c37b3902bd69f5ca0bf6c531a8553be2d59ac1087475b7590ae8206703130b7ed35281261dab3bf06f1e58157fc2099d6b41a19f4f77ec7894a975d8045277c639efda04d7e7341999d084355e94c7203bcea598bcb3d751056df7fa9e512ce5f34f0ab4755432b5a5fa3b9fb22c7b52e165284d19ecbc42bdfcdfd414a354ed107e6b4b93759c61c13ee8b2f74eaefed5680d91091b994f27afaff6664ba125dc34c06cc3e6b5d1bbb13198a00e5fc764823b2122dcda579c736b74cfe77dd1ba657b25941e50f3d9f8f72e07e30c48d0db9237520bf5337fa5031f22e04516c71485dc86888ff82d5f90cefeb59c4062d3666f44d998fdc22879132580c412e5cfc2c1d4b175c5fbd7c94b28adb1edcb441cec379844debd3f2a7afd9d479dbe599feae5b49b869147e4e766ee9b6078755daa1d48cdb564fe4bf531c3dbc7a0659f37ed461de7d171d6a8882b89ce0c6dc2e9b62c2db4e0d178bbc41b25f953a0dd26b1b1c843bbe920d88091324153c5537822c90da8b24546a2e1094637e96010847456f310d7cced536b1c76a47992544a8d8626f8dfd39341b811c52feaf01c517b7701b587b02868d570f8b16cfde8143997b89c8cda2681bc0bda1539da1e0419f4a12c3228046c74f99f1b61b1ce7964cb04fe0efafd5936d47d8d577cd5059932495c11a4680c50a25f22f7a8d513d0cb3b11769f2e34b803012721a27194dd4225fad48a807ef1739e33b76cfcf02af66980db025d8d494ddbcb00c43b2b3ee4e83db1f27624c1c7023d20306c9b1340ddf4bbfd687ba1ff04be1576ad650ae71d60b96ab8be5b71ceb782d342220efe5cbef5ba352f6d2398157ec1d6e969e89d1d64ff54837ab6530c8d596f418adc79f87bb0f1438f19847f7186034959d6aa8381647e0f58822be58f5d148323d141cc6e1d06c1ff83b996549c3c01655b1b81654922e17ccf68820c4bb2e9d96cdf0b0315479dab134cb5ad900f42e7ef3ec860f4a5003c6cee4c78d558b5ed7e2ad5c7b6e3b0a0ecc56f0b6227698a0747c4933bbcf8bb3d491f36b8b0ae30b654f50a437edd7813d5a23cd72a7d11356e24f3637eb353a5d943eb79e24e81ae166653bc06e0a30bdceabe4ae33b150eb18061d85c1733c060158c0a81c3a4ea641c455b569fd5f8a4b0b22de39421937b30316ee616f1358c82085926cb7bf44b7af60d2314d78d9cc8dc7f78a025afea1bec31578e1d6f2cb6a804b782a7ea9fb9fb3d314cc93e58871cb5a5e66b462b2b1e4f45ed2f2820239677a7b2887c38fe7c49a3ab6939315bd2054d76391d6e89499ca50a107e0628ad486a21eef653b9fa65bae5211465107302414ef4d7776740678437b8ec4ef045efbb78a33a0609093c332f636559027cad76665898a003cb0d5ab44db3914ef090ecb1fd6077242a17d0171952388e2f70ef1bd0c13b5f801ef1278fd74d878425b45a6128692cea28fcbdb68afbde98e128d7972e8c44e3cd3bfdef162eed4fa9797affdfe5f767e4ed7567cb1b1339758ee7f5be804a3f58761e118acb2b93d2d319d7b7c3c92aaf37e1ea9d3631e90decf7b0106fb53e97a6097fd5ebf98787ad81cb65dfef2241b7275e30c</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>Pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>orw学习</title>
-    <url>/orw%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>Pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>dl_runtime_resolve学习</title>
-    <url>/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>Pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>boofuzz学习之路</title>
-    <url>/boofuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>Fuzz</category>
-      </categories>
-      <tags>
-        <tag>Fuzz</tag>
       </tags>
   </entry>
   <entry>
@@ -346,6 +224,101 @@
       </tags>
   </entry>
   <entry>
+    <title>MUSL学习</title>
+    <url>/MUSL%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="65e94230ec1830462e927fdc919688e5e3d822d7ac9210b9d553392d86c5a974">cd28d3e0b4493b238e1a648c2b8d0b236585a5d668bd28cbd8de194bd5d7042851c816eb3826825f0c6f4ed2de6dd98b9c59679c6fc80b94a1291fcbd67559cd9c441acc09b993470855da0bf29603f0489417b1c5832a537d7e6df9f59c54982107d7506d91ee844d98830a5f0d52fba3c08099564880910add07eb445c590f20f9f41436763cb36ac73c40e20c0cadb2d5184453fb033d5afb958f7321c7a686aedb10f928a8d34c148dcf46048ac5fbc62653b93aca8cb860210ef18895a2fc0f39499e86ca98b51dcaf433c8323c99e117da07f449270babe3b83f282c04d4fbc27e7e23b5158d6c3e36d5d90dcd87a35477e56eb7b5dac6516a804794bba1e435e77a9cd6f184dd274f1a497dd6cc64cae932b8e216d670513623083282694c0bb43ca050ec40e4d3fc0c5ef7881e656fd4402839d826bd9b773e4da4a37804419eedf8cb8e4b9abeaf514373835e226c4ae9e98fb9fdcb7372175eb32dfab4feb922cd63f804eb4882e125de0cc0a288ac6426b533f6215fa5481f536d1c0625935c9e9452288e07e2d61b075d2e1aea58e2f9d324665456734ce29cfb892390b1dea6ad50b1f4b3234820b44a8eed0ee287994e8f58e42916a76692af2daf2a3bfcb67b067d489cf99f4b9a9d062ef3e37986e407c572ae24858566d828258a7a01ed80d4a02b04b96c6225af7535fa7f2e7c334d1d56f0959667f7ffb26efb931166f4f12aad8be0237af72976954848ffd52bcdd2c2c9d7dc487afaf7ad3edd1e03b0f8ad7945a22537bc3fee53959bfbd42d2eedfc87ab129db4d778c1552a37e4f7e9ea7bc92c54c73302d02b8a497db4e90764e0735393570d232a0d41fd3041f96a811f67260ef7bc179ae7887e666c74196eba204524707a188ef4ff9da3d5f13d97dd1e5eb0388eaf58587cc62855c992b05f9b265e33720f2193a05382a9387512cd0cbb48a29882ee291420438da51bb638eb1e1712830043a8b9b55feed7b36f7e0bb46e374f51722bdbb5ee8c637e2602b6f30efdd3099d09d73db5970004242ae57c2c3c91bc992ee5d24558c193fdf146b4db35602aec42ec1690f2762e8f7177735bb6f700adcce4ddc8dccbc43edfb8c2ba4398963c6cb059cc604daee9fd266f00ca738cdcd4f40ed40a2a5f563f8c3935d3bbb7165073f300ed7e6eeb8faac5020fa0a1082d4193b0cd17e76865bb4100d08fc16fae0b8863e5dd121fb1477e25e146949b359afb393f8d15e7f7c40ee3cb4d35ef376207de8e97a07d86e50cea70d680f73540d20e625d19c8bc7dd45c19badb8f648fa5a90ee7b6f39eb9cea13d54607091452016a31791ba0034173baf4e7cc12bd8b1bcd47405a21ed4fcdcb76387160163b5c79e23c21da6aafc1bf09c5b02176ece05b8ff68af54410219a270ea30008ccae11f8d0d376eaf4a585b26e3e0c7397fa3383eda38a8f9ce51b883037514df458f3d8537a638fef7a552902b06bd4a272fb3633723adc50dd75f6f2fe35e7ec67fadc36b81d5607b0aaf9de4511c37b3902bd69f5ca0bf6c531a8553be2d59ac1087475b7590ae8206703130b7ed35281261dab3bf06f1e58157fc2099d6b41a19f4f77ec7894a975d8045277c639efda04d7e7341999d084355e94c7203bcea598bcb3d751056df7fa9e512ce5f34f0ab4755432b5a5fa3b9fb22c7b52e165284d19ecbc42bdfcdfd414a354ed107e6b4b93759c61c13ee8b2f74eaefed5680d91091b994f27afaff6664ba125dc34c06cc3e6b5d1bbb13198a00e5fc764823b2122dcda579c736b74cfe77dd1ba657b25941e50f3d9f8f72e07e30c48d0db9237520bf5337fa5031f22e04516c71485dc86888ff82d5f90cefeb59c4062d3666f44d998fdc22879132580c412e5cfc2c1d4b175c5fbd7c94b28adb1edcb441cec379844debd3f2a7afd9d479dbe599feae5b49b869147e4e766ee9b6078755daa1d48cdb564fe4bf531c3dbc7a0659f37ed461de7d171d6a8882b89ce0c6dc2e9b62c2db4e0d178bbc41b25f953a0dd26b1b1c843bbe920d88091324153c5537822c90da8b24546a2e1094637e96010847456f310d7cced536b1c76a47992544a8d8626f8dfd39341b811c52feaf01c517b7701b587b02868d570f8b16cfde8143997b89c8cda2681bc0bda1539da1e0419f4a12c3228046c74f99f1b61b1ce7964cb04fe0efafd5936d47d8d577cd5059932495c11a4680c50a25f22f7a8d513d0cb3b11769f2e34b803012721a27194dd4225fad48a807ef1739e33b76cfcf02af66980db025d8d494ddbcb00c43b2b3ee4e83db1f27624c1c7023d20306c9b1340ddf4bbfd687ba1ff04be1576ad650ae71d60b96ab8be5b71ceb782d342220efe5cbef5ba352f6d2398157ec1d6e969e89d1d64ff54837ab6530c8d596f418adc79f87bb0f1438f19847f7186034959d6aa8381647e0f58822be58f5d148323d141cc6e1d06c1ff83b996549c3c01655b1b81654922e17ccf68820c4bb2e9d96cdf0b0315479dab134cb5ad900f42e7ef3ec860f4a5003c6cee4c78d558b5ed7e2ad5c7b6e3b0a0ecc56f0b6227698a0747c4933bbcf8bb3d491f36b8b0ae30b654f50a437edd7813d5a23cd72a7d11356e24f3637eb353a5d943eb79e24e81ae166653bc06e0a30bdceabe4ae33b150eb18061d85c1733c060158c0a81c3a4ea641c455b569fd5f8a4b0b22de39421937b30316ee616f1358c82085926cb7bf44b7af60d2314d78d9cc8dc7f78a025afea1bec31578e1d6f2cb6a804b782a7ea9fb9fb3d314cc93e58871cb5a5e66b462b2b1e4f45ed2f2820239677a7b2887c38fe7c49a3ab6939315bd2054d76391d6e89499ca50a107e0628ad486a21eef653b9fa65bae5211465107302414ef4d7776740678437b8ec4ef045efbb78a33a0609093c332f636559027cad76665898a003cb0d5ab44db3914ef090ecb1fd6077242a17d0171952388e2f70ef1bd0c13b5f801ef1278fd74d878425b45a6128692cea28fcbdb68afbde98e128d7972e8c44e3cd3bfdef162eed4fa9797affdfe5f767e4ed7567cb1b1339758ee7f5be804a3f58761e118acb2b93d2d319d7b7c3c92aaf37e1ea9d3631e90decf7b0106fb53e97a6097fd5ebf98787ad81cb65dfef2241b7275e30c</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pwn Environment</title>
+    <url>/Pwn-Environment/</url>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
+<ul>
+<li>VMware Pro 16</li>
+<li>Ubuntu 18.04</li>
+</ul>
+<h1 id="实用软件"><a href="#实用软件" class="headerlink" title="实用软件"></a>实用软件</h1><h2 id="安装aptitude"><a href="#安装aptitude" class="headerlink" title="安装aptitude"></a>安装aptitude</h2><p>强大的包管理器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install aptitude</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h2><p>强大的编辑器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install vim</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>强大的github仓库管理神器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install git</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h2><p>单纯觉得可以配置得好看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install zsh</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装terminator"><a href="#安装terminator" class="headerlink" title="安装terminator"></a>安装terminator</h2><p>gdb调试时用到，也可以选择tmux</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install terminator</span><br></pre></td></tr></table></figure>
+
+<h1 id="Pwn工具"><a href="#Pwn工具" class="headerlink" title="Pwn工具"></a>Pwn工具</h1><h2 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h2><p>python2版本的pwntools：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python python-pip python-dev libssl-dev libffi-dev build-essential</span><br><span class="line"></span><br><span class="line">pip install -U setuptools</span><br><span class="line"></span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">pip install --upgrade pwntools</span><br></pre></td></tr></table></figure>
+
+<p>python3版本的pwntools：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install python3 python3-dev python3-pip git</span><br><span class="line"></span><br><span class="line">pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="gdb插件"><a href="#gdb插件" class="headerlink" title="gdb插件"></a>gdb插件</h2><p>原生的gdb比较难用，我们可以选择安装以下插件来进行调试</p>
+<h3 id="pwndbg"><a href="#pwndbg" class="headerlink" title="pwndbg"></a>pwndbg</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/pwndbg/pwndbg</span><br><span class="line"></span><br><span class="line">cd pwndbg</span><br><span class="line"></span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="peda"><a href="#peda" class="headerlink" title="peda"></a>peda</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/longld/peda.git~ /peda</span><br></pre></td></tr></table></figure>
+
+<h3 id="gef"><a href="#gef" class="headerlink" title="gef"></a>gef</h3><p>网上大多数使用wget的命令进行操作，但是我都无法进行下载，于是直接复制<a href="https://github.com/hugsy/gef/blob/master/gef.py">https://github.com/hugsy/gef/blob/master/gef.py</a>里面的内容，在本地新建一个gef.py的文件进行粘贴</p>
+<hr>
+<p>由于gdb一次只能使用一个插件，所以可以使用自动化脚本来进行切换。笔者插件存放目录结构如下：</p>
+<p><img src="https://img.imgdb.cn/item/604d82e95aedab222cbed9d1.png"></p>
+<p>插件配置文件<code>.gdbinit</code>(位于用户根目录下，笔者的位于<code>/home/jimp</code>目录下，没有的话可以新建一个)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /home/jimp/safetools/peda/peda.py</span><br><span class="line">source /home/jimp/safetools/gef/gef.py			#不知道为啥这条影响其他插件的使用,故笔者本地已经删除</span><br><span class="line">source /home/jimp/safetools/pwndbg/gdbinit.py</span><br></pre></td></tr></table></figure>
+
+<p><code>gdb.sh</code>文件(创建于<code>/usr/local/sbin</code>目录下)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">function Mode_change &#123;</span><br><span class="line">    name=$1</span><br><span class="line">    gdbinitfile=/home/jimp/.gdbinit    #这个路径按照你的实际情况修改</span><br><span class="line">    # gdbinitfile=/root/Desktop/mode</span><br><span class="line"> </span><br><span class="line">    peda=&quot;source /home/jimp/safetools/peda/peda.py&quot;          #这个路径按照你的实际情况修改</span><br><span class="line">    gef=&quot;source /home/jimp/safetools/gef/gef.py&quot;             #这个路径按照你的实际情况修改</span><br><span class="line">    pwndbg=&quot;source /home/jimp/safetools/pwndbg/gdbinit.py&quot;   #这个路径按照你的实际情况修改</span><br><span class="line"> </span><br><span class="line">    sign=$(cat $gdbinitfile | grep -n &quot;#this place is controled by user&#x27;s shell&quot;)    </span><br><span class="line">    #这是一个定位flag，此处上面的查找内容要和你自己的保持一致</span><br><span class="line"> </span><br><span class="line">    pattern=&quot;:#this place is controled by user&#x27;s shell&quot;</span><br><span class="line">    number=$&#123;sign%$pattern&#125;</span><br><span class="line">    location=$[number+2]</span><br><span class="line"> </span><br><span class="line">    parameter_add=$&#123;location&#125;i</span><br><span class="line">    parameter_del=$&#123;location&#125;d</span><br><span class="line"> </span><br><span class="line">    message=&quot;TEST&quot;</span><br><span class="line"> </span><br><span class="line">    if [ $name -eq &quot;1&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $peda&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the peda!\n&quot;</span><br><span class="line">    elif [ $name -eq &quot;2&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $gef&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the gef!\n&quot;</span><br><span class="line">    else</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $pwndbg&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the pwndbg!\n&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">echo -e &quot;Please choose one mode of GDB?\n1.peda    2.gef    3.pwndbg&quot;</span><br><span class="line"> </span><br><span class="line">read -p &quot;Input your choice:&quot; num</span><br><span class="line"> </span><br><span class="line">if [ $num -eq &quot;1&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;2&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;3&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">else</span><br><span class="line">    echo -e &quot;Error!\nPleasse input right number!&quot;</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line">gdb $1 $2 $3 $4 $5 $6 $7 $8 $9</span><br></pre></td></tr></table></figure>
+
+<p>简单使用演示：</p>
+<p><img src="https://img.imgdb.cn/item/604d8c315aedab222cc8a7cc.png"></p>
+<h2 id="32位程序支持"><a href="#32位程序支持" class="headerlink" title="32位程序支持"></a>32位程序支持</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install libc6-dev-i386</span><br></pre></td></tr></table></figure>
+
+<h2 id="LibcSearcher"><a href="#LibcSearcher" class="headerlink" title="LibcSearcher"></a>LibcSearcher</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/lieanu/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
+
+<p>可以使用IZAY01师傅的LibcSearcher-ng，项目地址<a href="https://github.com/IZAY01/LibcSearcher">https://github.com/IZAY01/LibcSearcher</a>，安装方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/IZAY01/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">sudo python3 setup.py develop</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用Rootkit师傅的LibcSearcher3，项目地址<a href="https://github.com/Ro0tk1t/LibcSearcher3">https://github.com/Ro0tk1t/LibcSearcher3</a>，安装方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Ro0tk1t/LibcSearcher3.git</span><br><span class="line"></span><br><span class="line">pip3 install -e LibcSearcher3</span><br></pre></td></tr></table></figure>
+
+<h2 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h2><p>用来搜索gadgets的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install python-capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/JonathanSalwan/ROPgadget.git</span><br><span class="line"></span><br><span class="line">cd ROPgadget </span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h2 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h2><p>用来搜索Rop链的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install ruby</span><br><span class="line"></span><br><span class="line">gem install one_gadget</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pwn Writeup</title>
     <url>/Pwn-Writeup/</url>
     <content><![CDATA[<p>欢迎一起讨论学习:)</p>
@@ -412,6 +385,28 @@
       </tags>
   </entry>
   <entry>
+    <title>VM Pwn学习</title>
+    <url>/VM-Pwn%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>PWn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pwnable.tw</title>
     <url>/Pwnable-tw/</url>
     <content><![CDATA[<p>欢迎一起讨论学习:)</p>
@@ -426,6 +421,260 @@
       </categories>
       <tags>
         <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Kernel Pool Spraying</title>
+    <url>/Windows-Kernel-Pool-Spraying/</url>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<p><a href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
+<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
+<h1 id="部分池结构"><a href="#部分池结构" class="headerlink" title="部分池结构"></a>部分池结构</h1><p>这个池对于Windows内核中的每个分配来说是常见的。由于它已经被广泛使用，所以控制它比控制一个简单的堆要困难得多。它管理着所有类型的数据，从最简单的字符串到最大的结构体。即使池跟堆没有太大的不同，池也有自己的分配器和结构。Windows操作系统内核预留两个内存池，一个保留在物理内存(非分页池)，一个可以跟物理内存进行交换(分页池)。注意Windows8引入了NonPagedPoolNx，它基本上是一个开启了DEP的非分页池。内核中有许多种类型的池，但它们的主要结构是相同的。池描述符保留了池的当前状态信息，当前状态信息包含以下5点：</p>
+<ul>
+<li>(A Deferred Free list)一个延迟的释放列表(默认状态下开启)：当列表被填充的时候就会被释放的块列表</li>
+<li>(A ListHeads)一个根据大小排序的可用块的后进先出列表</li>
+<li>(A Lookaside List)一个后备列表：据大小排序的可用块的后进先出列表。跟ListHeads列表十分相似，但会有一些限制。</li>
+<li>关于当前分配的错误信息</li>
+<li>这个后备列表是一个可用块的后进先出小列表，也是根据大小排序。对于小于或等于0x200(512)字节的块，它被当作块的ListHeads的替代品，来提高性能。稍后介绍它的内部原理。</li>
+</ul>
+<p>简单来说，池只是已分配页的一个列表。一个页的大小为0x1000字节，并且分成块。有一些块大于0x1000字节，这些代表了一种我们目前不进行学习的特殊情况。所以我们将专注于那些小于0xFF1字节的块。下面是内核池块的结构：</p>
+<p><img src="https://img.imgdb.cn/item/6066c4d88322e6675cc779f2.png" alt="image"></p>
+<ul>
+<li><p>(PreviousSize)之前的块大小：之前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
+</li>
+<li><p>(PoolIndex)池索引：一个用于从对应池类型的的池描述符数组中获取池描述符的索引(数组索引)</p>
+</li>
+<li><p>(BlockSize)当前的块大小：当前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
+</li>
+<li><p>(PoolType)池类型：一个位掩码，包含块的一些细节</p>
+<ul>
+<li>池类型(非分页、分页……)</li>
+<li>分配与否</li>
+<li>(Quota bit)配额位：如果块被用在进程配额的管理上。如果引发此标志，对应的EPROCESS对象(描述进程信息的内核数据结构)的指针将会被存储到ProcessBilled</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/60952a90d1a9ae528f5e9d8a.png"></p>
+<ul>
+<li>一些其他的信息</li>
+</ul>
+</li>
+<li><p>(PoolTag)池标签：4个字符用于识别块是否正在被调试</p>
+</li>
+<li><p>(ProcessBilled)进程指针：如果配额位被设置，就是一个指向EPROCESS结构的指针</p>
+</li>
+</ul>
+<h2 id="内核池中的分配与释放"><a href="#内核池中的分配与释放" class="headerlink" title="内核池中的分配与释放"></a>内核池中的分配与释放</h2><h3 id="分配"><a href="#分配" class="headerlink" title="分配"></a>分配</h3><p>池有三种不同方式分配块</p>
+<p><img src="https://img.imgdb.cn/item/6066c5068322e6675cc7af38.png" alt="image"></p>
+<ol>
+<li>如果准备分配的块小于0x200字节，分配器将首次尝试使用后备列表。它将寻找与请求的大小完全相同的块。如果没有这样的块，分配器将会使用下一种方式</li>
+<li>它将使用列表头，也会寻找与请求的大小完全相同的块。如果没有这样的块，分配器将选择一个更大的块并将其分成两部分；一部分将会被分配，另外一部分被存储在适合的列表头中</li>
+<li>如果任何对应的块都没有，它将会分配一个新页，并且它的一个块被分配在该页的顶部。接下来的每个块都会被分配到该页的底端，第三种分配方法示意图如下：</li>
+</ol>
+<p><img src="https://img.imgdb.cn/item/606817a48322e6675cf4a6e5.png"></p>
+<h3 id="释放"><a href="#释放" class="headerlink" title="释放"></a>释放</h3><p>同时，存在几种机制去释放块</p>
+<p><img src="https://img.imgdb.cn/item/6068236f8322e6675c000c12.png"></p>
+<ol>
+<li>如果块是一个小的块(小于等于0x200字节)，分配器将首先尝试将这个块存储到对应其类型的后备列表中。然而，一个后备列表最多存储0xff(255)个同样大小的数据块，所以它可能已经满了</li>
+<li>如果延迟释放标志出现(默认开启)，这个块将被存储到延迟释放列表，直到这个列表是满的(最大容纳0x20个块)。一旦延迟释放列表满了，这个列表将用于同时释放每个块，进而提高性能</li>
+<li>最后，这个块实际上是可用的；分配器检查其周围的块是否可用，如果是，就将它们合并起来，然后存储这个新块到合适的列表头。如果实际上释放了整个页面，那么它将会被简单释放</li>
+</ol>
+<h1 id="池喷射基础"><a href="#池喷射基础" class="headerlink" title="池喷射基础"></a>池喷射基础</h1><p>现在，让我们直奔主题。池喷的基本原理就是分配足够多的对象以确保你可以控制未来的分配。Windows向我们提供了许多允许对象分配在不同类型的池的工具。例如，我们可以在非分页池(NonPagedPoolNx在Windows8及往后的版本)中分配ReservedObjects(对象)或者Semaphores(对象)。找到与要控制的池类型匹配的对象取决于你。你所选择的对象大小也很重要，它与你要创建的空隙大小直接相关。一旦你选择你的对象，首先通过大量分配这个对象来取消池的随机化，创建这样的池页面：</p>
+<p><img src="https://pic.imgdb.cn/item/60952c3ad1a9ae528f6dfb88.png"></p>
+<p>当你分配这些对象时，Windows显然不会提供它们的地址，因为这是一些内核地址，但它会给你一个对象句柄。你可以使用这个句柄通过调用CloseHanle函数去释放对象。大量分配这个对象确保我们耗尽后备列表和列表头。从现在开始，我们所做的每一个分配使用一个新的页面。当我们保留为自己分配的所有对象的句柄列表，我们可以猜想池与句柄列表之间的联系</p>
+<p><img src="https://pic.imgdb.cn/item/60952c76d1a9ae528f701a77.png"></p>
+<p>它允许我们通过相邻的块调用CloseHandle，创建半控制大小的间隙(因为它是对象大小的积)</p>
+<p><img src="https://pic.imgdb.cn/item/60952cadd1a9ae528f723b56.png"></p>
+<p>一些细节仍然存在，并可能会给你带来麻烦：</p>
+<ul>
+<li>如果你选择的对象大小为0x200字节，这是非常有可能的，这会使对应的块在后备列表中释放，避免块的合并。为了避免这种情况，你必须在释放将组成间隙的块之前通过释放足够多的对象来填充后备列表</li>
+<li>然后你释放的块将会进入延迟释放列表，但不会立即合并。因此，你必须释放足够的对象去填充延迟释放列表，在释放即将组成间隙的块之后</li>
+<li>最后，你将会在池中分配，对于整个内核来说它使通用的。这意味着你创建的间隙将会随时被你无法控制的一些东西分配。你得快点</li>
+</ul>
+<p>一个简短的步骤摘要：</p>
+<ol>
+<li>使用选择释放的块的句柄</li>
+<li>释放足够多的块去填充后备列表</li>
+<li>释放选择的块</li>
+<li>释放足够的块去填充延迟释放列表</li>
+<li>尽可能快地使用你的间隙</li>
+</ol>
+<h1 id="结合泄露"><a href="#结合泄露" class="headerlink" title="结合泄露"></a>结合泄露</h1><p>我之前提过Windows不会向你提供对象的地址，因为它们是内核地址。然而，我骗了你。</p>
+<p>在Windows上，可以使用函数NtQuerySystemInformation来获取一些总所周知的泄露。这个函数有点魔幻，它允许许多内核地址泄露。我们主要感兴趣的是它提供当前分配的每个对象的列表的能力，通过向我们提供那些结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX</span><br><span class="line">&#123;</span><br><span class="line">    PVOID Object;</span><br><span class="line">    ULONG_PTR UniqueProcessId;</span><br><span class="line">    HANDLE HandleValue;</span><br><span class="line">    ULONG GrantedAccess;</span><br><span class="line">    USHORT CreatorBackTraceIndex;</span><br><span class="line">    USHORT ObjectTypeIndex;</span><br><span class="line">    ULONG HandleAttributes;</span><br><span class="line">    ULONG Reserved;</span><br><span class="line">&#125; SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX, *PSYSTEM_HANDLE_TABLE_ENTRY_INFO_EX;</span><br><span class="line"></span><br><span class="line">typedef struct _SYSTEM_EXTENDED_HANDLE_INFORMATION</span><br><span class="line">&#123;</span><br><span class="line">    ULONG_PTR NumberOfHandles;</span><br><span class="line">    ULONG_PTR Reserved;</span><br><span class="line">    SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX Handles[1];</span><br><span class="line">&#125; SYSTEM_EXTENDED_HANDLE_INFORMATION, *PSYSTEM_EXTENDED_HANDLE_INFORMATION;</span><br></pre></td></tr></table></figure>
+
+<p>使用 SystemExtendedHandleInformation参数来调用NtQuerySystemInformation函数会给我们提供_SYSTEM_EXTENDED_HANDLE_INFORMATION结构。我们可以使用句柄字段去列举每个在系统上已分配的对象。每个对象都被_SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX结构描述，其中包括以下信息：</p>
+<ul>
+<li>句柄值字段，它匹配我们分配对象时获得的句柄</li>
+<li>对象字段，它是内核池内存中对象的地址</li>
+<li>通过使用这个列表，我们可以通过句柄获取任何对象的内核地址</li>
+</ul>
+<p>值得注意得是，自Windows8以来，这个泄露在低完整性级别上就不再可用。因此，如果你处于低完整性级别，你得坚持基础喷射。我们可以使用它来提高我们得喷射性能并使它百分百可靠</p>
+<p>我们当前在池中创建间隙得方法不值得信任；即使还要很多可能性，两个对象一个接一个在池内存中是相邻的，这也是不确定的。它们可能被分配到两个不同的页面，或者一个未知的块可能分配到两个块之间，谁知道呢。</p>
+<p>通过这些泄露地址，我们可以轻松确保我们创建的间隙是有效的：</p>
+<ul>
+<li>选择我们列表里的一个句柄，并泄露它的内核地址</li>
+<li>使用上面选择的句柄的下一个句柄并泄露它的内核地址，它应该等于上一个内核地址加上块的大小。如果不相等，这些块就不是一个紧挨着一个的，间隙就不是有效的</li>
+<li>检查构成间隙的每个块，也检查间隙周围的每一块</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6066c4858322e6675cc72387.png"></p>
+<p>使用这种方法，我们百分百确定我们的间隙是有效的</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在，池喷是如此的强大以至于没有使用它去利用内核池的一个漏洞似乎是不可能的。然而，池喷任然存在一些限制。首先，我们不能创建任意大小的间隙，因为它总是取决于所选择的池喷对象的大小。当然，我们可以想象一个喷射混合了几种对象为了创建更多不同大小的间隙，但迄今为止，我们从来不需要使用这种方法。尽管它完全可能，因为地址泄露总是允许我们确保我们的间隙的有效性。其次，预测一个大小&lt;=0x200字节的块的分配是很复杂的，因为这个分配器会使用后备列表。实现这一点的唯一办法就是使用一个与要控制的块的大小完全相同的对象。我编写了一个库，它使用了这里解释的方法，并提供了一个简易的API去池喷</p>
+<p>Windows是时候完全修复NtQuerySystemInformation泄露(虽然它在低IL上不再可用)，因为在我看来，这是唯一的办法去减轻对内核池的每一次攻击</p>
+<p>在那之前，享受的你的内核池派对</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><p><a href="http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf">http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf</a></p>
+</li>
+<li><p><a href="http://illmatics.com/Windows%208%20Heap%20Internals.pdf">http://illmatics.com/Windows%208%20Heap%20Internals.pdf</a></p>
+</li>
+<li><p><a href="http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html">http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html</a></p>
+</li>
+<li><p><a href="https://github.com/fishstiqz/poolinfo">https://github.com/fishstiqz/poolinfo</a></p>
+</li>
+<li><p><a href="https://github.com/cbayet/PoolSprayer">https://github.com/cbayet/PoolSprayer</a></p>
+<p>研究和文章作者: BAYET Corentin</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Kernel</category>
+      </categories>
+      <tags>
+        <tag>Vuln</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>boofuzz学习之路</title>
+    <url>/boofuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>Fuzz</category>
+      </categories>
+      <tags>
+        <tag>Fuzz</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>dl_runtime_resolve学习</title>
+    <url>/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>orw学习</title>
+    <url>/orw%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>学习日志</title>
+    <url>/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="2021-6-6"><a href="#2021-6-6" class="headerlink" title="2021.6.6"></a>2021.6.6</h1><ul>
+<li>明天下午概率论考试，此时此刻还想去学习堆利用，pwn实在是太吸引人了</li>
+<li>前几天分别在ubuntu16、18、20上使用buildroot编译了mips编译环境和binwalk，binwalk扩展安装略显挣扎，ubuntu16上的libc存在一些问题(版本是4.0，匹配不上)，无法编译动态链接的可执行文件，还是乖乖在Ubuntu18/20上先搞搞，找了道栈溢出的题，发现虽然学了mips汇编，但还是不熟悉，这得继续加强；其次，调用叶子函数时堆栈上没有返回地址，返回地址存在$ra中；最后，我要恶补计网知识！然后再尝试复现CVE，抱紧澳神大腿</li>
+<li>两个星期以来，修电脑的几天里，肉眼学了几天堆，修完电脑发现上手调试非常手生，说明肌肉记忆才是最靠谱的；目前学到的两个漏洞点：UAF&amp;Heap overflow；一系列的利用方式也围绕这两种情况，如double free、unlink、chunk重叠等，这一切的最终目的就是为了修改fd指针，申请到我们想控制的区域，进而进行hook，总的来说就两个要点：泄露信息与修改fd指针。unsorted bin、small bin、house of orange、沙箱、IO_File等都是我未学或者未理解的点，后面需要进行大量真题练习进行学习</li>
+</ul>
+<h1 id="2021-6-7"><a href="#2021-6-7" class="headerlink" title="2021.6.7"></a>2021.6.7</h1><ul>
+<li>复习半天概率论，考完试已经六点多</li>
+<li>对mips部分指令熟悉了不少，调试一个简单的栈溢出漏洞却不能成功，遇到两个问题：<ul>
+<li>1、IDA Pro堆栈上的局部变量偏移识别错误 </li>
+<li>2、执行<code>jr $ra</code>指令时候，又进行了几个跳转，真正跳到gadget时，已经出现了段错误(crash)，一时间没想明白</li>
+</ul>
+</li>
+<li>开始狂补基础知识……</li>
+</ul>
+<h1 id="2021-6-8"><a href="#2021-6-8" class="headerlink" title="2021.6.8"></a>2021.6.8</h1><ul>
+<li>调了一道2.31版本的简单off-by-null的题目</li>
+</ul>
+<h1 id="2021-6-9"><a href="#2021-6-9" class="headerlink" title="2021.6.9"></a>2021.6.9</h1><ul>
+<li>复现两道国赛题目：pwny&amp;lonelywolf</li>
+<li>效率还是不够高:(</li>
+</ul>
+<h1 id="2021-6-10"><a href="#2021-6-10" class="headerlink" title="2021.6.10"></a>2021.6.10</h1><ul>
+<li>复习了两小节信安数学基础</li>
+<li>复现了TP-Link-sr20远程命令执行漏洞，了解如何操作qemu等(网络这块知识感觉太欠缺了)</li>
+</ul>
+<h1 id="2021-6-11"><a href="#2021-6-11" class="headerlink" title="2021.6.11"></a>2021.6.11</h1><ul>
+<li>复现两个IOT漏洞，还没完……</li>
+</ul>
+<h1 id="2021-6-12-13"><a href="#2021-6-12-13" class="headerlink" title="2021.6.12-13"></a>2021.6.12-13</h1><ul>
+<li>世界名作: 强网杯Pwn方向0解</li>
+</ul>
+<h1 id="2021-6-14-7-2"><a href="#2021-6-14-7-2" class="headerlink" title="2021.6.14-7.2"></a>2021.6.14-7.2</h1><ul>
+<li>期末复习与考试……</li>
+</ul>
+]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
@@ -600,162 +849,6 @@
       </tags>
   </entry>
   <entry>
-    <title>AFL-Fuzz学习之路</title>
-    <url>/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</url>
-    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
-<span id="more"></span>
-
-<h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
-<!--more-->
-
-<p>安装成功标志如下:</p>
-<p><img src="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png"></p>
-<h2 id="无源码模式"><a href="#无源码模式" class="headerlink" title="无源码模式"></a>无源码模式</h2><blockquote>
-<p>即在上面的基础上安装qemu_mode afl fuzzing，安装了n次都没有成功，差点放弃，最后还是成功了</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd afl-2.52b/qemu_mode</span><br><span class="line"></span><br><span class="line">./build_qemu_support.sh</span><br></pre></td></tr></table></figure>
-
-<p>不出意外的话这一步就开始报错，缺什么就是用apt安装什么，除了安装libtool，还得安装libtool-bin，再次执行build_qemu_support.sh脚本依然可以看到以下错误</p>
-<p><img src="https://pic.imgdb.cn/item/609f1b00d1a9ae528f003074.png"></p>
-<p>memfd_create和glibc中的同名函数冲突，需要打patch，在afl-2.52b/qemu_mode/patches/目录下新增一个memfd_create.diff，文件内容如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">diff -ru qemu-2.10.0-clean/util/memfd.c qemu-2.10.0/util/memfd.c</span><br><span class="line">--- qemu-2.10.0-clean/util/memfd.c      2018-11-20 18:11:00.170271506 +0100</span><br><span class="line">+++ qemu-2.10.0/util/memfd.c    2018-11-20 18:11:13.398423613 +0100</span><br><span class="line">@@ -37,7 +37,7 @@</span><br><span class="line"> #include &lt;sys/syscall.h&gt;</span><br><span class="line"> #include &lt;asm/unistd.h&gt;</span><br><span class="line"> </span><br><span class="line">-static int memfd_create(const char *name, unsigned int flags)</span><br><span class="line">+int memfd_create(const char *name, unsigned int flags)</span><br><span class="line"> &#123;</span><br><span class="line"> #ifdef __NR_memfd_create</span><br><span class="line">     return syscall(__NR_memfd_create, name, flags);</span><br></pre></td></tr></table></figure>
-
-<p>修改build_qemu_support.sh文件内容，加上自己添加的补丁</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;[*] Applying patches...&quot;</span><br><span class="line"></span><br><span class="line">patch -p1 &lt;../patches/elfload.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/cpu-exec.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/syscall.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/memfd_create.diff || exit 1</span><br><span class="line"></span><br><span class="line">echo &quot;[+] Patching done.&quot;</span><br></pre></td></tr></table></figure>
-
-<p>再次执行build_qemu_support.sh脚本，可以看到以下成功的信息：</p>
-<p><img src="https://pic.imgdb.cn/item/609f1ccfd1a9ae528f118d7b.png"></p>
-]]></content>
-      <categories>
-        <category>Fuzz</category>
-      </categories>
-      <tags>
-        <tag>Fuzz</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows Kernel Pool Spraying</title>
-    <url>/Windows-Kernel-Pool-Spraying/</url>
-    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
-<span id="more"></span>
-
-<p><a href="https://www.gatewatcher.com/en/news/blog/windows-kernel-pool-spraying">原文链接</a></p>
-<h1 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h1><p>当你正尝试去利用一个内核池漏洞时，你将必须处理许多块和池元数据。块头部存在着不少检查，如果你想避免BSOD(蓝屏)，就必须去控制所有东西。池喷是一门使池中的分配可预见的艺术。这意味着你将知道一个块会被分配在哪里，及其周围的块。如果你想泄露一些精确的信息或者覆写特定的数据，这是必须的。本篇文章的意图不是深度阐述池的内部结构，但只有你知道基础知识才能理解池喷机制。如果你需要关于池的内部结构的详尽信息，你应该阅读Tarjei Mandt的文章。基于同样的原因，我们将只讲述x64结构。<strong>所有在本文提及的东西仅仅使用Windows内部结构并且可以应用在Windows7到Windows10的每个版本。</strong></p>
-<h1 id="部分池结构"><a href="#部分池结构" class="headerlink" title="部分池结构"></a>部分池结构</h1><p>这个池对于Windows内核中的每个分配来说是常见的。由于它已经被广泛使用，所以控制它比控制一个简单的堆要困难得多。它管理着所有类型的数据，从最简单的字符串到最大的结构体。即使池跟堆没有太大的不同，池也有自己的分配器和结构。Windows操作系统内核预留两个内存池，一个保留在物理内存(非分页池)，一个可以跟物理内存进行交换(分页池)。注意Windows8引入了NonPagedPoolNx，它基本上是一个开启了DEP的非分页池。内核中有许多种类型的池，但它们的主要结构是相同的。池描述符保留了池的当前状态信息，当前状态信息包含以下5点：</p>
-<ul>
-<li>(A Deferred Free list)一个延迟的释放列表(默认状态下开启)：当列表被填充的时候就会被释放的块列表</li>
-<li>(A ListHeads)一个根据大小排序的可用块的后进先出列表</li>
-<li>(A Lookaside List)一个后备列表：据大小排序的可用块的后进先出列表。跟ListHeads列表十分相似，但会有一些限制。</li>
-<li>关于当前分配的错误信息</li>
-<li>这个后备列表是一个可用块的后进先出小列表，也是根据大小排序。对于小于或等于0x200(512)字节的块，它被当作块的ListHeads的替代品，来提高性能。稍后介绍它的内部原理。</li>
-</ul>
-<p>简单来说，池只是已分配页的一个列表。一个页的大小为0x1000字节，并且分成块。有一些块大于0x1000字节，这些代表了一种我们目前不进行学习的特殊情况。所以我们将专注于那些小于0xFF1字节的块。下面是内核池块的结构：</p>
-<p><img src="https://img.imgdb.cn/item/6066c4d88322e6675cc779f2.png" alt="image"></p>
-<ul>
-<li><p>(PreviousSize)之前的块大小：之前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
-</li>
-<li><p>(PoolIndex)池索引：一个用于从对应池类型的的池描述符数组中获取池描述符的索引(数组索引)</p>
-</li>
-<li><p>(BlockSize)当前的块大小：当前块的大小。块的大小存储为实际大小右移4位(即实际大小/16)</p>
-</li>
-<li><p>(PoolType)池类型：一个位掩码，包含块的一些细节</p>
-<ul>
-<li>池类型(非分页、分页……)</li>
-<li>分配与否</li>
-<li>(Quota bit)配额位：如果块被用在进程配额的管理上。如果引发此标志，对应的EPROCESS对象(描述进程信息的内核数据结构)的指针将会被存储到ProcessBilled</li>
-</ul>
-<p><img src="https://pic.imgdb.cn/item/60952a90d1a9ae528f5e9d8a.png"></p>
-<ul>
-<li>一些其他的信息</li>
-</ul>
-</li>
-<li><p>(PoolTag)池标签：4个字符用于识别块是否正在被调试</p>
-</li>
-<li><p>(ProcessBilled)进程指针：如果配额位被设置，就是一个指向EPROCESS结构的指针</p>
-</li>
-</ul>
-<h2 id="内核池中的分配与释放"><a href="#内核池中的分配与释放" class="headerlink" title="内核池中的分配与释放"></a>内核池中的分配与释放</h2><h3 id="分配"><a href="#分配" class="headerlink" title="分配"></a>分配</h3><p>池有三种不同方式分配块</p>
-<p><img src="https://img.imgdb.cn/item/6066c5068322e6675cc7af38.png" alt="image"></p>
-<ol>
-<li>如果准备分配的块小于0x200字节，分配器将首次尝试使用后备列表。它将寻找与请求的大小完全相同的块。如果没有这样的块，分配器将会使用下一种方式</li>
-<li>它将使用列表头，也会寻找与请求的大小完全相同的块。如果没有这样的块，分配器将选择一个更大的块并将其分成两部分；一部分将会被分配，另外一部分被存储在适合的列表头中</li>
-<li>如果任何对应的块都没有，它将会分配一个新页，并且它的一个块被分配在该页的顶部。接下来的每个块都会被分配到该页的底端，第三种分配方法示意图如下：</li>
-</ol>
-<p><img src="https://img.imgdb.cn/item/606817a48322e6675cf4a6e5.png"></p>
-<h3 id="释放"><a href="#释放" class="headerlink" title="释放"></a>释放</h3><p>同时，存在几种机制去释放块</p>
-<p><img src="https://img.imgdb.cn/item/6068236f8322e6675c000c12.png"></p>
-<ol>
-<li>如果块是一个小的块(小于等于0x200字节)，分配器将首先尝试将这个块存储到对应其类型的后备列表中。然而，一个后备列表最多存储0xff(255)个同样大小的数据块，所以它可能已经满了</li>
-<li>如果延迟释放标志出现(默认开启)，这个块将被存储到延迟释放列表，直到这个列表是满的(最大容纳0x20个块)。一旦延迟释放列表满了，这个列表将用于同时释放每个块，进而提高性能</li>
-<li>最后，这个块实际上是可用的；分配器检查其周围的块是否可用，如果是，就将它们合并起来，然后存储这个新块到合适的列表头。如果实际上释放了整个页面，那么它将会被简单释放</li>
-</ol>
-<h1 id="池喷射基础"><a href="#池喷射基础" class="headerlink" title="池喷射基础"></a>池喷射基础</h1><p>现在，让我们直奔主题。池喷的基本原理就是分配足够多的对象以确保你可以控制未来的分配。Windows向我们提供了许多允许对象分配在不同类型的池的工具。例如，我们可以在非分页池(NonPagedPoolNx在Windows8及往后的版本)中分配ReservedObjects(对象)或者Semaphores(对象)。找到与要控制的池类型匹配的对象取决于你。你所选择的对象大小也很重要，它与你要创建的空隙大小直接相关。一旦你选择你的对象，首先通过大量分配这个对象来取消池的随机化，创建这样的池页面：</p>
-<p><img src="https://pic.imgdb.cn/item/60952c3ad1a9ae528f6dfb88.png"></p>
-<p>当你分配这些对象时，Windows显然不会提供它们的地址，因为这是一些内核地址，但它会给你一个对象句柄。你可以使用这个句柄通过调用CloseHanle函数去释放对象。大量分配这个对象确保我们耗尽后备列表和列表头。从现在开始，我们所做的每一个分配使用一个新的页面。当我们保留为自己分配的所有对象的句柄列表，我们可以猜想池与句柄列表之间的联系</p>
-<p><img src="https://pic.imgdb.cn/item/60952c76d1a9ae528f701a77.png"></p>
-<p>它允许我们通过相邻的块调用CloseHandle，创建半控制大小的间隙(因为它是对象大小的积)</p>
-<p><img src="https://pic.imgdb.cn/item/60952cadd1a9ae528f723b56.png"></p>
-<p>一些细节仍然存在，并可能会给你带来麻烦：</p>
-<ul>
-<li>如果你选择的对象大小为0x200字节，这是非常有可能的，这会使对应的块在后备列表中释放，避免块的合并。为了避免这种情况，你必须在释放将组成间隙的块之前通过释放足够多的对象来填充后备列表</li>
-<li>然后你释放的块将会进入延迟释放列表，但不会立即合并。因此，你必须释放足够的对象去填充延迟释放列表，在释放即将组成间隙的块之后</li>
-<li>最后，你将会在池中分配，对于整个内核来说它使通用的。这意味着你创建的间隙将会随时被你无法控制的一些东西分配。你得快点</li>
-</ul>
-<p>一个简短的步骤摘要：</p>
-<ol>
-<li>使用选择释放的块的句柄</li>
-<li>释放足够多的块去填充后备列表</li>
-<li>释放选择的块</li>
-<li>释放足够的块去填充延迟释放列表</li>
-<li>尽可能快地使用你的间隙</li>
-</ol>
-<h1 id="结合泄露"><a href="#结合泄露" class="headerlink" title="结合泄露"></a>结合泄露</h1><p>我之前提过Windows不会向你提供对象的地址，因为它们是内核地址。然而，我骗了你。</p>
-<p>在Windows上，可以使用函数NtQuerySystemInformation来获取一些总所周知的泄露。这个函数有点魔幻，它允许许多内核地址泄露。我们主要感兴趣的是它提供当前分配的每个对象的列表的能力，通过向我们提供那些结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX</span><br><span class="line">&#123;</span><br><span class="line">    PVOID Object;</span><br><span class="line">    ULONG_PTR UniqueProcessId;</span><br><span class="line">    HANDLE HandleValue;</span><br><span class="line">    ULONG GrantedAccess;</span><br><span class="line">    USHORT CreatorBackTraceIndex;</span><br><span class="line">    USHORT ObjectTypeIndex;</span><br><span class="line">    ULONG HandleAttributes;</span><br><span class="line">    ULONG Reserved;</span><br><span class="line">&#125; SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX, *PSYSTEM_HANDLE_TABLE_ENTRY_INFO_EX;</span><br><span class="line"></span><br><span class="line">typedef struct _SYSTEM_EXTENDED_HANDLE_INFORMATION</span><br><span class="line">&#123;</span><br><span class="line">    ULONG_PTR NumberOfHandles;</span><br><span class="line">    ULONG_PTR Reserved;</span><br><span class="line">    SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX Handles[1];</span><br><span class="line">&#125; SYSTEM_EXTENDED_HANDLE_INFORMATION, *PSYSTEM_EXTENDED_HANDLE_INFORMATION;</span><br></pre></td></tr></table></figure>
-
-<p>使用 SystemExtendedHandleInformation参数来调用NtQuerySystemInformation函数会给我们提供_SYSTEM_EXTENDED_HANDLE_INFORMATION结构。我们可以使用句柄字段去列举每个在系统上已分配的对象。每个对象都被_SYSTEM_HANDLE_TABLE_ENTRY_INFO_EX结构描述，其中包括以下信息：</p>
-<ul>
-<li>句柄值字段，它匹配我们分配对象时获得的句柄</li>
-<li>对象字段，它是内核池内存中对象的地址</li>
-<li>通过使用这个列表，我们可以通过句柄获取任何对象的内核地址</li>
-</ul>
-<p>值得注意得是，自Windows8以来，这个泄露在低完整性级别上就不再可用。因此，如果你处于低完整性级别，你得坚持基础喷射。我们可以使用它来提高我们得喷射性能并使它百分百可靠</p>
-<p>我们当前在池中创建间隙得方法不值得信任；即使还要很多可能性，两个对象一个接一个在池内存中是相邻的，这也是不确定的。它们可能被分配到两个不同的页面，或者一个未知的块可能分配到两个块之间，谁知道呢。</p>
-<p>通过这些泄露地址，我们可以轻松确保我们创建的间隙是有效的：</p>
-<ul>
-<li>选择我们列表里的一个句柄，并泄露它的内核地址</li>
-<li>使用上面选择的句柄的下一个句柄并泄露它的内核地址，它应该等于上一个内核地址加上块的大小。如果不相等，这些块就不是一个紧挨着一个的，间隙就不是有效的</li>
-<li>检查构成间隙的每个块，也检查间隙周围的每一块</li>
-</ul>
-<p><img src="https://pic.imgdb.cn/item/6066c4858322e6675cc72387.png"></p>
-<p>使用这种方法，我们百分百确定我们的间隙是有效的</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在，池喷是如此的强大以至于没有使用它去利用内核池的一个漏洞似乎是不可能的。然而，池喷任然存在一些限制。首先，我们不能创建任意大小的间隙，因为它总是取决于所选择的池喷对象的大小。当然，我们可以想象一个喷射混合了几种对象为了创建更多不同大小的间隙，但迄今为止，我们从来不需要使用这种方法。尽管它完全可能，因为地址泄露总是允许我们确保我们的间隙的有效性。其次，预测一个大小&lt;=0x200字节的块的分配是很复杂的，因为这个分配器会使用后备列表。实现这一点的唯一办法就是使用一个与要控制的块的大小完全相同的对象。我编写了一个库，它使用了这里解释的方法，并提供了一个简易的API去池喷</p>
-<p>Windows是时候完全修复NtQuerySystemInformation泄露(虽然它在低IL上不再可用)，因为在我看来，这是唯一的办法去减轻对内核池的每一次攻击</p>
-<p>在那之前，享受的你的内核池派对</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><p><a href="http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf">http://www.mista.nu/research/MANDT-kernelpool-PAPER.pdf</a></p>
-</li>
-<li><p><a href="http://illmatics.com/Windows%208%20Heap%20Internals.pdf">http://illmatics.com/Windows%208%20Heap%20Internals.pdf</a></p>
-</li>
-<li><p><a href="http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html">http://blog.ptsecurity.com/2013/03/stars-aligners-how-to-kernel-pool.html</a></p>
-</li>
-<li><p><a href="https://github.com/fishstiqz/poolinfo">https://github.com/fishstiqz/poolinfo</a></p>
-</li>
-<li><p><a href="https://github.com/cbayet/PoolSprayer">https://github.com/cbayet/PoolSprayer</a></p>
-<p>研究和文章作者: BAYET Corentin</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Kernel</category>
-      </categories>
-      <tags>
-        <tag>Vuln</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CVE-2010-2883分析</title>
     <url>/CVE-2010-2883%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p>欢迎一起讨论学习:)</p>
@@ -857,98 +950,5 @@
       <tags>
         <tag>Vuln</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Pwn Environment</title>
-    <url>/Pwn-Environment/</url>
-    <content><![CDATA[<p>欢迎一起讨论学习:)</p>
-<span id="more"></span>
-
-<h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p>Ubuntu版本不需要太新，版本稳定就行，遇到问题利用搜索引擎也能快速解决，推荐上手Ubuntu18，Ubuntu20实在卡顿，不敢恭维</p>
-<ul>
-<li>VMware Pro 16</li>
-<li>Ubuntu 18.04</li>
-</ul>
-<h1 id="实用软件"><a href="#实用软件" class="headerlink" title="实用软件"></a>实用软件</h1><h2 id="安装aptitude"><a href="#安装aptitude" class="headerlink" title="安装aptitude"></a>安装aptitude</h2><p>强大的包管理器</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install aptitude</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h2><p>强大的编辑器</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install vim</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>强大的github仓库管理神器</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install git</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h2><p>单纯觉得可以配置得好看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install zsh</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装terminator"><a href="#安装terminator" class="headerlink" title="安装terminator"></a>安装terminator</h2><p>gdb调试时用到，也可以选择tmux</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo aptitude install terminator</span><br></pre></td></tr></table></figure>
-
-<h1 id="Pwn工具"><a href="#Pwn工具" class="headerlink" title="Pwn工具"></a>Pwn工具</h1><h2 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h2><p>python2版本的pwntools：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python python-pip python-dev libssl-dev libffi-dev build-essential</span><br><span class="line"></span><br><span class="line">pip install -U setuptools</span><br><span class="line"></span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">pip install --upgrade pwntools</span><br></pre></td></tr></table></figure>
-
-<p>python3版本的pwntools：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install python3 python3-dev python3-pip git</span><br><span class="line"></span><br><span class="line">pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git</span><br></pre></td></tr></table></figure>
-
-<h2 id="gdb插件"><a href="#gdb插件" class="headerlink" title="gdb插件"></a>gdb插件</h2><p>原生的gdb比较难用，我们可以选择安装以下插件来进行调试</p>
-<h3 id="pwndbg"><a href="#pwndbg" class="headerlink" title="pwndbg"></a>pwndbg</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/pwndbg/pwndbg</span><br><span class="line"></span><br><span class="line">cd pwndbg</span><br><span class="line"></span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
-
-<h3 id="peda"><a href="#peda" class="headerlink" title="peda"></a>peda</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/longld/peda.git~ /peda</span><br></pre></td></tr></table></figure>
-
-<h3 id="gef"><a href="#gef" class="headerlink" title="gef"></a>gef</h3><p>网上大多数使用wget的命令进行操作，但是我都无法进行下载，于是直接复制<a href="https://github.com/hugsy/gef/blob/master/gef.py">https://github.com/hugsy/gef/blob/master/gef.py</a>里面的内容，在本地新建一个gef.py的文件进行粘贴</p>
-<hr>
-<p>由于gdb一次只能使用一个插件，所以可以使用自动化脚本来进行切换。笔者插件存放目录结构如下：</p>
-<p><img src="https://img.imgdb.cn/item/604d82e95aedab222cbed9d1.png"></p>
-<p>插件配置文件<code>.gdbinit</code>(位于用户根目录下，笔者的位于<code>/home/jimp</code>目录下，没有的话可以新建一个)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /home/jimp/safetools/peda/peda.py</span><br><span class="line">source /home/jimp/safetools/gef/gef.py			#不知道为啥这条影响其他插件的使用,故笔者本地已经删除</span><br><span class="line">source /home/jimp/safetools/pwndbg/gdbinit.py</span><br></pre></td></tr></table></figure>
-
-<p><code>gdb.sh</code>文件(创建于<code>/usr/local/sbin</code>目录下)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">function Mode_change &#123;</span><br><span class="line">    name=$1</span><br><span class="line">    gdbinitfile=/home/jimp/.gdbinit    #这个路径按照你的实际情况修改</span><br><span class="line">    # gdbinitfile=/root/Desktop/mode</span><br><span class="line"> </span><br><span class="line">    peda=&quot;source /home/jimp/safetools/peda/peda.py&quot;          #这个路径按照你的实际情况修改</span><br><span class="line">    gef=&quot;source /home/jimp/safetools/gef/gef.py&quot;             #这个路径按照你的实际情况修改</span><br><span class="line">    pwndbg=&quot;source /home/jimp/safetools/pwndbg/gdbinit.py&quot;   #这个路径按照你的实际情况修改</span><br><span class="line"> </span><br><span class="line">    sign=$(cat $gdbinitfile | grep -n &quot;#this place is controled by user&#x27;s shell&quot;)    </span><br><span class="line">    #这是一个定位flag，此处上面的查找内容要和你自己的保持一致</span><br><span class="line"> </span><br><span class="line">    pattern=&quot;:#this place is controled by user&#x27;s shell&quot;</span><br><span class="line">    number=$&#123;sign%$pattern&#125;</span><br><span class="line">    location=$[number+2]</span><br><span class="line"> </span><br><span class="line">    parameter_add=$&#123;location&#125;i</span><br><span class="line">    parameter_del=$&#123;location&#125;d</span><br><span class="line"> </span><br><span class="line">    message=&quot;TEST&quot;</span><br><span class="line"> </span><br><span class="line">    if [ $name -eq &quot;1&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $peda&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the peda!\n&quot;</span><br><span class="line">    elif [ $name -eq &quot;2&quot; ];then</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $gef&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the gef!\n&quot;</span><br><span class="line">    else</span><br><span class="line">        sed -i &quot;$parameter_del&quot; $gdbinitfile</span><br><span class="line">        sed -i &quot;$parameter_add $pwndbg&quot; $gdbinitfile</span><br><span class="line">        echo -e &quot;Please enjoy the pwndbg!\n&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">echo -e &quot;Please choose one mode of GDB?\n1.peda    2.gef    3.pwndbg&quot;</span><br><span class="line"> </span><br><span class="line">read -p &quot;Input your choice:&quot; num</span><br><span class="line"> </span><br><span class="line">if [ $num -eq &quot;1&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;2&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">elif [ $num -eq &quot;3&quot; ];then</span><br><span class="line">    Mode_change $num</span><br><span class="line">else</span><br><span class="line">    echo -e &quot;Error!\nPleasse input right number!&quot;</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line">gdb $1 $2 $3 $4 $5 $6 $7 $8 $9</span><br></pre></td></tr></table></figure>
-
-<p>简单使用演示：</p>
-<p><img src="https://img.imgdb.cn/item/604d8c315aedab222cc8a7cc.png"></p>
-<h2 id="32位程序支持"><a href="#32位程序支持" class="headerlink" title="32位程序支持"></a>32位程序支持</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install libc6-dev-i386</span><br></pre></td></tr></table></figure>
-
-<h2 id="LibcSearcher"><a href="#LibcSearcher" class="headerlink" title="LibcSearcher"></a>LibcSearcher</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/lieanu/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
-
-<p>可以使用IZAY01师傅的LibcSearcher-ng，项目地址<a href="https://github.com/IZAY01/LibcSearcher">https://github.com/IZAY01/LibcSearcher</a>，安装方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/IZAY01/LibcSearcher.git</span><br><span class="line"></span><br><span class="line">cd LibcSearcher</span><br><span class="line"></span><br><span class="line">sudo python3 setup.py develop</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用Rootkit师傅的LibcSearcher3，项目地址<a href="https://github.com/Ro0tk1t/LibcSearcher3">https://github.com/Ro0tk1t/LibcSearcher3</a>，安装方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Ro0tk1t/LibcSearcher3.git</span><br><span class="line"></span><br><span class="line">pip3 install -e LibcSearcher3</span><br></pre></td></tr></table></figure>
-
-<h2 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h2><p>用来搜索gadgets的工具</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install python-capstone</span><br><span class="line"></span><br><span class="line">git clone https://github.com/JonathanSalwan/ROPgadget.git</span><br><span class="line"></span><br><span class="line">cd ROPgadget </span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-
-<h2 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h2><p>用来搜索Rop链的工具</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install ruby</span><br><span class="line"></span><br><span class="line">gem install one_gadget</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>Pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
