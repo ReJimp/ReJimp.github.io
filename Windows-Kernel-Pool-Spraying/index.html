@@ -560,6 +560,29 @@
 
 
 
+  
+  <div id="gitment-ctn"></div>
+  
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "Windows Kernel Pool Spraying" -->
+    var gitment = new Gitment({
+      id: "20210518031820",
+      owner: 'ReJimp',
+      repo: 'gitment-comments',
+      oauth: {
+        client_id: 'd6d4041349209813f35e',
+        client_secret: '0da798dc158c2f3f01a547884e3185e73ad0305c',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
+  
 
 
 
@@ -606,7 +629,7 @@
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: true
