@@ -6,7 +6,7 @@
   <link href="https://jimp.top/atom.xml" rel="self"/>
   
   <link href="https://jimp.top/"/>
-  <updated>2021-07-13T14:22:03.734Z</updated>
+  <updated>2021-07-16T06:22:22.674Z</updated>
   <id>https://jimp.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>学习日志</title>
-    <link href="https://jimp.top/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/"/>
-    <id>https://jimp.top/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</id>
-    <published>2099-06-06T09:30:06.000Z</published>
-    <updated>2021-07-13T14:22:03.734Z</updated>
+    <title>mark</title>
+    <link href="https://jimp.top/mark/"/>
+    <id>https://jimp.top/mark/</id>
+    <published>2099-06-05T16:00:00.000Z</published>
+    <updated>2021-07-16T06:22:22.674Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -36,11 +36,11 @@
   </entry>
   
   <entry>
-    <title>HEVD从0到1</title>
-    <link href="https://jimp.top/HEVD%E4%BB%8E0%E5%88%B01/"/>
-    <id>https://jimp.top/HEVD%E4%BB%8E0%E5%88%B01/</id>
-    <published>2021-06-23T11:07:28.000Z</published>
-    <updated>2021-07-16T01:09:30.284Z</updated>
+    <title>HEVD from 0 to 1</title>
+    <link href="https://jimp.top/HEVD-from-0-to-1/"/>
+    <id>https://jimp.top/HEVD-from-0-to-1/</id>
+    <published>2021-06-22T16:00:00.000Z</published>
+    <updated>2021-07-16T09:16:05.438Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -55,11 +55,49 @@
   </entry>
   
   <entry>
-    <title>VM Pwn学习</title>
-    <link href="https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-06-15T09:01:14.000Z</published>
-    <updated>2021-06-15T09:01:54.361Z</updated>
+    <title>IO_FILE</title>
+    <link href="https://jimp.top/IO-FILE/"/>
+    <id>https://jimp.top/IO-FILE/</id>
+    <published>2021-06-15T09:01:02.000Z</published>
+    <updated>2021-07-16T06:18:35.602Z</updated>
+    
+    
+    <summary type="html">还没写完呀</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MUSL</title>
+    <link href="https://jimp.top/MUSL/"/>
+    <id>https://jimp.top/MUSL/</id>
+    <published>2021-06-14T16:00:00.000Z</published>
+    <updated>2021-07-16T06:22:56.825Z</updated>
+    
+    
+    <summary type="html">还没写完呀</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VM Pwn</title>
+    <link href="https://jimp.top/VM-Pwn/"/>
+    <id>https://jimp.top/VM-Pwn/</id>
+    <published>2021-06-14T16:00:00.000Z</published>
+    <updated>2021-07-16T06:22:42.439Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
@@ -74,11 +112,11 @@
   </entry>
   
   <entry>
-    <title>IO_FILE学习</title>
-    <link href="https://jimp.top/IO-FILE%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://jimp.top/IO-FILE%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-06-15T09:01:02.000Z</published>
-    <updated>2021-06-15T09:02:17.985Z</updated>
+    <title>orw</title>
+    <link href="https://jimp.top/orw/"/>
+    <id>https://jimp.top/orw/</id>
+    <published>2021-06-14T16:00:00.000Z</published>
+    <updated>2021-07-16T06:22:49.951Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
@@ -93,11 +131,11 @@
   </entry>
   
   <entry>
-    <title>MUSL学习</title>
-    <link href="https://jimp.top/MUSL%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://jimp.top/MUSL%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-06-15T08:59:33.000Z</published>
-    <updated>2021-06-23T11:09:17.971Z</updated>
+    <title>dl_runtime_resolve</title>
+    <link href="https://jimp.top/dl-runtime-resolve/"/>
+    <id>https://jimp.top/dl-runtime-resolve/</id>
+    <published>2021-06-11T16:00:00.000Z</published>
+    <updated>2021-07-16T06:21:26.945Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
@@ -112,49 +150,11 @@
   </entry>
   
   <entry>
-    <title>orw学习</title>
-    <link href="https://jimp.top/orw%E6%80%BB%E7%BB%93/"/>
-    <id>https://jimp.top/orw%E6%80%BB%E7%BB%93/</id>
-    <published>2021-06-14T17:42:38.000Z</published>
-    <updated>2021-06-15T09:02:41.792Z</updated>
-    
-    
-    <summary type="html">还没写完呀</summary>
-    
-    
-    
-    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
-    
-    
-    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dl_runtime_resolve学习</title>
-    <link href="https://jimp.top/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://jimp.top/dl-runtime-resolve%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-06-12T10:31:09.000Z</published>
-    <updated>2021-06-15T08:58:58.208Z</updated>
-    
-    
-    <summary type="html">还没写完呀</summary>
-    
-    
-    
-    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
-    
-    
-    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>boofuzz学习之路</title>
-    <link href="https://jimp.top/boofuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
-    <id>https://jimp.top/boofuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</id>
-    <published>2021-06-11T16:40:00.000Z</published>
-    <updated>2021-06-14T17:43:17.862Z</updated>
+    <title>boofuzz</title>
+    <link href="https://jimp.top/boofuzz/"/>
+    <id>https://jimp.top/boofuzz/</id>
+    <published>2021-06-11T16:00:00.000Z</published>
+    <updated>2021-07-16T06:21:56.201Z</updated>
     
     
     <summary type="html">还没写完呀</summary>
@@ -169,11 +169,11 @@
   </entry>
   
   <entry>
-    <title>IOT漏洞复现合集</title>
-    <link href="https://jimp.top/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/"/>
-    <id>https://jimp.top/IOT%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%90%88%E9%9B%86/</id>
-    <published>2021-06-10T17:51:09.000Z</published>
-    <updated>2021-07-04T10:39:41.898Z</updated>
+    <title>IOT Vulnerabilities</title>
+    <link href="https://jimp.top/IOT-Vulnerabilities/"/>
+    <id>https://jimp.top/IOT-Vulnerabilities/</id>
+    <published>2021-06-10T16:00:00.000Z</published>
+    <updated>2021-07-16T06:19:29.119Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -191,8 +191,8 @@
     <title>Pwn Writeup</title>
     <link href="https://jimp.top/Pwn-Writeup/"/>
     <id>https://jimp.top/Pwn-Writeup/</id>
-    <published>2021-06-09T10:50:04.000Z</published>
-    <updated>2021-07-04T10:40:07.657Z</updated>
+    <published>2021-06-08T16:00:00.000Z</published>
+    <updated>2021-07-16T06:20:32.755Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -226,30 +226,11 @@
   </entry>
   
   <entry>
-    <title>操作系统真象还原 Part1</title>
-    <link href="https://jimp.top/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/"/>
-    <id>https://jimp.top/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/</id>
-    <published>2021-05-18T05:44:42.000Z</published>
-    <updated>2021-07-04T10:41:17.474Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Kernel" scheme="https://jimp.top/categories/Kernel/"/>
-    
-    
-    <category term="Base" scheme="https://jimp.top/tags/Base/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AFL-Fuzz学习之路</title>
-    <link href="https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
-    <id>https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</id>
-    <published>2021-05-17T19:20:24.000Z</published>
-    <updated>2021-07-04T10:41:05.020Z</updated>
+    <title>AFL-Fuzz</title>
+    <link href="https://jimp.top/AFL-Fuzz/"/>
+    <id>https://jimp.top/AFL-Fuzz/</id>
+    <published>2021-05-17T16:00:00.000Z</published>
+    <updated>2021-07-16T06:22:05.995Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -264,11 +245,49 @@
   </entry>
   
   <entry>
+    <title>OS Part1</title>
+    <link href="https://jimp.top/OS-Part1/"/>
+    <id>https://jimp.top/OS-Part1/</id>
+    <published>2021-05-17T16:00:00.000Z</published>
+    <updated>2021-07-16T06:23:15.069Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Kernel" scheme="https://jimp.top/categories/Kernel/"/>
+    
+    
+    <category term="Base" scheme="https://jimp.top/tags/Base/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pwn Environment</title>
+    <link href="https://jimp.top/Pwn-Environment/"/>
+    <id>https://jimp.top/Pwn-Environment/</id>
+    <published>2021-05-17T16:00:00.000Z</published>
+    <updated>2021-07-16T06:20:18.656Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
+    
+    
+    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Windows Kernel Pool Spraying</title>
     <link href="https://jimp.top/Windows-Kernel-Pool-Spraying/"/>
     <id>https://jimp.top/Windows-Kernel-Pool-Spraying/</id>
-    <published>2021-05-17T19:18:20.000Z</published>
-    <updated>2021-07-04T10:40:26.891Z</updated>
+    <published>2021-05-17T16:00:00.000Z</published>
+    <updated>2021-07-16T06:17:41.116Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -283,11 +302,11 @@
   </entry>
   
   <entry>
-    <title>CVE-2010-2883分析</title>
-    <link href="https://jimp.top/CVE-2010-2883%E5%88%86%E6%9E%90/"/>
-    <id>https://jimp.top/CVE-2010-2883%E5%88%86%E6%9E%90/</id>
-    <published>2021-05-17T19:08:26.000Z</published>
-    <updated>2021-07-04T10:40:54.313Z</updated>
+    <title>CVE-2010-2883</title>
+    <link href="https://jimp.top/CVE-2010-2883/"/>
+    <id>https://jimp.top/CVE-2010-2883/</id>
+    <published>2021-05-17T16:00:00.000Z</published>
+    <updated>2021-07-16T06:23:11.150Z</updated>
     
     
     <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
@@ -298,25 +317,6 @@
     
     
     <category term="Vuln" scheme="https://jimp.top/tags/Vuln/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pwn Environment</title>
-    <link href="https://jimp.top/Pwn-Environment/"/>
-    <id>https://jimp.top/Pwn-Environment/</id>
-    <published>2021-05-17T19:00:00.000Z</published>
-    <updated>2021-07-04T10:39:55.514Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;欢迎一起讨论学习:)&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CTF" scheme="https://jimp.top/categories/CTF/"/>
-    
-    
-    <category term="Pwn" scheme="https://jimp.top/tags/Pwn/"/>
     
   </entry>
   

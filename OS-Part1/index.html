@@ -6,22 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jimp.top">
-  <title>VM Pwn学习 | Jimp&#39;s Blog</title>
+  <title>OS Part1 | Jimp&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="还没写完呀">
+  <meta name="description" content="欢迎一起讨论学习:)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VM Pwn学习">
-<meta property="og:url" content="https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="OS Part1">
+<meta property="og:url" content="https://jimp.top/OS-Part1/index.html">
 <meta property="og:site_name" content="Jimp&#39;s Blog">
-<meta property="og:description" content="还没写完呀">
+<meta property="og:description" content="欢迎一起讨论学习:)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-15T09:01:14.000Z">
-<meta property="article:modified_time" content="2021-06-15T09:01:54.361Z">
+<meta property="og:image" content="https://pic.imgdb.cn/item/60a381356ae4f77d35848f24.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/60a384066ae4f77d3599ae52.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/60a384766ae4f77d359cd527.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/60a562bb6ae4f77d35332d46.jpg">
+<meta property="article:published_time" content="2021-05-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-16T06:23:15.069Z">
 <meta property="article:author" content="Jimp">
-<meta property="article:tag" content="PWn">
+<meta property="article:tag" content="Base">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/60a381356ae4f77d35848f24.png">
   
     <link rel="alternative" href="/atom.xml" title="Jimp&#39;s Blog" type="application/atom+xml">
   
@@ -213,14 +218,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-VM-Pwn学习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-OS-Part1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      VM Pwn学习
+      OS Part1
     </h1>
   
 
@@ -232,8 +237,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/VM-Pwn%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2021-06-15T09:01:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-15</time>
+<a href="/OS-Part1/" class="archive-article-date">
+        <time datetime="2021-05-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-18</time>
 </a>
 
   
@@ -246,7 +251,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">6字</span>
+      <span class="post-count">2.5k字</span>
     </span>
   </span>
 
@@ -255,7 +260,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">10分</span>
     </span>
   </span>
 </div>
@@ -266,18 +271,167 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="c37a8f4b9071645e6164fbb48fcd8fe3363babae3c23694094fbb872a98d738f">cd28d3e0b4493b238e1a648c2b8d0b230ccf698e6271e94f80317016986da1d5</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    <p>欢迎一起讨论学习:)</p>
+<span id="more"></span>
+
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>笔者电脑环境：</p>
+<ul>
+<li>Vmware 16</li>
+<li>Ubuntu 18.04</li>
+</ul>
+<!--more-->
+
+<h2 id="bochs"><a href="#bochs" class="headerlink" title="bochs"></a>bochs</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在物理机下载bochs2.6.9版本<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/bochs/files/bochs/2.6.9/">Bochs x86 PC emulator - Browse /bochs/2.6.9 at SourceForge.net</a>，复制到Ubuntu虚拟机，进行解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf bochs-2.6.9.tar.gz</span><br><span class="line"></span><br><span class="line">cd bochs-2.6.9</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖环境：</p>
+<blockquote>
+<p>aptitude包管理器处理环境依赖问题优秀，自动解决相关环境依赖问题</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install aptitude</span><br><span class="line"></span><br><span class="line">sudo aptitude install build-essential</span><br><span class="line"></span><br><span class="line">sudo aptitude install xorg-dev</span><br><span class="line"></span><br><span class="line">sudo aptitude install bison</span><br><span class="line"></span><br><span class="line">sudo aptitude install libgtk2.0-dev</span><br><span class="line"></span><br><span class="line">sudo aptitude install gcc-multilib</span><br></pre></td></tr></table></figure>
+
+<h4 id="编译本身调试版本"><a href="#编译本身调试版本" class="headerlink" title="编译本身调试版本"></a>编译本身调试版本</h4><p>使用bochs自身debug，终端按顺序键入下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line"></span><br><span class="line">--prefix=/home/jimp/localdebug/bochs \</span><br><span class="line"></span><br><span class="line">--enable-debugger \</span><br><span class="line"></span><br><span class="line">--enable-disasm \</span><br><span class="line"></span><br><span class="line">--enable-iodebug \</span><br><span class="line"></span><br><span class="line">--enable-x86-debugger \</span><br><span class="line"></span><br><span class="line">--with-x \</span><br><span class="line"></span><br><span class="line">--with-x11</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>make install</code>出现以下错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x.cc:42:10: fatal error: X11/extensions/Xrandr.h: No such file or directory</span><br><span class="line"> #include &lt;X11/extensions/Xrandr.h&gt;</span><br><span class="line">          ^~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">compilation terminated.</span><br><span class="line">Makefile:114: recipe for target &#x27;x.o&#x27; failed</span><br><span class="line">make[1]: *** [x.o] Error 1</span><br><span class="line">make[1]: Leaving directory &#x27;/home/jimp/bochs-2.6.9/gui&#x27;</span><br><span class="line">Makefile:360: recipe for target &#x27;gui/libgui.a&#x27; failed</span><br><span class="line">make: *** [gui/libgui.a] Error 2</span><br></pre></td></tr></table></figure>
+
+<p>解决方案如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install libxrandr-dev</span><br></pre></td></tr></table></figure>
+
+<p>再次执行<code>make install</code>即可成功安装自身调试版本</p>
+<h4 id="编译gdb调试版本"><a href="#编译gdb调试版本" class="headerlink" title="编译gdb调试版本"></a>编译gdb调试版本</h4><p>使用gdb进行debug，终端按顺序键入下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line"></span><br><span class="line">--prefix=/home/jimp/gdbdebug/bochs \</span><br><span class="line"></span><br><span class="line">--enable-gdb-stub \</span><br><span class="line"></span><br><span class="line">--enable-disasm \</span><br><span class="line"></span><br><span class="line">--enable-iodebug \</span><br><span class="line"></span><br><span class="line">--enable-x86-debugger \</span><br><span class="line"></span><br><span class="line">--with-x \</span><br><span class="line"></span><br><span class="line">--with-x11</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>make install</code>即可成功安装gdb调试版本</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在自身调试版本的bochs安装目录下(我的是/home/jimp/localdebug/bochs/bin/)创建配置文件bochsrc.disk，文件内容如下(gdb调试版本去除gdbstub所在行的注释即可)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">############################################### </span><br><span class="line"># Configuration file for Bochs </span><br><span class="line">###############################################</span><br><span class="line"># 第一步，首先设置 Bochs 在运行过程中能够使用的内存，本例为 32MB。 </span><br><span class="line"># 关键字为：megs </span><br><span class="line"> </span><br><span class="line">megs: 32 </span><br><span class="line"> </span><br><span class="line"># 第二步，设置对应真实机器的 BIOS 和 VGA BIOS。 </span><br><span class="line"># 对应两个关键字为：romimage 和 vgaromimage </span><br><span class="line"> </span><br><span class="line">romimage: file=/home/jimp/localdebug/bochs/share/bochs/BIOS-bochs-latest </span><br><span class="line">vgaromimage: file=/home/jimp/localdebug/bochs/share/bochs/VGABIOS-lgpl-latest </span><br><span class="line"> </span><br><span class="line"># 第三步，设置 Bochs 所使用的磁盘，软盘的关键字为 floppy。 </span><br><span class="line"># 若只有一个软盘，则使用 floppya 即可，若有多个，则为 floppya，floppyb… </span><br><span class="line">#floppya: 1_44=a.img, status=inserted </span><br><span class="line"> </span><br><span class="line"># 第四步，选择启动盘符。 </span><br><span class="line">#boot: floppy #默认从软盘启动，将其注释 </span><br><span class="line">boot: disk  #改为从硬盘启动。我们的任何代码都将直接写在硬盘上，所以不会再有读写软盘的操作。 </span><br><span class="line"> </span><br><span class="line"># 第五步，设置日志文件的输出。 </span><br><span class="line">log: bochs.out </span><br><span class="line"> </span><br><span class="line"># 第六步，开启或关闭某些功能。 </span><br><span class="line"># 下面是关闭鼠标，并打开键盘。 </span><br><span class="line">mouse: enabled=0 </span><br><span class="line">keyboard: keymap=/home/jimp/localdebug/bochs/share/bochs/keymaps/x11-pc-us.map </span><br><span class="line"> </span><br><span class="line"># 硬盘设置 </span><br><span class="line">ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14 </span><br><span class="line"> </span><br><span class="line"># 下面的是增加的 bochs 对 gdb 的支持，这样 gdb 便可以远程连接到此机器的 1234 端口调试了 </span><br><span class="line"># gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0 </span><br><span class="line"> </span><br><span class="line">###################  配置文件结束  #####################</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>终端下进入到bin(/home/jimp/localdebug/bochs/bin/)目录下执行命令<code>./bochs</code>,在第一个红色方框处数字2的地方进行回车，在第二个红色方框处键入bochsrc.disk</p>
+<img src="https://pic.imgdb.cn/item/60a381356ae4f77d35848f24.png"  />
+
+<p>终端下键入c，弹出错误提示：No bootable device，提示我们需要创建启动盘，接下来可以使用工具bximage进行创建硬盘，直接按以下步骤创建即可</p>
+<img src="https://pic.imgdb.cn/item/60a384066ae4f77d3599ae52.png"  />
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">jimp@ubuntu:~/localdebug/bochs/bin$ ./bximage </span><br><span class="line">========================================================================</span><br><span class="line">                                bximage</span><br><span class="line">  Disk Image Creation / Conversion / Resize and Commit Tool for Bochs</span><br><span class="line">         $Id: bximage.cc 13069 2017-02-12 16:51:52Z vruppert $</span><br><span class="line">========================================================================</span><br><span class="line"></span><br><span class="line">1. Create new floppy or hard disk image</span><br><span class="line">2. Convert hard disk image to other format (mode)</span><br><span class="line">3. Resize hard disk image</span><br><span class="line">4. Commit &#x27;undoable&#x27; redolog to base image</span><br><span class="line">5. Disk image info</span><br><span class="line"></span><br><span class="line">0. Quit</span><br><span class="line"></span><br><span class="line">Please choose one [0] 1</span><br><span class="line"></span><br><span class="line">Create image</span><br><span class="line"></span><br><span class="line">Do you want to create a floppy disk image or a hard disk image?</span><br><span class="line">Please type hd or fd. [hd] hd</span><br><span class="line"></span><br><span class="line">What kind of image should I create?</span><br><span class="line">Please type flat, sparse, growing, vpc or vmware4. [flat] flat</span><br><span class="line"></span><br><span class="line">Enter the hard disk size in megabytes, between 10 and 8257535</span><br><span class="line">[10] 60</span><br><span class="line"></span><br><span class="line">What should be the name of the image?</span><br><span class="line">[c.img] hd60M.img</span><br><span class="line"></span><br><span class="line">Creating hard disk image &#x27;hd60M.img&#x27; with CHS=121/16/63</span><br><span class="line"></span><br><span class="line">The following line should appear in your bochsrc:</span><br><span class="line">  ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat</span><br></pre></td></tr></table></figure>
+
+<p>根据最后提示，在bochsrc.disk文件相应位置添加提示的内容，<code>CHS=121/16/63</code>(CHS为硬盘扇区表示方法)可以展开补充，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 硬盘设置 </span><br><span class="line">ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14 </span><br><span class="line">ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat, cylinders=121, heads=16, spt=63</span><br></pre></td></tr></table></figure>
+
+<p>使用命令<code>./bochs -f bochsrc.disk</code>启动，-f指示配置文件，最终效果如下：</p>
+<p><img src="https://pic.imgdb.cn/item/60a384766ae4f77d359cd527.png"></p>
+<p>再次报错是因为没有MBR(主引导记录)</p>
+<h2 id="nasm"><a href="#nasm" class="headerlink" title="nasm"></a>nasm</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install nasm</span><br></pre></td></tr></table></figure>
+
+<h1 id="MBR雏形"><a href="#MBR雏形" class="headerlink" title="MBR雏形"></a>MBR雏形</h1><p>提MBR(主引导记录)前，首先得了解BIOS，有人可能熟悉，也可能陌生</p>
+<h2 id="第一个运行的BIOS"><a href="#第一个运行的BIOS" class="headerlink" title="第一个运行的BIOS"></a>第一个运行的BIOS</h2><p>BIOS全称Base Input &amp; Output System，即基本输入输出系统(开机第一个运行的软件，独立于操作系统，因为操作系统还没有加载)，作用是检测内存、显卡等外设信息，检测通过便做好相关的初始化工作，其中中断向量表IVT的初始化尤为显著。接下来我们就想知道BIOS放置在内存哪个位置，PC指针如何指向BIOS起始地址。在此之前，还需要了解一下实模式。</p>
+<h3 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h3><p>实模式下，Intel 8086有20条地址线，寻址范围为<code>0~2^20</code>，即1MB空间，对于今天无比庞大的(256T左右)进程空间来说，其是十分渺小的，但是实模式只是进入保护模式的一个引路人，完成其引导工作就退出舞台了。实模式下1MB的内存空间按以下规律进行排布：</p>
+<table>
+<thead>
+<tr>
+<th align="center">起   始</th>
+<th align="center">结  束</th>
+<th align="center">大  小</th>
+<th align="center">用    途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">FFFF0</td>
+<td align="center">FFFFF</td>
+<td align="center">16B</td>
+<td align="center">BIOS 入口地址，此处代码段也属于 BIOS 代码，同样属于顶部的 640KB 字节。为了强调其入口地址才单独贴出来。此处 16 字节的内容是跳转指令 jmp f000:e05b</td>
+</tr>
+<tr>
+<td align="center">F0000</td>
+<td align="center">FFFEF</td>
+<td align="center">64KB-16B</td>
+<td align="center">系统 BIOS 范围是 F0000～FFFFF，共 640KB，为说明入口地址，将最上面的 16字节从此处去掉了，所以此处终止地址是 0XFFFEF</td>
+</tr>
+<tr>
+<td align="center">C8000</td>
+<td align="center">EFFFF</td>
+<td align="center">160KB</td>
+<td align="center">映射硬件适配器的 ROM 或内存映射式 I/O</td>
+</tr>
+<tr>
+<td align="center">C0000</td>
+<td align="center">C7FFF</td>
+<td align="center">32KB</td>
+<td align="center">显示适配器 BIOS</td>
+</tr>
+<tr>
+<td align="center">B8000</td>
+<td align="center">BFFFF</td>
+<td align="center">32KB</td>
+<td align="center">用于文本模式显示适配器</td>
+</tr>
+<tr>
+<td align="center">B0000</td>
+<td align="center">B7FFF</td>
+<td align="center">32KB</td>
+<td align="center">用于黑白显示适配器</td>
+</tr>
+<tr>
+<td align="center">A0000</td>
+<td align="center">AFFFF</td>
+<td align="center">64KB</td>
+<td align="center">用于彩色显示适配器</td>
+</tr>
+<tr>
+<td align="center">9FC00</td>
+<td align="center">9FFFF</td>
+<td align="center">1KB</td>
+<td align="center">EBDA（Extended BIOS Data Area）扩展 BIOS 数据区</td>
+</tr>
+<tr>
+<td align="center">7E00</td>
+<td align="center">9FBFF</td>
+<td align="center">622080B 约608KB</td>
+<td align="center">可用区域</td>
+</tr>
+<tr>
+<td align="center">7C00</td>
+<td align="center">7DFF</td>
+<td align="center">512B</td>
+<td align="center">MBR 被 BIOS 加载到此处，共 512 字节</td>
+</tr>
+<tr>
+<td align="center">500</td>
+<td align="center">7BFF</td>
+<td align="center">30464B 约 30KB</td>
+<td align="center">可用区域</td>
+</tr>
+<tr>
+<td align="center">400</td>
+<td align="center">4FF</td>
+<td align="center">256B</td>
+<td align="center">BIOS Data Area（BIOS 数据区）</td>
+</tr>
+<tr>
+<td align="center">000</td>
+<td align="center">3FF</td>
+<td align="center">1KB</td>
+<td align="center">Interrupt Vector Table（中断向量表）</td>
+</tr>
+</tbody></table>
+<p>从上面的表格就可以的知BIOS存储在0xF0000起始地址处，接下来就是PC指针问题。实模式的寻址是采用<code>段基址+偏移</code>的方式，如<code>CS:IP</code>,得到的地址就是(CS&lt;&lt;4)+IP，因为地址线宽度为16，范围是0~0xFFFF，无法表示20位的地址，于是便采用CS:IP的方式，令CS左移四位即可表示20位的地址。至于每次机器都能寻址到BIOS启动处(0xFFFF0)处，是通过硬件实现的，强制CS为0xF000，IP为0xFFF0。0xFFFF0处到阈值(0xFFFFF)只有16字节，这里只是一个跳转指令，跳到真正的指令执行处，或者说BIOS真正的入口处，好比C/C++程序一个执行的函数是mainCRTStartup这种函数，再跳转到main函数。</p>
+<h2 id="BIOS接力者MBR"><a href="#BIOS接力者MBR" class="headerlink" title="BIOS接力者MBR"></a>BIOS接力者MBR</h2><p>BIOS结束后执行的第二个程序，同样独立于操作系统，大小为512节，最后两字节必须分别为0x55、0xaa(魔数)，标识其为可执行程序，作用是加载某个程序。编写第一个mbr文件雏形，姑且命名为mbr.S，文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">;主引导程序</span><br><span class="line">;-------------------------------------------------</span><br><span class="line">SECTION MBR vstart=0x7c00</span><br><span class="line">    mov ax,cs</span><br><span class="line">    mov ds,ax</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov fs,ax</span><br><span class="line">    mov sp,0x7c00</span><br><span class="line"></span><br><span class="line">; 清屏利用0x06号功能，上卷全部行，则可清屏</span><br><span class="line">; ------------------------------------------------</span><br><span class="line">;INT 0x10   功能号:0x06   功能描述:上卷窗口</span><br><span class="line">;-------------------------------------------------</span><br><span class="line">;输入:</span><br><span class="line">;AH 功能号 = 0x06</span><br><span class="line">;AL = 上卷的行数(如果为0,表示全部)</span><br><span class="line">;BH = 上卷行属性</span><br><span class="line">;(CL,CH) = 窗口左下角的(X,Y)位置</span><br><span class="line">;(DL,DH) = 窗口右下角的(X,Y)位置</span><br><span class="line">;无返回值:</span><br><span class="line">    mov ax, 0x600</span><br><span class="line">    mov bx, 0x700</span><br><span class="line">    mov cx, 0           ; 左上角: (0,0)</span><br><span class="line">    mov dx, 0x184f      ; 右下角: (80,25)</span><br><span class="line">                        ; VGA文本模式中,一行只能容纳80个字符,共25行</span><br><span class="line">                        ; 下标从0开始,所以0x18=24，0x4f=79</span><br><span class="line">    int 0x10            ; int 0x10</span><br><span class="line"></span><br><span class="line">;;;;;;  下面三行代码获取光标位置    ;;;;;;</span><br><span class="line">;.get_cursor获取当前光标位置,在光标位置处打印字符</span><br><span class="line">    mov ah, 3           ; 输入: 3号子功能是获取光标位置,需要存入ah寄存器</span><br><span class="line">    mov bh, 0           ; bh寄存器存储的是待获取光标的页号</span><br><span class="line">    </span><br><span class="line">    int 0x10            ; 输出: ch=光标开始行,c1=光标结束行</span><br><span class="line">                        ; dh=光标所在行号,dl=光标所在列号</span><br><span class="line"></span><br><span class="line">;;;;;;  打印字符串  ;;;;;;</span><br><span class="line">    ;使用0x10中断,子功能号为13号,打印字符串</span><br><span class="line">    mov ax, message </span><br><span class="line">    mov bp, ax          ; es:bp为串首地址，es等于cs</span><br><span class="line">                        ; 开头已为sreg初始化</span><br><span class="line"></span><br><span class="line">    ; 光标位置要用到dx寄存器中的内容,cx中的光标位置可忽略</span><br><span class="line">    mov cx, 0x13        ; cx 为串长度,不包括结束符0的字符个数</span><br><span class="line">    mov ax, 0x1301      ; 子功能号13显示字符及属性,存入ax寄存器</span><br><span class="line">                        ; al设置写字符方式 al=01 : 显示字符串,光标跟随移动</span><br><span class="line">    mov bx, 0x2         ; bh存储要显示的页号,此处是第0页</span><br><span class="line">                        ; bl中是字符属性,属性黑底绿字(b1 = 02h)</span><br><span class="line">    int 0x10            ; 执行BIOS 0x10 中断</span><br><span class="line">;;;;;;  打印字符串结束  ;;;;;;</span><br><span class="line"></span><br><span class="line">    jmp $               ; 使程序悬停在此</span><br><span class="line"></span><br><span class="line">    message db &quot;Jimp System operate&quot;</span><br><span class="line">    times 510-($-$$) db 0</span><br><span class="line">    db 0x55,0xaa</span><br></pre></td></tr></table></figure>
+
+<p>使用nasm工具进行编译mbr.S</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nasm -o mbr.bin mbr.S</span><br></pre></td></tr></table></figure>
+
+<p>使用dd命令将mbr.bin写入我们在上面创建的硬盘的0盘0道1扇区(扇区从1开始计数)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/home/jimp/c2/a/boot/mbr.bin of=/home/jimp/localdebug/bochs/bin/hd60M.img bs=512 count=1 conv=notrunc</span><br></pre></td></tr></table></figure>
+
+<p>得到成功的回显结果如下(一定是512字节)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">512 bytes copied, 0.00083457 s, 613 kB/s</span><br></pre></td></tr></table></figure>
+
+<p>在/home/jimp/localdebug/bochs/bin目录下启动模拟器，直接回车，再按下c是模拟器继续运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bochs -f bochsrc.disk</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/60a562bb6ae4f77d35332d46.jpg"></p>
+
     
 
     
@@ -291,7 +445,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://jimp.top/VM-Pwn学习/" title="VM Pwn学习" target="_blank">https://jimp.top/VM-Pwn学习/</a>
+          <a href="https://jimp.top/OS-Part1/" title="OS Part1" target="_blank">https://jimp.top/OS-Part1/</a>
         </li>
         
         <li>
@@ -313,7 +467,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PWn</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Base</a>
         		</li>
       		
 		</ul>
@@ -325,7 +479,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/CTF//" class="article-tag-list-link color4">CTF</a>
+        			<a href="/categories/Kernel//" class="article-tag-list-link color2">Kernel</a>
         		</li>
       		
 		</ul>
@@ -380,7 +534,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/VM-Pwn%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/OS-Part1/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -395,18 +549,18 @@
 
 <nav id="article-nav">
   
-    <a href="/HEVD%E4%BB%8E0%E5%88%B01/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/AFL-Fuzz/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          HEVD从0到1
+          AFL-Fuzz
         
       </div>
     </a>
   
   
-    <a href="/IO-FILE%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">IO_FILE学习</div>
+    <a href="/Pwn-Environment/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Pwn Environment</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -433,7 +587,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bochs"><span class="toc-number">1.1.</span> <span class="toc-text">bochs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%9C%AC%E8%BA%AB%E8%B0%83%E8%AF%95%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">编译本身调试版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E8%AF%91gdb%E8%B0%83%E8%AF%95%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">编译gdb调试版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">1.1.3.</span> <span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nasm"><span class="toc-number">1.2.</span> <span class="toc-text">nasm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MBR%E9%9B%8F%E5%BD%A2"><span class="toc-number">2.</span> <span class="toc-text">MBR雏形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%BF%90%E8%A1%8C%E7%9A%84BIOS"><span class="toc-number">2.1.</span> <span class="toc-text">第一个运行的BIOS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.1.</span> <span class="toc-text">实模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIOS%E6%8E%A5%E5%8A%9B%E8%80%85MBR"><span class="toc-number">2.2.</span> <span class="toc-text">BIOS接力者MBR</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -605,11 +759,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Pwn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Vuln</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Pwn</a>
+                <a href="javascript:void(0)" class="js-tag color5">Base</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,10 +776,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">记录</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Base</a>
               </li>
             
             <div class="clearfix"></div>

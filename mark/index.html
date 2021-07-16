@@ -6,26 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jimp.top">
-  <title>AFL-Fuzz学习之路 | Jimp&#39;s Blog</title>
+  <title>mark | Jimp&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="description" content="欢迎一起讨论学习:)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AFL-Fuzz学习之路">
-<meta property="og:url" content="https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.html">
+<meta property="og:title" content="mark">
+<meta property="og:url" content="https://jimp.top/mark/index.html">
 <meta property="og:site_name" content="Jimp&#39;s Blog">
 <meta property="og:description" content="欢迎一起讨论学习:)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png">
-<meta property="og:image" content="https://pic.imgdb.cn/item/609f1b00d1a9ae528f003074.png">
-<meta property="og:image" content="https://pic.imgdb.cn/item/609f1ccfd1a9ae528f118d7b.png">
-<meta property="article:published_time" content="2021-05-17T19:20:24.000Z">
-<meta property="article:modified_time" content="2021-07-04T10:41:05.020Z">
+<meta property="article:published_time" content="2099-06-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-16T06:22:22.674Z">
 <meta property="article:author" content="Jimp">
-<meta property="article:tag" content="Fuzz">
+<meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png">
   
     <link rel="alternative" href="/atom.xml" title="Jimp&#39;s Blog" type="application/atom+xml">
   
@@ -217,14 +213,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-AFL-Fuzz学习之路" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mark" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      AFL-Fuzz学习之路
+      mark
     </h1>
   
 
@@ -236,8 +232,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" class="archive-article-date">
-        <time datetime="2021-05-17T19:20:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-18</time>
+<a href="/mark/" class="archive-article-date">
+        <time datetime="2099-06-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2099-06-06</time>
 </a>
 
   
@@ -250,7 +246,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">357字</span>
+      <span class="post-count">11字</span>
     </span>
   </span>
 
@@ -273,29 +269,7 @@
     <p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
-<h1 id="安装AFL"><a href="#安装AFL" class="headerlink" title="安装AFL"></a>安装AFL</h1><h2 id="有源码模式"><a href="#有源码模式" class="headerlink" title="有源码模式"></a>有源码模式</h2><p>前往官网进行下载压缩包，解压，安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget https://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf afl-latest.tgz</span><br><span class="line"></span><br><span class="line">cd afl-2.52b</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
-<!--more-->
-
-<p>安装成功标志如下:</p>
-<p><img src="https://pic.imgdb.cn/item/609f18f9d1a9ae528feb97bf.png"></p>
-<h2 id="无源码模式"><a href="#无源码模式" class="headerlink" title="无源码模式"></a>无源码模式</h2><blockquote>
-<p>即在上面的基础上安装qemu_mode afl fuzzing，安装了n次都没有成功，差点放弃，最后还是成功了</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd afl-2.52b/qemu_mode</span><br><span class="line"></span><br><span class="line">./build_qemu_support.sh</span><br></pre></td></tr></table></figure>
-
-<p>不出意外的话这一步就开始报错，缺什么就是用apt安装什么，除了安装libtool，还得安装libtool-bin，再次执行build_qemu_support.sh脚本依然可以看到以下错误</p>
-<p><img src="https://pic.imgdb.cn/item/609f1b00d1a9ae528f003074.png"></p>
-<p>memfd_create和glibc中的同名函数冲突，需要打patch，在afl-2.52b/qemu_mode/patches/目录下新增一个memfd_create.diff，文件内容如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">diff -ru qemu-2.10.0-clean/util/memfd.c qemu-2.10.0/util/memfd.c</span><br><span class="line">--- qemu-2.10.0-clean/util/memfd.c      2018-11-20 18:11:00.170271506 +0100</span><br><span class="line">+++ qemu-2.10.0/util/memfd.c    2018-11-20 18:11:13.398423613 +0100</span><br><span class="line">@@ -37,7 +37,7 @@</span><br><span class="line"> #include &lt;sys/syscall.h&gt;</span><br><span class="line"> #include &lt;asm/unistd.h&gt;</span><br><span class="line"> </span><br><span class="line">-static int memfd_create(const char *name, unsigned int flags)</span><br><span class="line">+int memfd_create(const char *name, unsigned int flags)</span><br><span class="line"> &#123;</span><br><span class="line"> #ifdef __NR_memfd_create</span><br><span class="line">     return syscall(__NR_memfd_create, name, flags);</span><br></pre></td></tr></table></figure>
-
-<p>修改build_qemu_support.sh文件内容，加上自己添加的补丁</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;[*] Applying patches...&quot;</span><br><span class="line"></span><br><span class="line">patch -p1 &lt;../patches/elfload.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/cpu-exec.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/syscall.diff || exit 1</span><br><span class="line">patch -p1 &lt;../patches/memfd_create.diff || exit 1</span><br><span class="line"></span><br><span class="line">echo &quot;[+] Patching done.&quot;</span><br></pre></td></tr></table></figure>
-
-<p>再次执行build_qemu_support.sh脚本，可以看到以下成功的信息：</p>
-<p><img src="https://pic.imgdb.cn/item/609f1ccfd1a9ae528f118d7b.png"></p>
-
+<h1 id="2021-7-14"><a href="#2021-7-14" class="headerlink" title="2021.7.14"></a>2021.7.14</h1>
     
 
     
@@ -309,7 +283,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://jimp.top/AFL-Fuzz学习之路/" title="AFL-Fuzz学习之路" target="_blank">https://jimp.top/AFL-Fuzz学习之路/</a>
+          <a href="https://jimp.top/mark/" title="mark" target="_blank">https://jimp.top/mark/</a>
         </li>
         
         <li>
@@ -331,7 +305,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Fuzz</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">记录</a>
         		</li>
       		
 		</ul>
@@ -343,7 +317,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Fuzz//" class="article-tag-list-link color5">Fuzz</a>
+        			<a href="/categories/记录//" class="article-tag-list-link color3">记录</a>
         		</li>
       		
 		</ul>
@@ -398,7 +372,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/AFL-Fuzz%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jimp.top/mark/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -413,18 +387,9 @@
 
 <nav id="article-nav">
   
-    <a href="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9C%9F%E8%B1%A1%E8%BF%98%E5%8E%9F-Part1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          操作系统真象还原 Part1
-        
-      </div>
-    </a>
   
-  
-    <a href="/Windows-Kernel-Pool-Spraying/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Windows Kernel Pool Spraying</div>
+    <a href="/HEVD-from-0-to-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HEVD from 0 to 1</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -451,7 +416,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85AFL"><span class="toc-number">1.</span> <span class="toc-text">安装AFL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E7%A0%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">有源码模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%BA%90%E7%A0%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">无源码模式</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2021-7-14"><span class="toc-number">1.</span> <span class="toc-text">2021.7.14</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -623,11 +588,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Pwn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Vuln</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Pwn</a>
+                <a href="javascript:void(0)" class="js-tag color5">Base</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,10 +605,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">记录</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Base</a>
               </li>
             
             <div class="clearfix"></div>
