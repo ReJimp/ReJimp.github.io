@@ -6,7 +6,21 @@
     <content><![CDATA[<p>欢迎一起讨论学习:)</p>
 <span id="more"></span>
 
-<h1 id="2021-7-14"><a href="#2021-7-14" class="headerlink" title="2021.7.14"></a>2021.7.14</h1>]]></content>
+<h2 id="第1周-2021-7-6-2021-7-12"><a href="#第1周-2021-7-6-2021-7-12" class="headerlink" title="第1周(2021.7.6-2021.7.12)"></a>第1周(2021.7.6-2021.7.12)</h2><blockquote>
+<p>作业：学习CSAPP</p>
+</blockquote>
+<ul>
+<li>C++学习到类，CSAPP还差存储、进程、异常、IO相关内容</li>
+</ul>
+<h2 id="第2周-2021-7-13-2021-7-19"><a href="#第2周-2021-7-13-2021-7-19" class="headerlink" title="第2周(2021.7.13-2021.7.19)"></a>第2周(2021.7.13-2021.7.19)</h2><blockquote>
+<p>作业：完成CSAPP学习，完成CSAPP的cache/malloc/proxy lab</p>
+</blockquote>
+<ul>
+<li>CSAPP基本学完，粗略地整理了下笔记，lab还没完成(茶</li>
+<li>HEVD只完成StackOverflow</li>
+<li>学习效率感觉不够高效，需要改进</li>
+</ul>
+]]></content>
       <categories>
         <category>记录</category>
       </categories>
